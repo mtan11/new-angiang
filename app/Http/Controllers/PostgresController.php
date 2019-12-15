@@ -103,7 +103,7 @@ class PostgresController extends Controller
             //     throw new ProcessFailedException($process);
             // }
 
-            return response()->json($process, 200);
+            return response()->json('Cap nhat thanh cong', 200);
 
             // return response()->json([
             //     // 'message' => $output
