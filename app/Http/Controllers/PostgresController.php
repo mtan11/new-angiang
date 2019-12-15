@@ -63,6 +63,56 @@ class PostgresController extends Controller
         return 'thêm data thanh cong';
     }
 
+    public function uploadShapeFile(Request $request)
+    {
+        $shpFile = $request->file('shpFile');
+        if ($shpFile) {
+            $extension = $shpFile->getClientOriginalExtension();
+            if ($extension != "zip") {
+                return response()->json([
+                    'error' => "File không đúng định dạng. Vui lòng chỉ chọn file .zip!",
+                ], 500);
+            }
+            $fileName = sprintf('%s.%s', $shpFile->getFilename(), $extension);
+            Storage::disk('public')->put('/Shape_File/' . $fileName, File::get($shpFile));
+            // Excute python code, import data to database
+            // chdir('/var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices');
+            // $output = shell_exec("python3 /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py ".$fileName." 2>&1");
+            // $output = shell_exec("touch /root/asddas.py");
+            // $process = new Process(['python3', '/var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py', $fileName]);
+            // $process->run();
+            // $output = shell_exec("source /root/.bashrc && python3 /var/www/new-angiang/pyservices/checkMaRanhDoAn.py {$fileName}");
+            // $outputsplit = explode("\n", $output);
+            // $maqhpkranh = $outputsplit[count($outputsplit)-2];
+            // // dd($output,$outputsplit,$maqhpkranh);
+            $process = shell_exec("source /root/.bashrc && python3 /var/www/new-angiang/pyservices/uploadSHP.py {$fileName}");
+            // $output = shell_exec("/root/anaconda3/bin/python3 /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py $fileName");
+            // var_dump($output);
+            // if (!$process->isSuccessful()) {
+            //     throw new ProcessFailedException($process);
+            // }
+            // Ghi log
+
+            // $ranhdoan = DB::connection('pgsql')->select(
+            //     "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) as geom
+            //     FROM qhpkranh_queue
+            //     where concat(maqh,stt) = '$maqhpkranh' and deleted_at is NULL");
+
+            // if (!$process->isSuccessful()) {
+            //     throw new ProcessFailedException($process);
+            // }
+
+            return response()->json($process, 200);
+
+            // return response()->json([
+            //     // 'message' => $output
+            //     'message' => "Upload shape file successfully!"
+            // ], 200);
+        }
+        return response()->json([
+            'error' => "No zip file found!"
+        ], 404);
+    }
 
     // /**
     //  * @var PostgresRepository
