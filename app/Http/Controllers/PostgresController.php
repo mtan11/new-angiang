@@ -130,6 +130,29 @@ class PostgresController extends Controller
         return json_encode($qhpksdd);
     }
 
+
+    public function getMatCat(Request $request)
+    {
+        $linestring = $request->linestring;
+        $qhpksdd = DB::connection('pgsql')->select(
+            " WITH line AS
+            (SELECT 'SRID=4326;LINESTRING ($linestring)'::geometry AS geom),
+          cells AS
+            (SELECT ST_Centroid((ST_Intersection(demelevation.rast, line.geom)).geom) AS geom,
+            (ST_Intersection(demelevation.rast, line.geom)).val AS val
+             FROM demelevation, line
+             WHERE ST_Intersects(demelevation.rast, line.geom)),
+          points3d AS
+            (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
+             FROM cells, line
+             ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
+
+        SELECT ST_Asgeojson(ST_Transform(ST_MakeLine(geom),4326)) FROM points3d;");
+        
+        return json_encode($qhpksdd);
+    }
+    
+
     // /**
     //  * @var PostgresRepository
     //  */
