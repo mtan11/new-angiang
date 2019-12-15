@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/insert-data-point', 'PostgresController@insertData');
 Route::post('/upload-shapefile','PostgresController@uploadShapeFile');
+Route::get('/get-all-imgpoint','PostgresController@getAllPointImg');

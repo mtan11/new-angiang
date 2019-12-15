@@ -43,7 +43,7 @@ class PostgresController extends Controller
                 $extension = $photo->getClientOriginalExtension();
                 $fileName = sprintf('%s.%s', $photo->getFilename(), $extension);
                 Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/img/' . $fileName, File::get($photo));
-                array_push($photoFiles, '/img/'.$fileName);
+                array_push($photoFiles, $fileName);
             }
         }
         $photomcFiles = [];
@@ -52,7 +52,7 @@ class PostgresController extends Controller
                 $extension = $photom->getClientOriginalExtension();
                 $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
                 Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
-                array_push($photomcFiles, '/imgmc/'.$fileName);
+                array_push($photomcFiles, $fileName);
             }
         }
         $data->update([
@@ -113,6 +113,12 @@ class PostgresController extends Controller
         return response()->json([
             'error' => "No zip file found!"
         ], 404);
+    }
+
+    public function getAllPointImg()
+    {
+        $all = PointData::all();
+        return json_encode($all,200);
     }
 
     // /**
