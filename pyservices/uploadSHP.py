@@ -172,4 +172,4 @@ cursor.close()
 connection.close()
 
 os.system('rm -rf '+root)
-os.system('rm '+'''/var/www/ttqh-hcm-dev.thongtinquyhoach.vn/storage/app/public/Shape_File/'''+namefile+'''.zip''')
+os.system('rm '+'''/var/www/new-angiang/storage/app/public/Shape_File/'''+namefile+'''.zip''')
