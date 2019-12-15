@@ -130,7 +130,7 @@ if checked==False:
                 cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
                 print(cmd)
                 os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (hs,elevation,shape_leng,geom) select hs,elevation,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (hs,shape_leng,geom) select hs,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
                 print(sql_append_query)
                 cursor.execute(sql_append_query)
                 connection.commit()
@@ -141,7 +141,7 @@ if checked==False:
                 cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
                 print(cmd)
                 os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (hs,elevation,shape_leng,geom) select hs,elevation,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (year_,shape_leng,geom) select year_,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
                 print(sql_append_query)
                 cursor.execute(sql_append_query)
                 connection.commit()
