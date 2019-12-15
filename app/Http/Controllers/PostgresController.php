@@ -117,8 +117,17 @@ class PostgresController extends Controller
 
     public function getAllPointImg()
     {
-        $all = PointData::all();
-        return json_encode($all,200);
+        // $all = PointData::all();
+        // $all = DB::raw("select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
+        // dd($all);
+        // // $data->update([
+        //     'geom' => DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"))]);
+        // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
+        // return json_encode($all,200);
+        $qhpksdd = DB::connection('pgsql')->select(
+            "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
+        
+        return json_encode($qhpksdd);
     }
 
     // /**
