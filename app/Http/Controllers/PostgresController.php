@@ -30,7 +30,7 @@ class PostgresController extends Controller
             )),
             'name' => $name,
             'info' => $info,
-            'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',3857), 32648)")
+            'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
 
         $photos = $request->file('photos');
