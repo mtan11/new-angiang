@@ -72,7 +72,7 @@ if checked==False:
 
         # likema = "'%"+asd[-1]+asd[0]+"%'"
         # print(likema)
-        sql_delete_query = """Delete from dangsau_2009_line,diemdosau_2009_point,diemdosau_2019_point,satlo_mohinhthuyluc_line,satlo_truottongthe_line,satloduongbo_gis_line"""
+        sql_delete_query = """Delete from dangsau_2009_line;Delete from diemdosau_2009_point;Delete from diemdosau_2019_point;Delete from satlo_mohinhthuyluc_line;Delete from satlo_truottongthe_line;Delete from satloduongbo_gis_line"""
         print(sql_delete_query)
         cursor.execute(sql_delete_query)
         connection.commit()
