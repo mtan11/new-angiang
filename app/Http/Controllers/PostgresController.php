@@ -30,7 +30,7 @@ class PostgresController extends Controller
             )),
             'name' => $name,
             'info' => $info,
-            'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',3857), 32648)")
+            'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
 
         $photos = $request->file('photos');
@@ -43,7 +43,7 @@ class PostgresController extends Controller
                 $extension = $photo->getClientOriginalExtension();
                 $fileName = sprintf('%s.%s', $photo->getFilename(), $extension);
                 Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/img/' . $fileName, File::get($photo));
-                array_push($photoFiles, '/img/'.$fileName);
+                array_push($photoFiles, $fileName);
             }
         }
         $photomcFiles = [];
@@ -52,7 +52,7 @@ class PostgresController extends Controller
                 $extension = $photom->getClientOriginalExtension();
                 $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
                 Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
-                array_push($photomcFiles, '/imgmc/'.$fileName);
+                array_push($photomcFiles, $fileName);
             }
         }
         $data->update([
@@ -63,6 +63,95 @@ class PostgresController extends Controller
         return 'thêm data thanh cong';
     }
 
+    public function uploadShapeFile(Request $request)
+    {
+        $shpFile = $request->file('shpFile');
+        if ($shpFile) {
+            $extension = $shpFile->getClientOriginalExtension();
+            if ($extension != "zip") {
+                return response()->json([
+                    'error' => "File không đúng định dạng. Vui lòng chỉ chọn file .zip!",
+                ], 500);
+            }
+            $fileName = sprintf('%s.%s', $shpFile->getFilename(), $extension);
+            Storage::disk('public')->put('/Shape_File/' . $fileName, File::get($shpFile));
+            // Excute python code, import data to database
+            // chdir('/var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices');
+            // $output = shell_exec("python3 /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py ".$fileName." 2>&1");
+            // $output = shell_exec("touch /root/asddas.py");
+            // $process = new Process(['python3', '/var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py', $fileName]);
+            // $process->run();
+            // $output = shell_exec("source /root/.bashrc && python3 /var/www/new-angiang/pyservices/checkMaRanhDoAn.py {$fileName}");
+            // $outputsplit = explode("\n", $output);
+            // $maqhpkranh = $outputsplit[count($outputsplit)-2];
+            // // dd($output,$outputsplit,$maqhpkranh);
+            $process = shell_exec("python3 /var/www/new-angiang/pyservices/uploadSHP.py {$fileName}");
+            // $process = shell_exec("source /root/.bashrc && python3 /var/www/new-angiang/pyservices/uploadSHP.py {$fileName}");
+            // $output = shell_exec("/root/anaconda3/bin/python3 /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py $fileName");
+            // var_dump($output);
+            // if (!$process->isSuccessful()) {
+            //     throw new ProcessFailedException($process);
+            // }
+            // Ghi log
+
+            // $ranhdoan = DB::connection('pgsql')->select(
+            //     "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) as geom
+            //     FROM qhpkranh_queue
+            //     where concat(maqh,stt) = '$maqhpkranh' and deleted_at is NULL");
+
+            // if (!$process->isSuccessful()) {
+            //     throw new ProcessFailedException($process);
+            // }
+
+            return response()->json('Cap nhat thanh cong', 200);
+
+            // return response()->json([
+            //     // 'message' => $output
+            //     'message' => "Upload shape file successfully!"
+            // ], 200);
+        }
+        return response()->json([
+            'error' => "No zip file found!"
+        ], 404);
+    }
+
+    public function getAllPointImg()
+    {
+        // $all = PointData::all();
+        // $all = DB::raw("select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
+        // dd($all);
+        // // $data->update([
+        //     'geom' => DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"))]);
+        // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
+        // return json_encode($all,200);
+        $qhpksdd = DB::connection('pgsql')->select(
+            "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
+        
+        return json_encode($qhpksdd);
+    }
+
+
+    public function getMatCat(Request $request)
+    {
+        $linestring = $request->linestring;
+        $qhpksdd = DB::connection('pgsql')->select(
+            " WITH line AS
+            (SELECT 'SRID=4326;LINESTRING ($linestring)'::geometry AS geom),
+          cells AS
+            (SELECT ST_Centroid((ST_Intersection(demelevation.rast, line.geom)).geom) AS geom,
+            (ST_Intersection(demelevation.rast, line.geom)).val AS val
+             FROM demelevation, line
+             WHERE ST_Intersects(demelevation.rast, line.geom)),
+          points3d AS
+            (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
+             FROM cells, line
+             ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
+
+        SELECT ST_Asgeojson(ST_Transform(ST_MakeLine(geom),4326)) FROM points3d;");
+        
+        return json_encode($qhpksdd);
+    }
+    
 
     // /**
     //  * @var PostgresRepository
