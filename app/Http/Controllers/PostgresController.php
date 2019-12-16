@@ -136,7 +136,7 @@ class PostgresController extends Controller
         $linestring = $request->linestring;
         $qhpksdd = DB::connection('pgsql')->select(
             " WITH line AS
-            (SELECT 'SRID=4326;LINESTRING ($linestring)'::geometry AS geom),
+            (SELECT st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($linestring)'),32648)::geometry AS geom),
           cells AS
             (SELECT ST_Centroid((ST_Intersection(demelevation.rast, line.geom)).geom) AS geom,
             (ST_Intersection(demelevation.rast, line.geom)).val AS val
