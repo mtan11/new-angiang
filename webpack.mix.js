@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,5 +12,15 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix
+    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/map.js', 'public/js')
+    .js('resources/js/map-edit.js', 'public/js')
+    .js('resources/js/components/leaflet-elevation.js', 'public/js')
+
+.sass('resources/sass/leaflet.elevation-0.0.4.scss', 'public/css')
+    .sass('resources/sass/style.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css')
+    .version()
+
+;

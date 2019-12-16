@@ -1,99 +1,222 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
 
-        <title>Laravel</title>
+<head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <title>An Giang</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            .full-height {
-                height: 100vh;
-            }
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 
-            .position-ref {
-                position: relative;
-            }
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+    <link rel="stylesheet" href="{{ mix('css/leaflet.elevation-0.0.4.css') }}" />
+    <script type="text/javascript" src="{{ mix('js/leaflet-elevation.js') }}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-            .content {
-                text-align: center;
-            }
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
-            .title {
-                font-size: 84px;
-            }
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.css">
+    <script src="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.css" />
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet"></script>
+
+    <!-- Esri Leaflet Geocoder -->
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css">
+    <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
+    <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}" />
+
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
+    <div id="panel" class="panel-container">
+        <div>
+            <div class="d-flex panel-header">
+                <h5 class="card-title" id="panel-title">Các lớp layer</h5>
+                <button type="button" id="close-btn" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
+                <div class="container-content">
+                    <div id="layer-content">
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Các điểm khảo sát</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="rungngapman" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Bản đồ bổ sung và điều chỉnh các quy hoạch khai thác cát cho các khu vực trọng điểm
+                                    của tỉnh An Giang</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="bandobosung" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Bản đồ theo kết quả tính ổn định đường bờ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="bandoketqua" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Bản đồ theo phân tích viễn thám GIS</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="bandophantich" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Đằng sau 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="2009line" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm độ sâu 2019</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemdosau20019" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm độ sâu 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemdosau" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Sạt lỡ mô hình thuỷ lực</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satlomohinhthuyluch" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Sạt lỡ trượt tổng thế</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satlotruottongthe" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Sạt lỡ đường bờ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satloduongbo" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            @endif
+                <div id="info-content" class="hidden">
+                    <div class="container-form" style="padding: 10px;">
+                        <div class="form-group">
+                            <label for="input-name">Tên</label>
+                            <input class="form-control" id="input-name" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Thông tin</label>
+                            <input class="form-control" id="input-info" disabled>
+                        </div>
+                    </div>
+                    <div class="img-slider">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" id="img-slider">
+                              
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+<script src="{{ mix('js/map.js') }}"></script>
+
 </html>

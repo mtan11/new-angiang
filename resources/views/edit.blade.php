@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>An Giang</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="{{ mix('css/leaflet.elevation-0.0.4.css') }}" />
+    <script type="text/javascript" src="{{ mix('js/leaflet-elevation.js') }}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.css">
+    <script src="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet"></script>
+
+    <!-- Esri Leaflet Geocoder -->
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css">
+    <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
+    <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}" />
+
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
+    <div id="panel-update" class="panel-container-update">
+        <div>
+            <div class="d-flex panel-header">
+                <h5 class="card-title">Thêm điểm khảo sát</h5>
+                <button type="button" id="close-update-btn" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
+
+                <div class="container-form" style="padding: 10px;">
+                    <div class="form-group">
+                        <label for="input-name">Tên</label>
+                        <input class="form-control" id="input-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-info">Thông tin</label>
+                        <input class="form-control" id="input-info">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-images">Chọn hình ảnh</label>
+                        <input type="file" class="form-control-file" multiple name="img" id="input-images">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-images">Chọn hình ảnh mặt cắt</label>
+                        <input type="file" class="form-control-file" multiple name="img" id="input-images-mc">
+                    </div>
+                    <div class="d-flex"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="panel" class="panel-container">
+        <div>
+            <div class="d-flex panel-header">
+                <h5 class="card-title">Các lớp layer</h5>
+                <button type="button" id="close-btn" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
+                <div class="container-content">
+                    <div id="layer-content" class="">
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Các điểm khảo sát</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="rungngapman" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Bản đồ bổ sung và điều chỉnh các quy hoạch khai thác cát cho các khu vực trọng điểm
+                                    của tỉnh An Giang</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="bandobosung" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Bản đồ theo kết quả tính ổn định đường bờ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="bandoketqua" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Bản đồ theo phân tích viễn thám GIS</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="bandophantich" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="info-content">
+                    <div class="container-form" style="padding: 10px;">
+                        <div class="form-group">
+                            <label for="input-name">Tên</label>
+                            <input class="form-control" id="input-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Thông tin</label>
+                            <input class="form-control" id="input-info">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-images">Chọn hình ảnh</label>
+                            <input type="file" class="form-control-file" multiple name="img" id="input-images">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-images">Chọn hình ảnh mặt cắt</label>
+                            <input type="file" class="form-control-file" multiple name="img" id="input-images-mc">
+                        </div>
+                        <div class="d-flex"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
+                    </div>
+
+                    <div id="img-slider" class="img-slider hidden">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{{ mix('js/map-edit.js') }}"></script>
+
+</html>
