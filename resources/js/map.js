@@ -127,8 +127,6 @@ function clickMarker(feature, layer) {
         inputInfo.value = feature.properties.Info;
         let photo = JSON.parse(feature.properties.Photos).img;
         let photomc = JSON.parse(feature.properties.Photos).imgmc;
-        console.log(photo);
-        console.log(photomc);
         for (let i = 0; i < photo.length; i++) {
             if (i == 0) {
                 createImgDiv(id, true, 'img', photo[i])
@@ -215,6 +213,55 @@ let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
+let u_diem_mc_moi = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_diem_mc_moi',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+let u_anh = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_anh',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+let u_diem_sat_lo = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_diem_sat_lo',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+let u_doan_sat_lo = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_doan_sat_lo',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+
+let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_tram_do_thuy_van',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+
+
+
 //add Layer
 
 var mapMinZoom = 10;
@@ -248,7 +295,7 @@ $("#bandophantich").on('change', function() {
 $("#2009line").on('change', function() {
     toggleLayer(dangsau_2009_line, map, this.checked);
 });
-$("#diemdosau2019").on('change', function() {
+$("#diemdosau20019").on('change', function() {
     toggleLayer(diemdosau_2019_point, map, this.checked);
 });
 $("#satlomohinhthuyluch").on('change', function() {
@@ -263,6 +310,23 @@ $("#satlotruottongthe").on('change', function() {
 $("#satloduongbo").on('change', function() {
     toggleLayer(satloduongbo_gis_line, map, this.checked);
 });
+$("#diemanh").on('change', function() {
+    toggleLayer(u_anh, map, this.checked);
+});
+$("#diemmatcatmoi").on('change', function() {
+    toggleLayer(u_diem_mc_moi, map, this.checked);
+});
+$("#diemsatlo").on('change', function() {
+    toggleLayer(u_diem_sat_lo, map, this.checked);
+});
+$("#doansatlo").on('change', function() {
+    toggleLayer(u_doan_sat_lo, map, this.checked);
+});
+$("#tramdothuyvan").on('change', function() {
+    toggleLayer(u_tram_do_thuy_van, map, this.checked);
+});
+
+
 
 
 function toggleLayer(layer, map, status) {

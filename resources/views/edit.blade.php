@@ -238,6 +238,61 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm ảnh</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemanh" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm mặt cắt mới</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemmatcatmoi" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm sạt lỡ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemsatlo" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Đoạn sạt lỡ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="doansatlo" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Trạm đo thuỷ văn</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="tramdothuyvan" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

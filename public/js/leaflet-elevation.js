@@ -1,1 +1,438 @@
-!function(t){var i={};function e(a){if(i[a])return i[a].exports;var s=i[a]={i:a,l:!1,exports:{}};return t[a].call(s.exports,s,s.exports,e),s.l=!0,s.exports}e.m=t,e.c=i,e.d=function(t,i,a){e.o(t,i)||Object.defineProperty(t,i,{enumerable:!0,get:a})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,i){if(1&i&&(t=e(t)),8&i)return t;if(4&i&&"object"==typeof t&&t&&t.__esModule)return t;var a=Object.create(null);if(e.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:t}),2&i&&"string"!=typeof t)for(var s in t)e.d(a,s,function(i){return t[i]}.bind(null,s));return a},e.n=function(t){var i=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(i,"a",i),i},e.o=function(t,i){return Object.prototype.hasOwnProperty.call(t,i)},e.p="/",e(e.s=3)}({"1asB":function(t,i){L.Control.Elevation=L.Control.extend({options:{position:"topright",theme:"lime-theme",width:600,height:175,margins:{top:10,right:20,bottom:30,left:60},useHeightIndicator:!0,interpolation:"linear",hoverNumber:{decimalsX:3,decimalsY:0,formatter:void 0},xTicks:void 0,yTicks:void 0,collapsed:!1,yAxisMin:void 0,yAxisMax:void 0,forceAxisBounds:!1,controlButton:{iconCssClass:"elevation-toggle-icon",title:"Elevation"},imperial:!1},__mileFactor:.621371,__footFactor:3.28084,onRemove:function(t){this._container=null},onAdd:function(t){this._map=t;var i=this.options,e=i.margins;i.xTicks=i.xTicks||Math.round(this._width()/75),i.yTicks=i.yTicks||Math.round(this._height()/30),i.hoverNumber.formatter=i.hoverNumber.formatter||this._formatter;var a=this._x=d3.scale.linear().range([0,this._width()]),s=this._y=d3.scale.linear().range([this._height(),0]),o=(this._area=d3.svg.area().interpolate(i.interpolation).x((function(t){var i=a(t.dist);return t.xDiagCoord=i,i})).y0(this._height()).y1((function(t){return s(t.altitude)})),this._container=L.DomUtil.create("div","elevation"));L.DomUtil.addClass(o,i.theme),this._initToggle();var n=d3.select(o);n.attr("width",i.width);var r=n.append("svg");r.attr("width",i.width).attr("class","background").attr("height",i.height).append("g").attr("transform","translate("+e.left+","+e.top+")");var h=d3.svg.line();h=h.x((function(t){return d3.mouse(r.select("g"))[0]})).y((function(t){return this._height()}));var l=d3.select(this._container).select("svg").select("g");this._areapath=l.append("path").attr("class","area");var d=this._background=l.append("rect").attr("width",this._width()).attr("height",this._height()).style("fill","none").style("stroke","none").style("pointer-events","all");L.Browser.touch?(d.on("touchmove.drag",this._dragHandler.bind(this)).on("touchstart.drag",this._dragStartHandler.bind(this)).on("touchstart.focus",this._mousemoveHandler.bind(this)),L.DomEvent.on(this._container,"touchend",this._dragEndHandler,this)):(d.on("mousemove.focus",this._mousemoveHandler.bind(this)).on("mouseout.focus",this._mouseoutHandler.bind(this)).on("mousedown.drag",this._dragStartHandler.bind(this)).on("mousemove.drag",this._dragHandler.bind(this)),L.DomEvent.on(this._container,"mouseup",this._dragEndHandler,this)),this._xaxisgraphicnode=l.append("g"),this._yaxisgraphicnode=l.append("g"),this._appendXaxis(this._xaxisgraphicnode),this._appendYaxis(this._yaxisgraphicnode);var c=this._focusG=l.append("g");return this._mousefocus=c.append("svg:line").attr("class","mouse-focus-line").attr("x2","0").attr("y2","0").attr("x1","0").attr("y1","0"),this._focuslabelX=c.append("svg:text").style("pointer-events","none").attr("class","mouse-focus-label-x"),this._focuslabelY=c.append("svg:text").style("pointer-events","none").attr("class","mouse-focus-label-y"),this._data&&this._applyData(),o},_dragHandler:function(){d3.event.preventDefault(),d3.event.stopPropagation(),this._gotDragged=!0,this._drawDragRectangle()},_drawDragRectangle:function(){if(this._dragStartCoords){var t=this._dragCurrentCoords=d3.mouse(this._background.node()),i=Math.min(this._dragStartCoords[0],t[0]),e=Math.max(this._dragStartCoords[0],t[0]);if(this._dragRectangle||this._dragRectangleG)this._dragRectangle.attr("width",e-i).attr("x",i);else{var a=d3.select(this._container).select("svg").select("g");this._dragRectangleG=a.append("g"),this._dragRectangle=this._dragRectangleG.append("rect").attr("width",e-i).attr("height",this._height()).attr("x",i).attr("class","mouse-drag").style("pointer-events","none")}}},_resetDrag:function(){this._dragRectangleG&&(this._dragRectangleG.remove(),this._dragRectangleG=null,this._dragRectangle=null,this._hidePositionMarker(),this._map.fitBounds(this._fullExtent))},_dragEndHandler:function(){if(!this._dragStartCoords||!this._gotDragged)return this._dragStartCoords=null,this._gotDragged=!1,void this._resetDrag();this._hidePositionMarker();var t=this._findItemForX(this._dragStartCoords[0]),i=this._findItemForX(this._dragCurrentCoords[0]);this._fitSection(t,i),this._dragStartCoords=null,this._gotDragged=!1},_dragStartHandler:function(){d3.event.preventDefault(),d3.event.stopPropagation(),this._gotDragged=!1,this._dragStartCoords=d3.mouse(this._background.node())},_findItemForX:function(t){var i=d3.bisector((function(t){return t.dist})).left,e=this._x.invert(t);return i(this._data,e)},_findItemForLatLng:function(t){var i=null,e=1/0;return this._data.forEach((function(a){var s=t.distanceTo(a.latlng);e>s&&(e=s,i=a)})),i},_fitSection:function(t,i){var e=Math.min(t,i),a=Math.max(t,i),s=this._calculateFullExtent(this._data.slice(e,a));this._map.fitBounds(s)},_initToggle:function(){var t=this._container;if(t.setAttribute("aria-haspopup",!0),L.Browser.touch?L.DomEvent.on(t,"click",L.DomEvent.stopPropagation):L.DomEvent.disableClickPropagation(t),this.options.collapsed){this._collapse(),L.Browser.android||L.DomEvent.on(t,"mouseover",this._expand,this).on(t,"mouseout",this._collapse,this);var i=this._button=L.DomUtil.create("a","elevation-toggle "+this.options.controlButton.iconCssClass,t);i.href="#",i.title=this.options.controlButton.title,L.Browser.touch?L.DomEvent.on(i,"click",L.DomEvent.stop).on(i,"click",this._expand,this):L.DomEvent.on(i,"focus",this._expand,this),this._map.on("click",this._collapse,this)}},_expand:function(){this._container.className=this._container.className.replace(" elevation-collapsed","")},_collapse:function(){L.DomUtil.addClass(this._container,"elevation-collapsed")},_width:function(){var t=this.options;return t.width-t.margins.left-t.margins.right},_height:function(){var t=this.options;return t.height-t.margins.top-t.margins.bottom},_formatter:function(t,i,e){var a,s=(a=0===i?Math.round(t)+"":L.Util.formatNum(t,i)+"").split(".");if(s[1]){for(var o=i-s[1].length;o>0;o--)s[1]+="0";a=s.join(e||".")}return a},_appendYaxis:function(t){this.options.imperial?t.attr("class","y axis").call(d3.svg.axis().scale(this._y).ticks(this.options.yTicks).orient("left")).append("text").attr("x",-37).attr("y",3).style("text-anchor","end").text("ft"):t.attr("class","y axis").call(d3.svg.axis().scale(this._y).ticks(this.options.yTicks).orient("left")).append("text").attr("x",-45).attr("y",3).style("text-anchor","end").text("m")},_appendXaxis:function(t){this.options.imperial?t.attr("class","x axis").attr("transform","translate(0,"+this._height()+")").call(d3.svg.axis().scale(this._x).ticks(this.options.xTicks).orient("bottom")).append("text").attr("x",this._width()+10).attr("y",15).style("text-anchor","end").text("mi"):t.attr("class","x axis").attr("transform","translate(0,"+this._height()+")").call(d3.svg.axis().scale(this._x).ticks(this.options.xTicks).orient("bottom")).append("text").attr("x",this._width()+20).attr("y",15).style("text-anchor","end").text("km")},_updateAxis:function(){this._xaxisgraphicnode.selectAll("g").remove(),this._xaxisgraphicnode.selectAll("path").remove(),this._xaxisgraphicnode.selectAll("text").remove(),this._yaxisgraphicnode.selectAll("g").remove(),this._yaxisgraphicnode.selectAll("path").remove(),this._yaxisgraphicnode.selectAll("text").remove(),this._appendXaxis(this._xaxisgraphicnode),this._appendYaxis(this._yaxisgraphicnode)},_mouseoutHandler:function(){this._hidePositionMarker()},_hidePositionMarker:function(){this._marker&&(this._map.removeLayer(this._marker),this._marker=null),this._mouseHeightFocus&&(this._mouseHeightFocus.style("visibility","hidden"),this._mouseHeightFocusLabel.style("visibility","hidden")),this._pointG&&this._pointG.style("visibility","hidden"),this._focusG.style("visibility","hidden")},_mousemoveHandler:function(t,i,e){if(this._data&&0!==this._data.length){var a=d3.mouse(this._background.node()),s=this.options,o=this._data[this._findItemForX(a[0])],n=o.altitude,r=o.dist,h=o.latlng,l=s.hoverNumber.formatter(n,s.hoverNumber.decimalsY);s.hoverNumber.formatter(r,s.hoverNumber.decimalsX),this._showDiagramIndicator(o,a[0]);var d=this._map.latLngToLayerPoint(h);if(s.useHeightIndicator){if(!this._mouseHeightFocus){var c=d3.select(".leaflet-overlay-pane svg").append("g");this._mouseHeightFocus=c.append("svg:line").attr("class",s.theme+" height-focus line").attr("x2",0).attr("y2",0).attr("x1",0).attr("y1",0),(this._pointG=c.append("g")).append("svg:circle").attr("r",6).attr("cx",0).attr("cy",0).attr("class",s.theme+" height-focus circle-lower"),this._mouseHeightFocusLabel=c.append("svg:text").attr("class",s.theme+" height-focus-label").style("pointer-events","none")}var _=this._height()/this._maxElevation*n,u=d.y-_;this._mouseHeightFocus.attr("x1",d.x).attr("x2",d.x).attr("y1",d.y).attr("y2",u).style("visibility","visible"),this._pointG.attr("transform","translate("+d.x+","+d.y+")").style("visibility","visible"),s.imperial?this._mouseHeightFocusLabel.attr("x",d.x).attr("y",u).text(l+" ft").style("visibility","visible"):this._mouseHeightFocusLabel.attr("x",d.x).attr("y",u).text(l+" m").style("visibility","visible")}else this._marker?this._marker.setLatLng(h):this._marker=new L.Marker(h).addTo(this._map)}},_addGeoJSONData:function(t){var i=this.options;if(t){for(var e=this._data||[],a=this._dist||0,s=this._maxElevation||0,o=0;o<t.length;o++){var n=new L.LatLng(t[o][1],t[o][0]),r=new L.LatLng(t[o?o-1:0][1],t[o?o-1:0][0]),h=i.imperial?n.distanceTo(r)*this.__mileFactor:n.distanceTo(r);a+=Math.round(h/1e3*1e5)/1e5,s=s<t[o][2]?t[o][2]:s,e.push({dist:a,altitude:i.imperial?t[o][2]*this.__footFactor:t[o][2],x:t[o][0],y:t[o][1],latlng:n})}this._dist=a,this._data=e,s=i.imperial?s*this.__footFactor:s,this._maxElevation=s}},_addGPXdata:function(t){var i=this.options;if(t){for(var e=this._data||[],a=this._dist||0,s=this._maxElevation||0,o=0;o<t.length;o++){var n=t[o],r=t[o?o-1:0],h=i.imperial?n.distanceTo(r)*this.__mileFactor:n.distanceTo(r);a+=Math.round(h/1e3*1e5)/1e5,s=s<n.meta.ele?n.meta.ele:s,e.push({dist:a,altitude:i.imperial?n.meta.ele*this.__footFactor:n.meta.ele,x:n.lng,y:n.lat,latlng:n})}this._dist=a,this._data=e,s=i.imperial?s*this.__footFactor:s,this._maxElevation=s}},_addData:function(t){var i,e=t&&t.geometry&&t.geometry;if(e)switch(e.type){case"LineString":this._addGeoJSONData(e.coordinates);break;case"MultiLineString":for(i=0;i<e.coordinates.length;i++)this._addGeoJSONData(e.coordinates[i]);break;default:throw new Error("Invalid GeoJSON object.")}if(t&&"FeatureCollection"===t.type)for(i=0;i<t.features.length;i++)this._addData(t.features[i]);t&&t._latlngs&&this._addGPXdata(t._latlngs)},_calculateFullExtent:function(t){if(!t||t.length<1)throw new Error("no data in parameters");var i=new L.latLngBounds(t[0].latlng,t[0].latlng);return t.forEach((function(t){i.extend(t.latlng)})),i},addData:function(t,i){this._addData(t),this._container&&this._applyData(),null===i&&t.on&&(i=t),i&&i.on("mousemove",this._handleLayerMouseOver.bind(this))},_handleLayerMouseOver:function(t){if(this._data&&0!==this._data.length){var i=t.latlng,e=this._findItemForLatLng(i);if(e){var a=e.xDiagCoord;this._showDiagramIndicator(e,a)}}},_showDiagramIndicator:function(t,i){var e=this.options;this._focusG.style("visibility","visible"),this._mousefocus.attr("x1",i).attr("y1",0).attr("x2",i).attr("y2",this._height()).classed("hidden",!1);var a=t.altitude,s=t.dist,o=(t.latlng,e.hoverNumber.formatter(a,e.hoverNumber.decimalsY)),n=e.hoverNumber.formatter(s,e.hoverNumber.decimalsX);e.imperial?(this._focuslabelX.attr("x",i).text(o+" ft"),this._focuslabelY.attr("y",this._height()-5).attr("x",i).text(n+" mi")):(this._focuslabelX.attr("x",i).text(o+" m"),this._focuslabelY.attr("y",this._height()-5).attr("x",i).text(n+" km"))},_applyData:function(){var t=d3.extent(this._data,(function(t){return t.dist})),i=d3.extent(this._data,(function(t){return t.altitude})),e=this.options;void 0!==e.yAxisMin&&(e.yAxisMin<i[0]||e.forceAxisBounds)&&(i[0]=e.yAxisMin),void 0!==e.yAxisMax&&(e.yAxisMax>i[1]||e.forceAxisBounds)&&(i[1]=e.yAxisMax),this._x.domain(t),this._y.domain(i),this._areapath.datum(this._data).attr("d",this._area),this._updateAxis(),this._fullExtent=this._calculateFullExtent(this._data)},_clearData:function(){this._data=null,this._dist=null,this._maxElevation=null},clear:function(){this._clearData(),this._areapath&&(this._areapath.attr("d","M0 0"),this._x.domain([0,1]),this._y.domain([0,1]),this._updateAxis())},hide:function(){this._container.style.display="none"},show:function(){this._container.style.display="block"}}),L.control.elevation=function(t){return new L.Control.Elevation(t)}},3:function(t,i,e){t.exports=e("1asB")}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/components/leaflet-elevation.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/leaflet-elevation.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*! leaflet.elevation 02-03-2016 */
+L.Control.Elevation = L.Control.extend({
+  options: {
+    position: "topright",
+    theme: "lime-theme",
+    width: 600,
+    height: 175,
+    margins: {
+      top: 10,
+      right: 20,
+      bottom: 30,
+      left: 60
+    },
+    useHeightIndicator: !0,
+    interpolation: "linear",
+    hoverNumber: {
+      decimalsX: 3,
+      decimalsY: 0,
+      formatter: void 0
+    },
+    xTicks: void 0,
+    yTicks: void 0,
+    collapsed: !1,
+    yAxisMin: void 0,
+    yAxisMax: void 0,
+    forceAxisBounds: !1,
+    controlButton: {
+      iconCssClass: "elevation-toggle-icon",
+      title: "Elevation"
+    },
+    imperial: !1
+  },
+  __mileFactor: .621371,
+  __footFactor: 3.28084,
+  onRemove: function onRemove(a) {
+    this._container = null;
+  },
+  onAdd: function onAdd(a) {
+    this._map = a;
+    var b = this.options,
+        c = b.margins;
+    b.xTicks = b.xTicks || Math.round(this._width() / 75), b.yTicks = b.yTicks || Math.round(this._height() / 30), b.hoverNumber.formatter = b.hoverNumber.formatter || this._formatter;
+    var d = this._x = d3.scale.linear().range([0, this._width()]),
+        e = this._y = d3.scale.linear().range([this._height(), 0]),
+        f = (this._area = d3.svg.area().interpolate(b.interpolation).x(function (a) {
+      var b = d(a.dist);
+      return a.xDiagCoord = b, b;
+    }).y0(this._height()).y1(function (a) {
+      return e(a.altitude);
+    }), this._container = L.DomUtil.create("div", "elevation"));
+    L.DomUtil.addClass(f, b.theme), this._initToggle();
+    var g = d3.select(f);
+    g.attr("width", b.width);
+    var h = g.append("svg");
+    h.attr("width", b.width).attr("class", "background").attr("height", b.height).append("g").attr("transform", "translate(" + c.left + "," + c.top + ")");
+    var i = d3.svg.line();
+    i = i.x(function (a) {
+      return d3.mouse(h.select("g"))[0];
+    }).y(function (a) {
+      return this._height();
+    });
+    var j = d3.select(this._container).select("svg").select("g");
+    this._areapath = j.append("path").attr("class", "area");
+    var k = this._background = j.append("rect").attr("width", this._width()).attr("height", this._height()).style("fill", "none").style("stroke", "none").style("pointer-events", "all");
+    L.Browser.touch ? (k.on("touchmove.drag", this._dragHandler.bind(this)).on("touchstart.drag", this._dragStartHandler.bind(this)).on("touchstart.focus", this._mousemoveHandler.bind(this)), L.DomEvent.on(this._container, "touchend", this._dragEndHandler, this)) : (k.on("mousemove.focus", this._mousemoveHandler.bind(this)).on("mouseout.focus", this._mouseoutHandler.bind(this)).on("mousedown.drag", this._dragStartHandler.bind(this)).on("mousemove.drag", this._dragHandler.bind(this)), L.DomEvent.on(this._container, "mouseup", this._dragEndHandler, this)), this._xaxisgraphicnode = j.append("g"), this._yaxisgraphicnode = j.append("g"), this._appendXaxis(this._xaxisgraphicnode), this._appendYaxis(this._yaxisgraphicnode);
+    var l = this._focusG = j.append("g");
+    return this._mousefocus = l.append("svg:line").attr("class", "mouse-focus-line").attr("x2", "0").attr("y2", "0").attr("x1", "0").attr("y1", "0"), this._focuslabelX = l.append("svg:text").style("pointer-events", "none").attr("class", "mouse-focus-label-x"), this._focuslabelY = l.append("svg:text").style("pointer-events", "none").attr("class", "mouse-focus-label-y"), this._data && this._applyData(), f;
+  },
+  _dragHandler: function _dragHandler() {
+    d3.event.preventDefault(), d3.event.stopPropagation(), this._gotDragged = !0, this._drawDragRectangle();
+  },
+  _drawDragRectangle: function _drawDragRectangle() {
+    if (this._dragStartCoords) {
+      var a = this._dragCurrentCoords = d3.mouse(this._background.node()),
+          b = Math.min(this._dragStartCoords[0], a[0]),
+          c = Math.max(this._dragStartCoords[0], a[0]);
+      if (this._dragRectangle || this._dragRectangleG) this._dragRectangle.attr("width", c - b).attr("x", b);else {
+        var d = d3.select(this._container).select("svg").select("g");
+        this._dragRectangleG = d.append("g"), this._dragRectangle = this._dragRectangleG.append("rect").attr("width", c - b).attr("height", this._height()).attr("x", b).attr("class", "mouse-drag").style("pointer-events", "none");
+      }
+    }
+  },
+  _resetDrag: function _resetDrag() {
+    this._dragRectangleG && (this._dragRectangleG.remove(), this._dragRectangleG = null, this._dragRectangle = null, this._hidePositionMarker(), this._map.fitBounds(this._fullExtent));
+  },
+  _dragEndHandler: function _dragEndHandler() {
+    if (!this._dragStartCoords || !this._gotDragged) return this._dragStartCoords = null, this._gotDragged = !1, void this._resetDrag();
+
+    this._hidePositionMarker();
+
+    var a = this._findItemForX(this._dragStartCoords[0]),
+        b = this._findItemForX(this._dragCurrentCoords[0]);
+
+    this._fitSection(a, b), this._dragStartCoords = null, this._gotDragged = !1;
+  },
+  _dragStartHandler: function _dragStartHandler() {
+    d3.event.preventDefault(), d3.event.stopPropagation(), this._gotDragged = !1, this._dragStartCoords = d3.mouse(this._background.node());
+  },
+  _findItemForX: function _findItemForX(a) {
+    var b = d3.bisector(function (a) {
+      return a.dist;
+    }).left,
+        c = this._x.invert(a);
+
+    return b(this._data, c);
+  },
+  _findItemForLatLng: function _findItemForLatLng(a) {
+    var b = null,
+        c = 1 / 0;
+    return this._data.forEach(function (d) {
+      var e = a.distanceTo(d.latlng);
+      c > e && (c = e, b = d);
+    }), b;
+  },
+  _fitSection: function _fitSection(a, b) {
+    var c = Math.min(a, b),
+        d = Math.max(a, b),
+        e = this._calculateFullExtent(this._data.slice(c, d));
+
+    this._map.fitBounds(e);
+  },
+  _initToggle: function _initToggle() {
+    var a = this._container;
+
+    if (a.setAttribute("aria-haspopup", !0), L.Browser.touch ? L.DomEvent.on(a, "click", L.DomEvent.stopPropagation) : L.DomEvent.disableClickPropagation(a), this.options.collapsed) {
+      this._collapse(), L.Browser.android || L.DomEvent.on(a, "mouseover", this._expand, this).on(a, "mouseout", this._collapse, this);
+      var b = this._button = L.DomUtil.create("a", "elevation-toggle " + this.options.controlButton.iconCssClass, a);
+      b.href = "#", b.title = this.options.controlButton.title, L.Browser.touch ? L.DomEvent.on(b, "click", L.DomEvent.stop).on(b, "click", this._expand, this) : L.DomEvent.on(b, "focus", this._expand, this), this._map.on("click", this._collapse, this);
+    }
+  },
+  _expand: function _expand() {
+    this._container.className = this._container.className.replace(" elevation-collapsed", "");
+  },
+  _collapse: function _collapse() {
+    L.DomUtil.addClass(this._container, "elevation-collapsed");
+  },
+  _width: function _width() {
+    var a = this.options;
+    return a.width - a.margins.left - a.margins.right;
+  },
+  _height: function _height() {
+    var a = this.options;
+    return a.height - a.margins.top - a.margins.bottom;
+  },
+  _formatter: function _formatter(a, b, c) {
+    var d;
+    d = 0 === b ? Math.round(a) + "" : L.Util.formatNum(a, b) + "";
+    var e = d.split(".");
+
+    if (e[1]) {
+      for (var f = b - e[1].length; f > 0; f--) {
+        e[1] += "0";
+      }
+
+      d = e.join(c || ".");
+    }
+
+    return d;
+  },
+  _appendYaxis: function _appendYaxis(a) {
+    var b = this.options;
+    b.imperial ? a.attr("class", "y axis").call(d3.svg.axis().scale(this._y).ticks(this.options.yTicks).orient("left")).append("text").attr("x", -37).attr("y", 3).style("text-anchor", "end").text("ft") : a.attr("class", "y axis").call(d3.svg.axis().scale(this._y).ticks(this.options.yTicks).orient("left")).append("text").attr("x", -45).attr("y", 3).style("text-anchor", "end").text("m");
+  },
+  _appendXaxis: function _appendXaxis(a) {
+    var b = this.options;
+    b.imperial ? a.attr("class", "x axis").attr("transform", "translate(0," + this._height() + ")").call(d3.svg.axis().scale(this._x).ticks(this.options.xTicks).orient("bottom")).append("text").attr("x", this._width() + 10).attr("y", 15).style("text-anchor", "end").text("mi") : a.attr("class", "x axis").attr("transform", "translate(0," + this._height() + ")").call(d3.svg.axis().scale(this._x).ticks(this.options.xTicks).orient("bottom")).append("text").attr("x", this._width() + 20).attr("y", 15).style("text-anchor", "end").text("km");
+  },
+  _updateAxis: function _updateAxis() {
+    this._xaxisgraphicnode.selectAll("g").remove(), this._xaxisgraphicnode.selectAll("path").remove(), this._xaxisgraphicnode.selectAll("text").remove(), this._yaxisgraphicnode.selectAll("g").remove(), this._yaxisgraphicnode.selectAll("path").remove(), this._yaxisgraphicnode.selectAll("text").remove(), this._appendXaxis(this._xaxisgraphicnode), this._appendYaxis(this._yaxisgraphicnode);
+  },
+  _mouseoutHandler: function _mouseoutHandler() {
+    this._hidePositionMarker();
+  },
+  _hidePositionMarker: function _hidePositionMarker() {
+    this._marker && (this._map.removeLayer(this._marker), this._marker = null), this._mouseHeightFocus && (this._mouseHeightFocus.style("visibility", "hidden"), this._mouseHeightFocusLabel.style("visibility", "hidden")), this._pointG && this._pointG.style("visibility", "hidden"), this._focusG.style("visibility", "hidden");
+  },
+  _mousemoveHandler: function _mousemoveHandler(a, b, c) {
+    if (this._data && 0 !== this._data.length) {
+      var d = d3.mouse(this._background.node()),
+          e = this.options,
+          f = this._data[this._findItemForX(d[0])],
+          g = f.altitude,
+          h = f.dist,
+          i = f.latlng,
+          j = e.hoverNumber.formatter(g, e.hoverNumber.decimalsY);
+
+      e.hoverNumber.formatter(h, e.hoverNumber.decimalsX);
+
+      this._showDiagramIndicator(f, d[0]);
+
+      var k = this._map.latLngToLayerPoint(i);
+
+      if (e.useHeightIndicator) {
+        if (!this._mouseHeightFocus) {
+          var l = d3.select(".leaflet-overlay-pane svg").append("g");
+          this._mouseHeightFocus = l.append("svg:line").attr("class", e.theme + " height-focus line").attr("x2", 0).attr("y2", 0).attr("x1", 0).attr("y1", 0);
+          var m = this._pointG = l.append("g");
+          m.append("svg:circle").attr("r", 6).attr("cx", 0).attr("cy", 0).attr("class", e.theme + " height-focus circle-lower"), this._mouseHeightFocusLabel = l.append("svg:text").attr("class", e.theme + " height-focus-label").style("pointer-events", "none");
+        }
+
+        var n = this._height() / this._maxElevation * g,
+            o = k.y - n;
+        this._mouseHeightFocus.attr("x1", k.x).attr("x2", k.x).attr("y1", k.y).attr("y2", o).style("visibility", "visible"), this._pointG.attr("transform", "translate(" + k.x + "," + k.y + ")").style("visibility", "visible"), e.imperial ? this._mouseHeightFocusLabel.attr("x", k.x).attr("y", o).text(j + " ft").style("visibility", "visible") : this._mouseHeightFocusLabel.attr("x", k.x).attr("y", o).text(j + " m").style("visibility", "visible");
+      } else this._marker ? this._marker.setLatLng(i) : this._marker = new L.Marker(i).addTo(this._map);
+    }
+  },
+  _addGeoJSONData: function _addGeoJSONData(a) {
+    var b = this.options;
+
+    if (a) {
+      for (var c = this._data || [], d = this._dist || 0, e = this._maxElevation || 0, f = 0; f < a.length; f++) {
+        var g = new L.LatLng(a[f][1], a[f][0]),
+            h = new L.LatLng(a[f ? f - 1 : 0][1], a[f ? f - 1 : 0][0]),
+            i = b.imperial ? g.distanceTo(h) * this.__mileFactor : g.distanceTo(h);
+        d += Math.round(i / 1e3 * 1e5) / 1e5, e = e < a[f][2] ? a[f][2] : e, c.push({
+          dist: d,
+          altitude: b.imperial ? a[f][2] * this.__footFactor : a[f][2],
+          x: a[f][0],
+          y: a[f][1],
+          latlng: g
+        });
+      }
+
+      this._dist = d, this._data = c, e = b.imperial ? e * this.__footFactor : e, this._maxElevation = e;
+    }
+  },
+  _addGPXdata: function _addGPXdata(a) {
+    var b = this.options;
+
+    if (a) {
+      for (var c = this._data || [], d = this._dist || 0, e = this._maxElevation || 0, f = 0; f < a.length; f++) {
+        var g = a[f],
+            h = a[f ? f - 1 : 0],
+            i = b.imperial ? g.distanceTo(h) * this.__mileFactor : g.distanceTo(h);
+        d += Math.round(i / 1e3 * 1e5) / 1e5, e = e < g.meta.ele ? g.meta.ele : e, c.push({
+          dist: d,
+          altitude: b.imperial ? g.meta.ele * this.__footFactor : g.meta.ele,
+          x: g.lng,
+          y: g.lat,
+          latlng: g
+        });
+      }
+
+      this._dist = d, this._data = c, e = b.imperial ? e * this.__footFactor : e, this._maxElevation = e;
+    }
+  },
+  _addData: function _addData(a) {
+    var b,
+        c = a && a.geometry && a.geometry;
+    if (c) switch (c.type) {
+      case "LineString":
+        this._addGeoJSONData(c.coordinates);
+
+        break;
+
+      case "MultiLineString":
+        for (b = 0; b < c.coordinates.length; b++) {
+          this._addGeoJSONData(c.coordinates[b]);
+        }
+
+        break;
+
+      default:
+        throw new Error("Invalid GeoJSON object.");
+    }
+    var d = a && "FeatureCollection" === a.type;
+    if (d) for (b = 0; b < a.features.length; b++) {
+      this._addData(a.features[b]);
+    }
+    a && a._latlngs && this._addGPXdata(a._latlngs);
+  },
+  _calculateFullExtent: function _calculateFullExtent(a) {
+    if (!a || a.length < 1) throw new Error("no data in parameters");
+    var b = new L.latLngBounds(a[0].latlng, a[0].latlng);
+    return a.forEach(function (a) {
+      b.extend(a.latlng);
+    }), b;
+  },
+  addData: function addData(a, b) {
+    this._addData(a), this._container && this._applyData(), null === b && a.on && (b = a), b && b.on("mousemove", this._handleLayerMouseOver.bind(this));
+  },
+  _handleLayerMouseOver: function _handleLayerMouseOver(a) {
+    if (this._data && 0 !== this._data.length) {
+      var b = a.latlng,
+          c = this._findItemForLatLng(b);
+
+      if (c) {
+        var d = c.xDiagCoord;
+
+        this._showDiagramIndicator(c, d);
+      }
+    }
+  },
+  _showDiagramIndicator: function _showDiagramIndicator(a, b) {
+    var c = this.options;
+    this._focusG.style("visibility", "visible"), this._mousefocus.attr("x1", b).attr("y1", 0).attr("x2", b).attr("y2", this._height()).classed("hidden", !1);
+    var d = a.altitude,
+        e = a.dist,
+        f = (a.latlng, c.hoverNumber.formatter(d, c.hoverNumber.decimalsY)),
+        g = c.hoverNumber.formatter(e, c.hoverNumber.decimalsX);
+    c.imperial ? (this._focuslabelX.attr("x", b).text(f + " ft"), this._focuslabelY.attr("y", this._height() - 5).attr("x", b).text(g + " mi")) : (this._focuslabelX.attr("x", b).text(f + " m"), this._focuslabelY.attr("y", this._height() - 5).attr("x", b).text(g + " km"));
+  },
+  _applyData: function _applyData() {
+    var a = d3.extent(this._data, function (a) {
+      return a.dist;
+    }),
+        b = d3.extent(this._data, function (a) {
+      return a.altitude;
+    }),
+        c = this.options;
+    void 0 !== c.yAxisMin && (c.yAxisMin < b[0] || c.forceAxisBounds) && (b[0] = c.yAxisMin), void 0 !== c.yAxisMax && (c.yAxisMax > b[1] || c.forceAxisBounds) && (b[1] = c.yAxisMax), this._x.domain(a), this._y.domain(b), this._areapath.datum(this._data).attr("d", this._area), this._updateAxis(), this._fullExtent = this._calculateFullExtent(this._data);
+  },
+  _clearData: function _clearData() {
+    this._data = null, this._dist = null, this._maxElevation = null;
+  },
+  clear: function clear() {
+    this._clearData(), this._areapath && (this._areapath.attr("d", "M0 0"), this._x.domain([0, 1]), this._y.domain([0, 1]), this._updateAxis());
+  },
+  hide: function hide() {
+    this._container.style.display = "none";
+  },
+  show: function show() {
+    this._container.style.display = "block";
+  }
+}), L.control.elevation = function (a) {
+  return new L.Control.Elevation(a);
+};
+
+/***/ }),
+
+/***/ 3:
+/*!************************************************************!*\
+  !*** multi ./resources/js/components/leaflet-elevation.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! E:\git-vlab\new-angiang\resources\js\components\leaflet-elevation.js */"./resources/js/components/leaflet-elevation.js");
+
+
+/***/ })
+
+/******/ });

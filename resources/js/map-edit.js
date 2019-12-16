@@ -232,8 +232,53 @@ let satlo_truottongthe_line = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:satloduongbo_gis_line',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let u_diem_mc_moi = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_diem_mc_moi',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+let u_anh = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_anh',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+let u_diem_sat_lo = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_diem_sat_lo',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+let u_doan_sat_lo = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:u_doan_sat_lo',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+
+let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
         Format: 'image/png',
-        Layers: 'angiang:satloduongbo_gis_line',
+        Layers: 'angiang:u_tram_do_thuy_van',
         Version: '1.1.1',
         Transparent: true,
         SRS: 'EPSG:900913',
@@ -285,6 +330,21 @@ $("#satlotruottongthe").on('change', function() {
 });
 $("#satloduongbo").on('change', function() {
     toggleLayer(satloduongbo_gis_line, map, this.checked);
+});
+$("#diemanh").on('change', function() {
+    toggleLayer(u_anh, map, this.checked);
+});
+$("#diemmatcatmoi").on('change', function() {
+    toggleLayer(u_diem_mc_moi, map, this.checked);
+});
+$("#diemsatlo").on('change', function() {
+    toggleLayer(u_diem_sat_lo, map, this.checked);
+});
+$("#doansatlo").on('change', function() {
+    toggleLayer(u_doan_sat_lo, map, this.checked);
+});
+$("#tramdothuyvan").on('change', function() {
+    toggleLayer(u_tram_do_thuy_van, map, this.checked);
 });
 
 function toggleLayer(layer, map, status) {
