@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>index</title>
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-<link rel="stylesheet" type="text/css" href="{{asset('Qgis2threejs.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/Qgis2threejs.css')}}">
 </head>
 <body>
 <div id="webgl"></div>
@@ -38,7 +38,7 @@ and uses the following library:
 <div id="footer"></div>
 
 <script src="{{ asset('js/3dmap/threejs/three.min.js') }}"></script>
-<script src="{{asset('js/Qgis2threejs.js')}}"></script>
+<script src="{{asset('js/3dmap/Qgis2threejs.js')}}"></script>
 <script src="{{asset('js/3dmap/threejs/OrbitControls.js')}}"></script>
 <script>
 var option = Q3D.Options;
@@ -84,7 +84,7 @@ app.start();
 
 </script>
 <script src="{{asset('js/3dmap/dat-gui/dat.gui.min.js')}}"></script>
-<script src="{{asset('js/3dmap/dat-gui/dat-gui_panel.js')}}"></script>
+<script src="{{asset('js/3dmap/dat-gui_panel.js')}}"></script>
 <script>
 // initialize dat-gui panel
 Q3D.gui.init();
