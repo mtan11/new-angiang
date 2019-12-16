@@ -134,7 +134,9 @@ function clickMarker(feature, layer) {
             createImgDiv(id, false, 'img', photo[i])
         }
         for (let i = 0; i < photomc.length; i++) {
-            createImgDiv(id, false, 'imgmc', photo[i])
+            console.log(photomc);
+
+            createImgDiv(id, false, 'imgmc', photomc[i])
         }
     })
 }

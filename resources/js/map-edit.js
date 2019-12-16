@@ -65,32 +65,36 @@ function acceptEditInfo() {
     var xy = lng + ' ' + lat;
     console.log(xy);
     var url = api + 'api/insert-data-point';
-    bodyFormData.set('name', name.value);
-    bodyFormData.set('info', descr.value);
-    bodyFormData.set('xy', xy);
-    // console.log(img.files.length);
-    for (let i = 0; i < img.files.length; i++) {
-        bodyFormData.append('photos[]', img.files[i]);
-    }
-    for (let i = 0; i < imgmc.files.length; i++) {
-        bodyFormData.append('photomc[]', imgmc.files[i]);
-    }
+    if (name.value == null || descr.value == null) {
+        alert('Vui lòng điền đầy đủ thông tin')
+    } else {
+        bodyFormData.set('name', name.value);
+        bodyFormData.set('info', descr.value);
+        bodyFormData.set('xy', xy);
+        // console.log(img.files.length);
+        for (let i = 0; i < img.files.length; i++) {
+            bodyFormData.append('photos[]', img.files[i]);
+        }
+        for (let i = 0; i < imgmc.files.length; i++) {
+            bodyFormData.append('photomc[]', imgmc.files[i]);
+        }
 
-    axios({
-            method: 'post',
-            url: url,
-            data: bodyFormData,
-            headers: { 'Content-Type': 'multipart/form-data' }
-        })
-        .then(function(response) {
-            //handle success
-            alert('Cập nhật điểm thành công');
-            console.log(response);
-        })
-        .catch(function(response) {
-            //handle error
-            console.log(response);
-        });
+        axios({
+                method: 'post',
+                url: url,
+                data: bodyFormData,
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+            .then(function(response) {
+                //handle success
+                alert('Cập nhật điểm thành công');
+                console.log(response);
+            })
+            .catch(function(response) {
+                //handle error
+                console.log(response);
+            });
+    }
 
 }
 
@@ -156,7 +160,7 @@ function clickMarker(feature, layer) {
             createImgDiv(id, false, 'img', photo[i])
         }
         for (let i = 0; i < photomc.length; i++) {
-            createImgDiv(id, false, 'imgmc', photo[i])
+            createImgDiv(id, false, 'imgmc', photomc[i])
         }
     })
 }
