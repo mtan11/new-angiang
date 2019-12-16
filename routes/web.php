@@ -14,7 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/edit', function () {
-    return view('edit');
+Route::get('/3dmap', function () {
+    return view('3dmap');
 });
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/edit', function () {
+        return view('edit');
+    })->name('edit');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

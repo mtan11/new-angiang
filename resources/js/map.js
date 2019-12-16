@@ -16,6 +16,9 @@ let api = 'http://35.240.232.121/';
 let lat = 0;
 let lng = 0;
 
+let latlngmc = '';
+let coormc;
+
 let markerGot = [];
 let arrMarkers = [];
 arrMarkers = L.layerGroup();
@@ -223,9 +226,9 @@ var options = {
     attribution: 'Rendered with <a href="http://www.maptiler.com/">MapTiler Desktop</a>',
     tms: false
 };
-let bandobosung = L.tileLayer('/public/images/bandobosungvadieuchinh/{z}/{x}/{y}.png', options);
-let bandophantich = L.tileLayer('/public/images/bandophantich/{z}/{x}/{y}.png', options);
-let bandotheoketqua = L.tileLayer('/public/images/bandotheoketqua/{z}/{x}/{y}.png', options);
+let bandobosung = L.tileLayer('/storage/bandobosungvadieuchinh/{z}/{x}/{y}.png', options);
+let bandophantich = L.tileLayer('/storage/bandophantich/{z}/{x}/{y}.png', options);
+let bandotheoketqua = L.tileLayer('/storage/bandotheoketqua/{z}/{x}/{y}.png', options);
 
 
 // marker.on('click', onMarkerClick);
@@ -302,6 +305,61 @@ searchControl.on("results", function(data) {
     }
 });
 
+map.on('pm:create', function(e) {
+    console.log(e.layer.getLatLngs());
+    let latlng = '';
+    let url = api + 'api/get-matcat'
+    var bodyFormData = new FormData();
+    let coordinates = e.layer.getLatLngs();
+    for (let i = 0; i < coordinates.length; i++) {
+        if (i == coordinates.length - 1) {
+            latlng += coordinates[i].lng + ' ' + coordinates[i].lat;
+        } else { latlng += coordinates[i].lng + ' ' + coordinates[i].lat + ','; }
+
+    }
+    latlngmc = latlng;
+    console.log(latlngmc);
+    bodyFormData.set('linestring', latlngmc);
+    axios({
+            method: 'post',
+            url: url,
+            data: bodyFormData,
+            headers: { 'Content-Type': 'multipart/form-data' }
+        })
+        .then(function(response) {
+            //handle success
+            alert('Biểu đồ mặt cắt được cập nhật');
+            coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
+            el.clear();
+
+            geojson = {
+                "name": "NewFeatureType",
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": coormc
+                    },
+                    "properties": null
+                }]
+            };
+            el.addData(geojson);
+            var gjl = L.geoJson(geojson, {
+                onEachFeature: el.addData.bind(el)
+            }).addTo(map);
+
+
+
+        })
+        .catch(function(response) {
+            //handle error
+            console.log(response);
+        });
+
+
+})
+
 var geojson = {
     "name": "NewFeatureType",
     "type": "FeatureCollection",
@@ -309,355 +367,11 @@ var geojson = {
         "type": "Feature",
         "geometry": {
             "type": "LineString",
-            "coordinates": [
-                [
-                    105.13693,
-                    10.696476,
-                    296
-                ],
-                [
-                    105.134602,
-                    10.69764,
-                    295
-                ],
-                [
-                    105.129983,
-                    10.701164,
-                    299
-                ],
-                [
-                    105.131292,
-                    10.702382,
-                    303
-                ],
-                [
-                    105.13376,
-                    10.704533,
-                    315
-                ],
-                [
-                    105.135568,
-                    10.705574,
-                    336
-                ],
-                [
-                    105.136179,
-                    10.70934,
-                    338
-                ],
-                [
-                    105.137011,
-                    10.714066,
-                    344
-                ],
-                [
-                    105.136984,
-                    10.719489,
-                    342
-                ],
-                [
-                    105.136898,
-                    10.725235,
-                    350
-                ],
-                [
-                    105.136801,
-                    10.730143,
-                    353
-                ],
-                [
-                    105.135632,
-                    10.734853,
-                    354
-                ],
-                [
-                    105.131882,
-                    10.738989,
-                    363
-                ],
-                [
-                    105.129688,
-                    10.744241,
-                    363
-                ],
-                [
-                    105.123937,
-                    10.746982,
-                    361
-                ],
-                [
-                    105.118509,
-                    10.750286,
-                    371
-                ],
-                [
-                    105.112763,
-                    10.753113,
-                    374
-                ],
-                [
-                    105.107807,
-                    10.755356,
-                    378
-                ],
-                [
-                    105.103467,
-                    10.758086,
-                    386
-                ],
-                [
-                    105.098902,
-                    10.760956,
-                    388
-                ],
-                [
-                    105.096429,
-                    10.764642,
-                    397
-                ],
-                [
-                    105.094197,
-                    10.768246,
-                    401
-                ],
-                [
-                    105.091955,
-                    10.773037,
-                    402
-                ],
-                [
-                    105.089251,
-                    10.777194,
-                    408
-                ],
-                [
-                    105.086215,
-                    10.780939,
-                    410
-                ],
-                [
-                    105.083227,
-                    10.785498,
-                    412
-                ],
-                [
-                    105.079778,
-                    10.788926,
-                    423
-                ],
-                [
-                    105.076913,
-                    10.7923,
-                    429
-                ],
-                [
-                    105.074059,
-                    10.795938,
-                    429
-                ],
-                [
-                    105.071495,
-                    10.800213,
-                    435
-                ],
-                [
-                    105.069505,
-                    10.804263,
-                    442
-                ],
-                [
-                    105.067574,
-                    10.809322,
-                    436
-                ],
-                [
-                    105.065508,
-                    10.812728,
-                    450
-                ],
-                [
-                    105.063277,
-                    10.817299,
-                    451
-                ],
-                [
-                    105.062,
-                    10.822073,
-                    447
-                ],
-                [
-                    105.06023,
-                    10.826622,
-                    464
-                ],
-                [
-                    105.058905,
-                    10.831729,
-                    459
-                ],
-                [
-                    105.05553,
-                    10.835645,
-                    460
-                ],
-                [
-                    105.051888,
-                    10.83933,
-                    467
-                ],
-                [
-                    105.048626,
-                    10.842817,
-                    476
-                ],
-                [
-                    105.045467,
-                    10.846106,
-                    480
-                ],
-                [
-                    105.042028,
-                    10.849287,
-                    485
-                ],
-                [
-                    105.037672,
-                    10.851776,
-                    493
-                ],
-                [
-                    105.033477,
-                    10.854367,
-                    495
-                ],
-                [
-                    105.029974,
-                    10.856373,
-                    502
-                ],
-                [
-                    105.027324,
-                    10.857559,
-                    514
-                ],
-                [
-                    105.023832,
-                    10.859275,
-                    518
-                ],
-                [
-                    105.020587,
-                    10.861743,
-                    524
-                ],
-                [
-                    105.017615,
-                    10.864414,
-                    526
-                ],
-                [
-                    105.015748,
-                    10.868888,
-                    520
-                ],
-                [
-                    105.013119,
-                    10.872059,
-                    529
-                ],
-                [
-                    105.009879,
-                    10.874521,
-                    536
-                ],
-                [
-                    105.00798,
-                    10.87598,
-                    553
-                ],
-                [
-                    105.005073,
-                    10.878158,
-                    556
-                ],
-                [
-                    105.00452,
-                    10.878609,
-                    557
-                ],
-                [
-                    105.004488,
-                    10.878619,
-                    554
-                ],
-                [
-                    105.004477,
-                    10.878619,
-                    553
-                ],
-                [
-                    105.004483,
-                    10.878619,
-                    552
-                ],
-                [
-                    105.004477,
-                    10.878619,
-                    551
-                ],
-                [
-                    105.004477,
-                    10.878619,
-                    550
-                ],
-                [
-                    105.004477,
-                    10.878619,
-                    551
-                ],
-                [
-                    105.004483,
-                    10.878614,
-                    551
-                ],
-                [
-                    105.004488,
-                    10.878614,
-                    551
-                ],
-                [
-                    105.004488,
-                    10.878614,
-                    552
-                ],
-                [
-                    105.004558,
-                    10.878598,
-                    556
-                ],
-                [
-                    105.004011,
-                    10.880808,
-                    556
-                ],
-                [
-                    105.002584,
-                    10.884032,
-                    570
-                ],
-                [
-                    105.001033,
-                    10.886172,
-                    583
-                ],
-
-            ]
+            "coordinates": coormc
         },
         "properties": null
     }]
 };
+
 var el = L.control.elevation();
 el.addTo(map);
-var gjl = L.geoJson(geojson, {
-    onEachFeature: el.addData.bind(el)
-}).addTo(map);

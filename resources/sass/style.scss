@@ -35,7 +35,7 @@ body {
 .panel-container-update {
     position: absolute;
     top: 25%;
-    right: 10px;
+    right: -450px;
     border-radius: 5px;
     height: 670px;
     margin: 10px 0px;
@@ -74,6 +74,20 @@ body {
     cursor: pointer;
     width: 30px;
     transition: 2s;
+}
+
+.btn-login {
+    position: absolute;
+    top: 10px;
+    right: 180px;
+    z-index: 1000;
+}
+
+.btn-3d {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    z-index: 1000;
 }
 
 .hidden {
