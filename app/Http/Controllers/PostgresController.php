@@ -135,7 +135,7 @@ class PostgresController extends Controller
     {
         $linestring = $request->linestring;
         $qhpksdd = DB::connection('pgsql')->select(
-            " WITH line AS
+            "WITH line AS
             (SELECT st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($linestring)'),32648)::geometry AS geom),
           cells AS
             (SELECT ST_Centroid((ST_Intersection(demelevation.rast, line.geom)).geom) AS geom,
@@ -147,7 +147,7 @@ class PostgresController extends Controller
              FROM cells, line
              ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
 
-        SELECT ST_Asgeojson(ST_Transform(ST_MakeLine(geom),4326)) FROM points3d;");
+        SELECT ST_Asgeojson(ST_Transform(ST_GeomFromText(st_astext(ST_MakeLine(geom)),32648),4326)) FROM points3d;");
         
         return json_encode($qhpksdd);
     }
