@@ -89,16 +89,16 @@
 
     </div>
     <div id="panel" class="panel-container">
-        <div>
+    <div>
             <div class="d-flex panel-header">
-                <h5 class="card-title">Các lớp layer</h5>
+                <h5 class="card-title" id="panel-title">Các lớp layer</h5>
                 <button type="button" id="close-btn" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
                 <div class="container-content">
-                    <div id="layer-content" class="">
+                    <div id="layer-content">
                         <div class="row">
                             <div class="col-8">
                                 <h6>Các điểm khảo sát</h6>
@@ -144,41 +144,94 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Đằng sau 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="2009line" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm độ sâu 2019</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemdosau20019" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Điểm độ sâu 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemdosau" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Sạt lỡ mô hình thuỷ lực</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satlomohinhthuyluch" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Sạt lỡ trượt tổng thế</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satlotruottongthe" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Sạt lỡ đường bờ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satloduongbo" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div id="info-content">
+                <div id="info-content" class="hidden">
                     <div class="container-form" style="padding: 10px;">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
-                            <input class="form-control" id="input-name">
+                            <input class="form-control" id="input-name-show" disabled>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Thông tin</label>
-                            <input class="form-control" id="input-info">
+                            <input class="form-control" id="input-info-show" disabled>
                         </div>
-                        <div class="form-group">
-                            <label for="input-images">Chọn hình ảnh</label>
-                            <input type="file" class="form-control-file" multiple name="img" id="input-images">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-images">Chọn hình ảnh mặt cắt</label>
-                            <input type="file" class="form-control-file" multiple name="img" id="input-images-mc">
-                        </div>
-                        <div class="d-flex"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
                     </div>
-
-                    <div id="img-slider" class="img-slider hidden">
+                    <div class="img-slider">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Third slide">
-                                </div>
+                            <div class="carousel-inner" id="img-slider">
+                              
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -190,7 +243,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -54,6 +54,8 @@
 
 <body>
     <div id="map"></div>
+    <a class="btn btn-light btn-login" href="/login">Đăng nhập</a>
+    <a class="btn btn-light btn-3d">Bản đồ 3D</a>
     <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel" class="panel-container">
         <div>
@@ -210,8 +212,6 @@
                             </a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

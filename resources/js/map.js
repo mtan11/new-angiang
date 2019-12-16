@@ -223,9 +223,9 @@ var options = {
     attribution: 'Rendered with <a href="http://www.maptiler.com/">MapTiler Desktop</a>',
     tms: false
 };
-let bandobosung = L.tileLayer('/public/images/bandobosungvadieuchinh/{z}/{x}/{y}.png', options);
-let bandophantich = L.tileLayer('/public/images/bandophantich/{z}/{x}/{y}.png', options);
-let bandotheoketqua = L.tileLayer('/public/images/bandotheoketqua/{z}/{x}/{y}.png', options);
+let bandobosung = L.tileLayer('/storage/bandobosungvadieuchinh/{z}/{x}/{y}.png', options);
+let bandophantich = L.tileLayer('/storage/bandophantich/{z}/{x}/{y}.png', options);
+let bandotheoketqua = L.tileLayer('/storage/bandotheoketqua/{z}/{x}/{y}.png', options);
 
 
 // marker.on('click', onMarkerClick);
