@@ -15,7 +15,7 @@ conn = psycopg2.connect(host='localhost',
 
 cursor = conn.cursor()
 
-df = pd.read_excel('/var/www/new-angiang/storage/app/public/uploadedimages/'+str(pointid)'/excel/'+str(filename), 'Sheet1')
+df = pd.read_excel('/var/www/new-angiang/storage/app/public/uploadedimages/'+str(pointid)+'/excel/'+str(filename), 'Sheet1')
 
 for i in df.index:
     khoangcach = df['KhoangCach'][i]
