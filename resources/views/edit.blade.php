@@ -54,28 +54,29 @@
 
 <body>
     @auth
-        {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+    {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->name }} <span class="caret"></span>
-        </a> --}}
-        <a class="btn btn-light btn-login" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
+    </a> --}}
+    <a class="btn btn-light btn-login" href="{{ route('logout') }}" onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
-                {{ __('Đăng xuất') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        {{ __('Đăng xuất') }}
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                {{ __('Đăng xuất') }}
-            </a>
+    onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">
+    {{ __('Đăng xuất') }}
+    </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </div> --}}
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    </div> --}}
+
+    <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     @endauth
     <div id="map"></div>
     <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
@@ -113,7 +114,7 @@
 
     </div>
     <div id="panel" class="panel-container">
-    <div>
+        <div>
             <div class="d-flex panel-header">
                 <h5 class="card-title" id="panel-title">Các lớp layer</h5>
                 <button type="button" id="close-btn" class="close" aria-label="Close">
@@ -210,7 +211,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="satlomohinhthuyluch" type="checkbox" >
+                                    <input id="satlomohinhthuyluch" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -222,7 +223,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="satlotruottongthe" type="checkbox" >
+                                    <input id="satlotruottongthe" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -233,7 +234,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="satloduongbo" type="checkbox" >
+                                    <input id="satloduongbo" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -244,7 +245,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemanh" type="checkbox" >
+                                    <input id="diemanh" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -255,7 +256,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemmatcatmoi" type="checkbox" >
+                                    <input id="diemmatcatmoi" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -266,7 +267,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemsatlo" type="checkbox" >
+                                    <input id="diemsatlo" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -277,7 +278,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="doansatlo" type="checkbox" >
+                                    <input id="doansatlo" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -288,7 +289,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="tramdothuyvan" type="checkbox" >
+                                    <input id="tramdothuyvan" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -322,6 +323,53 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modaluploadshp" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class="row"> -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelectNameShp">Chọn lớp dữ liệu:</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelectNameShp">
+                            <option value="dangsau_2009_line">dangsau_2009_line</option>
+                            <option value="diemdosau_2019_point">diemdosau_2019_point</option>
+                            <option value="diemdosau_2009_point">diemdosau_2009_point</option>
+                            <option value="satlo_mohinhthuyluc_line">satlo_mohinhthuyluc_line</option>
+                            <option value="satlo_truottongthe_line">satlo_truottongthe_line</option>
+                            <option value="satloduongbo_gis_line">satloduongbo_gis_line</option>
+                            <option value="u_diem_mc_moi">u_diem_mc_moi</option>
+                            <option value="u_anh">u_anh</option>
+                            <option value="u_diem_sat_lo">u_diem_sat_lo</option>
+                            <option value="u_doan_sat_lo">u_doan_sat_lo</option>
+                            <option value="u_tram_do_thuy_van">u_tram_do_thuy_van</option>
+                        </select>
+                    </div>
+
+                    <p>Chọn shapefile đã được nén lại dưới định dạng zip:</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Chọn tệp tin</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" id="inputShp" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-upload-shp-file">Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
                 </div>
             </div>
         </div>

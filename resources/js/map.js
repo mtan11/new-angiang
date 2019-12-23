@@ -12,7 +12,7 @@ let infoContent = document.getElementById('info-content');
 let inputName = document.getElementById('input-name');
 let inputInfo = document.getElementById('input-info');
 let imgSlider = document.getElementById('img-slider');
-let api = 'http://35.240.232.121/';
+let api = 'http://35.198.222.40/';
 let lat = 0;
 let lng = 0;
 
@@ -22,8 +22,8 @@ let coormc;
 let markerGot = [];
 let arrMarkers = [];
 arrMarkers = L.layerGroup();
-let geoserver = 'http://35.240.232.121:8080/geoserver/angiang/wms';
-let urlImg = 'http://35.240.232.121/storage/uploadedimages/';
+let geoserver = 'http://35.198.222.40:8080/geoserver/angiang/wms';
+let urlImg = 'http://35.198.222.40/storage/uploadedimages/';
 
 
 btnClose.addEventListener('click', closePanel.bind(this));
@@ -76,7 +76,7 @@ function showPanel() {
 // }
 
 function getMarker() {
-    let url = api + '/api/get-all-imgpoint'
+    let url = api + 'api/get-all-imgpoint'
     axios({
             method: 'get',
             url: url,
