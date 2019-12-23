@@ -20,8 +20,11 @@ class PostgresController extends Controller
         $info = $request->info;
         $xy = $request->xy;
         $photos = $request->file('photos');
-        $photomc = $request->file('photomc');
+        // $photomc = $request->file('photomc');
+        $excelmc = $request->file('excelmc');
         $point = "MultiPoint($xy)";
+
+
 
         $data = PointData::create([
             'photos' => json_encode(array(
@@ -34,7 +37,7 @@ class PostgresController extends Controller
         ]);
 
         $photos = $request->file('photos');
-        $photomc = $request->file('photomc');
+        // $photomc = $request->file('photomc');
         
 
         $photoFiles = [];
@@ -46,20 +49,27 @@ class PostgresController extends Controller
                 array_push($photoFiles, $fileName);
             }
         }
-        $photomcFiles = [];
-        if ($photomc) {
-            foreach ($photomc as $photom) {
-                $extension = $photom->getClientOriginalExtension();
-                $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
-                Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
-                array_push($photomcFiles, $fileName);
-            }
-        }
+        // $photomcFiles = [];
+        // if ($photomc) {
+        //     foreach ($photomc as $photom) {
+        //         $extension = $photom->getClientOriginalExtension();
+        //         $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
+        //         Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
+        //         array_push($photomcFiles, $fileName);
+        //     }
+        // }
         $data->update([
             'photos' => json_encode(array(
-                'img' => $photoFiles,
-                'imgmc' => $photomcFiles
+                'img' => $photoFiles
             ))]);
+        
+        $excelextension = $excelmc->getClientOriginalExtension();
+        $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+        Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/excel/' . $excelfileName, File::get($excelmc));
+        
+        $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+
+
         return 'thêm data thanh cong';
     }
 
@@ -129,6 +139,23 @@ class PostgresController extends Controller
             "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
         
         return json_encode($qhpksdd);
+        
+    }
+
+    public function getMatCatByPointID($pointid)
+    {
+        // $all = PointData::all();
+        // $all = DB::raw("select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
+        // dd($all);
+        // // $data->update([
+        //     'geom' => DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"))]);
+        // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
+        // return json_encode($all,200);
+        $qhpksdd = DB::connection('pgsql')->select(
+            "select * from excel_matcat where pointid = '$pointid'");
+        
+        return json_encode($qhpksdd);
+        
     }
 
 
