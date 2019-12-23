@@ -70,7 +70,7 @@ class PostgresController extends Controller
         $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
 
 
-        return 'thêm data thanh cong';
+        return 'thêm data thanh cong'.$process;
     }
 
     public function uploadShapeFile(Request $request)
