@@ -66,6 +66,7 @@ class PostgresController extends Controller
     public function uploadShapeFile(Request $request)
     {
         $shpFile = $request->file('shpFile');
+        $tablename = $request->tablename;
         if ($shpFile) {
             $extension = $shpFile->getClientOriginalExtension();
             if ($extension != "zip") {
@@ -85,7 +86,7 @@ class PostgresController extends Controller
             // $outputsplit = explode("\n", $output);
             // $maqhpkranh = $outputsplit[count($outputsplit)-2];
             // // dd($output,$outputsplit,$maqhpkranh);
-            $process = shell_exec("python3 /var/www/new-angiang/pyservices/uploadSHP.py {$fileName}");
+            $process = shell_exec("python3 /var/www/new-angiang/pyservices/uploadSHP.py {$fileName} {$tablename}");
             // $process = shell_exec("source /root/.bashrc && python3 /var/www/new-angiang/pyservices/uploadSHP.py {$fileName}");
             // $output = shell_exec("/root/anaconda3/bin/python3 /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/uploadSHP.py $fileName");
             // var_dump($output);

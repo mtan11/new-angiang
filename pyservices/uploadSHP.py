@@ -20,7 +20,7 @@ import psycopg2
 
 
 namefile = sys.argv[1].split(".")[0]
-
+table = sys.argv[2]
 
 # os.system('''cd /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/storage/app/public/Shape_File/ && mv '''+namefile+'''.tmp.zip '''+namefile+'''.zip''')
 
@@ -38,9 +38,9 @@ os.system('''unzip /var/www/new-angiang/storage/app/public/Shape_File/'''+namefi
 root = '/var/www/new-angiang/storage/app/public/Shape_File/'+namefile
 pattern = "*.shp"
 listfile = []
-checklistfile = ['dangsau_2009_line.shp','diemdosau_2009_point.shp','diemdosau_2019_point.shp','satlo_mohinhthuyluc_line.shp','satlo_truottongthe_line.shp','satloduongbo_gis_line.shp','u_anh.shp','u_diem_do_mcn_moi.shp','u_diem_sat_lo.shp','u_doan_sat_lo.shp','u_tram_do_thuy_van.shp']
-checked = False
-asd = []
+# checklistfile = ['dangsau_2009_line.shp','diemdosau_2009_point.shp','diemdosau_2019_point.shp','satlo_mohinhthuyluc_line.shp','satlo_truottongthe_line.shp','satloduongbo_gis_line.shp','u_anh.shp','u_diem_do_mcn_moi.shp','u_diem_sat_lo.shp','u_doan_sat_lo.shp','u_tram_do_thuy_van.shp']
+# checked = True
+# asd = []
 
 
 for path, subdirs, files in os.walk(root):
@@ -50,14 +50,14 @@ for path, subdirs, files in os.walk(root):
 
 
 # if len(listfile)==5:
-if checked==False:
-    for i in listfile:
-        if i.lower().split('/')[-1] in checklistfile:
-            checked = True
-            print(i.lower().split('/')[-1]+" Checked")
-        else:
-            checked = False
-            print("Vui long kiem tra lai ten file")
+# if checked==False:
+#     for i in listfile:
+#         if i.lower().split('/')[-1] in checklistfile:
+#             checked = True
+#             print(i.lower().split('/')[-1]+" Checked")
+#         else:
+#             checked = False
+#             print("Vui long kiem tra lai ten file")
     #         break
     # if checked == True:
     #     for i in listfile:
@@ -73,180 +73,180 @@ if checked==False:
         # likema = "'%"+asd[-1]+asd[0]+"%'"
         # print(likema)
 
-
-    if checked == True:
-        for i in listfile:
-            if i.lower().split('/')[-1] == 'dangsau_2009_line.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from dangsau_2009_line"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (layer,elevation,shape_leng,geom) select layer,elevation,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'diemdosau_2009_point.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from diemdosau_2009_point"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (z,geom) select z,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'diemdosau_2019_point.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from diemdosau_2019_point"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (z,x,y,geom) select z,x,y,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'satlo_mohinhthuyluc_line.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from satlo_mohinhthuyluc_line"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (boi_xoi,shape_leng,geom) select boi_xoi,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'satlo_truottongthe_line.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from satlo_truottongthe_line"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (hs,shape_leng,geom) select hs,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'satloduongbo_gis_line.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from satloduongbo_gis_line"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (year_,shape_leng,geom) select year_,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'u_anh.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from u_anh"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,geom) select name,descriptio,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'u_diem_do_mcn_moi.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from u_diem_do_mcn_moi"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,geom) select name,descriptio,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'u_diem_sat_lo.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from u_diem_sat_lo"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,geom) select name,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'u_doan_sat_lo.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from u_doan_sat_lo"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,geom) select name,descriptio,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-            elif i.lower().split('/')[-1] == 'u_tram_do_thuy_van.shp':
-                tablename = namefile+"_"+i.split('/')[-1].split('.')[0]
-                sql_delete_query = """Delete from u_tram_do_thuy_van"""
-                print(sql_delete_query)
-                cursor.execute(sql_delete_query)
-                connection.commit()
-                # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-                cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
-                print(cmd)
-                os.system(cmd)  
-                sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,timestamp,geom) select name,descriptio,timestamp,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
-                print(sql_append_query)
-                cursor.execute(sql_append_query)
-                connection.commit()
-                print(i.split('/')[-1]+" imported")
-
-
+i = listfile[0]
+# if checked == True:
+#     for i in listfile:
+if table == 'dangsau_2009_line':
+    tablename = table
+    sql_delete_query = """Delete from dangsau_2009_line"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (layer,elevation,shape_leng,geom) select layer,elevation,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'diemdosau_2009_point':
+    tablename = table
+    sql_delete_query = """Delete from diemdosau_2009_point"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (z,geom) select z,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'diemdosau_2019_point':
+    tablename = table
+    sql_delete_query = """Delete from diemdosau_2019_point"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (z,x,y,geom) select z,x,y,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'satlo_mohinhthuyluc_line':
+    tablename = table
+    sql_delete_query = """Delete from satlo_mohinhthuyluc_line"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (boi_xoi,shape_leng,geom) select boi_xoi,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'satlo_truottongthe_line':
+    tablename = table
+    sql_delete_query = """Delete from satlo_truottongthe_line"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (hs,shape_leng,geom) select hs,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'satloduongbo_gis_line':
+    tablename = table
+    sql_delete_query = """Delete from satloduongbo_gis_line"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (year_,shape_leng,geom) select year_,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'u_anh':
+    tablename = table
+    sql_delete_query = """Delete from u_anh"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,geom) select name,descriptio,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'u_diem_do_mcn_moi':
+    tablename = table
+    sql_delete_query = """Delete from u_diem_do_mcn_moi"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,geom) select name,descriptio,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'u_diem_sat_lo':
+    tablename = table
+    sql_delete_query = """Delete from u_diem_sat_lo"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,geom) select name,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'u_doan_sat_lo':
+    tablename = table
+    sql_delete_query = """Delete from u_doan_sat_lo"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,geom) select name,descriptio,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
+elif table == 'u_tram_do_thuy_van':
+    tablename = table
+    sql_delete_query = """Delete from u_tram_do_thuy_van"""
+    print(sql_delete_query)
+    cursor.execute(sql_delete_query)
+    connection.commit()
+    # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    print(cmd)
+    os.system(cmd)  
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (name,descriptio,timestamp,geom) select name,descriptio,timestamp,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    print(sql_append_query)
+    cursor.execute(sql_append_query)
+    connection.commit()
+    print(i.split('/')[-1]+" imported")
 
 
-else:
-    print("Vui long upload day du va chinh xac cac lop shapefile")
+
+
+# else:
+#     print("Vui long upload day du va chinh xac cac lop shapefile")
 
 #     if checked == True:
 #         for i in listfile:
