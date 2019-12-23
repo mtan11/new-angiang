@@ -7,7 +7,7 @@ import json
 import datetime
 pointid = sys.argv[1]
 
-conn = psycopg2.connect(host='35.198.222.40',
+conn = psycopg2.connect(host='localhost',
                         port='5432',
                         user='postgres',
                         password='nguyenq12345678',
