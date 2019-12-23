@@ -152,7 +152,7 @@ class PostgresController extends Controller
         // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
         // return json_encode($all,200);
         $qhpksdd = DB::connection('pgsql')->select(
-            "select * from excel_matcat where pointid = '$pointid'");
+            "select pointid,khoangcach,dosau,to_char(thoigian, 'DD/MM/YYYY') from excel_matcat where pointid = '$pointid'");
         
         return json_encode($qhpksdd);
         
