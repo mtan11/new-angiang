@@ -58,14 +58,16 @@ function uploadShpFIle() {
             method: 'post',
             url: url,
             data: bodyFormData,
-            headers: { 'Content-Type': 'multipart/form-data' }
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
-        .then(function(response) {
+        .then(function (response) {
             //handle success
             alert('Cập nhật dữ liệu thành công');
             console.log(response);
         })
-        .catch(function(response) {
+        .catch(function (response) {
             //handle error
             alert('Có lỗi xảy ra trong quá trình cập nhật');
             console.log(response);
@@ -104,21 +106,23 @@ function acceptEditInfo() {
             bodyFormData.append('photos[]', img.files[i]);
         }
         for (let i = 0; i < imgmc.files.length; i++) {
-            bodyFormData.append('photomc[]', imgmc.files[i]);
+            bodyFormData.append('excelmc', imgmc.files[i]);
         }
 
         axios({
                 method: 'post',
                 url: url,
                 data: bodyFormData,
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
-            .then(function(response) {
+            .then(function (response) {
                 //handle success
                 alert('Cập nhật điểm thành công');
                 console.log(response);
             })
-            .catch(function(response) {
+            .catch(function (response) {
                 //handle error
                 console.log(response);
             });
@@ -133,7 +137,7 @@ function getMarker() {
             method: 'get',
             url: url,
         })
-        .then(function(response) {
+        .then(function (response) {
             let markers = response.data;
             markerGot = [];
             for (var i = 0; i < markers.length; i++) {
@@ -167,8 +171,9 @@ getMarker();
 map.on('click', addMarker);
 
 function clickMarker(feature, layer) {
-    layer.on('click', function(e) {
+    layer.on('click', function (e) {
         showPanel();
+        let url = api + 'api/get-matcat-by-pointid/' + feature.properties.Id;
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
         layerContent.classList.add("hidden");
@@ -177,24 +182,343 @@ function clickMarker(feature, layer) {
         inputNameShow.value = feature.properties.Name;
         inputInfoShow.value = feature.properties.Info;
         let photo = JSON.parse(feature.properties.Photos).img;
-        let photomc = JSON.parse(feature.properties.Photos).imgmc;
+        // let photomc = JSON.parse(feature.properties.Photos).imgmc;
         for (let i = 0; i < photo.length; i++) {
             if (i == 0) {
                 createImgDiv(id, true, 'img', photo[i])
             }
             createImgDiv(id, false, 'img', photo[i])
         }
-        for (let i = 0; i < photomc.length; i++) {
-            createImgDiv(id, false, 'imgmc', photomc[i])
-        }
+        axios({
+                method: 'get',
+                url: url,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(function (response) {
+                //handle success
+                // createChart(response.data);
+                // console.log(response.data)
+                console.log(response.data);
+
+                var data = [{
+                        name: "USA",
+                        values: [{
+                                date: "2000",
+                                price: "100"
+                            },
+                            {
+                                date: "2001",
+                                price: "110"
+                            },
+                            {
+                                date: "2002",
+                                price: "145"
+                            },
+                            {
+                                date: "2003",
+                                price: "241"
+                            },
+                            {
+                                date: "2004",
+                                price: "101"
+                            },
+                            {
+                                date: "2005",
+                                price: "90"
+                            },
+                            {
+                                date: "2006",
+                                price: "10"
+                            },
+                            {
+                                date: "2007",
+                                price: "35"
+                            },
+                            {
+                                date: "2008",
+                                price: "21"
+                            },
+                            {
+                                date: "2009",
+                                price: "201"
+                            }
+                        ]
+                    },
+                    {
+                        name: "Canada",
+                        values: [{
+                                date: "2000",
+                                price: "200"
+                            },
+                            {
+                                date: "2001",
+                                price: "120"
+                            },
+                            {
+                                date: "2002",
+                                price: "33"
+                            },
+                            {
+                                date: "2003",
+                                price: "21"
+                            },
+                            {
+                                date: "2004",
+                                price: "51"
+                            },
+                            {
+                                date: "2005",
+                                price: "190"
+                            },
+                            {
+                                date: "2006",
+                                price: "120"
+                            },
+                            {
+                                date: "2007",
+                                price: "85"
+                            },
+                            {
+                                date: "2008",
+                                price: "221"
+                            },
+                            {
+                                date: "2009",
+                                price: "101"
+                            }
+                        ]
+                    },
+                    {
+                        name: "Maxico",
+                        values: [{
+                                date: "2000",
+                                price: "50"
+                            },
+                            {
+                                date: "2001",
+                                price: "10"
+                            },
+                            {
+                                date: "2002",
+                                price: "5"
+                            },
+                            {
+                                date: "2003",
+                                price: "71"
+                            },
+                            {
+                                date: "2004",
+                                price: "20"
+                            },
+                            {
+                                date: "2005",
+                                price: "9"
+                            },
+                            {
+                                date: "2006",
+                                price: "220"
+                            },
+                            {
+                                date: "2007",
+                                price: "235"
+                            },
+                            {
+                                date: "2008",
+                                price: "61"
+                            },
+                            {
+                                date: "2009",
+                                price: "10"
+                            }
+                        ]
+                    }
+                ];
+                console.log(data)
+                // let data = [];
+                // data.push(response.data);
+                createChart(response.data);
+
+                // console.log(data);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+        // for (let i = 0; i < photomc.length; i++) {
+        //     createImgDiv(id, false, 'imgmc', photomc[i])
+        // }
     })
 }
+
+// function createChart(data) {
+//     var width = 500;
+//     var height = 300;
+//     var margin = 50;
+//     var duration = 250;
+
+//     var lineOpacity = "0.25";
+//     var lineOpacityHover = "0.85";
+//     var otherLinesOpacityHover = "0.1";
+//     var lineStroke = "1.5px";
+//     var lineStrokeHover = "2.5px";
+
+//     var circleOpacity = '0.85';
+//     var circleOpacityOnLineHover = "0.25"
+//     var circleRadius = 3;
+//     var circleRadiusHover = 6;
+
+
+//     /* Format Data */
+//     // var parseDate = d3.timeParse("%Y");
+//     data.forEach(function (d) {
+//         d.values.forEach(function (d) {
+//             d.date = d.date;
+//             d.price = d.price;
+//         });
+//     });
+
+
+//     /* Scale */
+//     var xScale = d3.scaleTime()
+//         .domain(d3.extent(data[0].values, d => d.date))
+//         .range([0, width - margin]);
+
+//     var yScale = d3.scaleLinear()
+//         .domain([0, d3.max(data[0].values, d => d.price)])
+//         .range([height - margin, 0]);
+
+//     var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+//     /* Add SVG */
+//     var svg = d3.select("#chart").append("svg")
+//         .attr("width", (width + margin) + "px")
+//         .attr("height", (height + margin) + "px")
+//         .append('g')
+//         .attr("transform", `translate(${margin}, ${margin})`);
+
+
+//     /* Add line into SVG */
+//     var line = d3.line()
+//         .x(d => xScale(d.date))
+//         .y(d => yScale(d.price));
+
+//     let lines = svg.append('g')
+//         .attr('class', 'lines');
+
+//     lines.selectAll('.line-group')
+//         .data(data).enter()
+//         .append('g')
+//         .attr('class', 'line-group')
+//         .on("mouseover", function (d, i) {
+//             svg.append("text")
+//                 .attr("class", "title-text")
+//                 .style("fill", color(i))
+//                 .text(d.name)
+//                 .attr("text-anchor", "middle")
+//                 .attr("x", (width - margin) / 2)
+//                 .attr("y", 5);
+//         })
+//         .on("mouseout", function (d) {
+//             svg.select(".title-text").remove();
+//         })
+//         .append('path')
+//         .attr('class', 'line')
+//         .attr('d', d => line(d.values))
+//         .style('stroke', (d, i) => color(i))
+//         .style('opacity', lineOpacity)
+//         .on("mouseover", function (d) {
+//             d3.selectAll('.line')
+//                 .style('opacity', otherLinesOpacityHover);
+//             d3.selectAll('.circle')
+//                 .style('opacity', circleOpacityOnLineHover);
+//             d3.select(this)
+//                 .style('opacity', lineOpacityHover)
+//                 .style("stroke-width", lineStrokeHover)
+//                 .style("cursor", "pointer");
+//         })
+//         .on("mouseout", function (d) {
+//             d3.selectAll(".line")
+//                 .style('opacity', lineOpacity);
+//             d3.selectAll('.circle')
+//                 .style('opacity', circleOpacity);
+//             d3.select(this)
+//                 .style("stroke-width", lineStroke)
+//                 .style("cursor", "none");
+//         });
+
+
+//     /* Add circles in the line */
+//     lines.selectAll("circle-group")
+//         .data(data).enter()
+//         .append("g")
+//         .style("fill", (d, i) => color(i))
+//         .selectAll("circle")
+//         .data(d => d.values).enter()
+//         .append("g")
+//         .attr("class", "circle")
+//         .on("mouseover", function (d) {
+//             d3.select(this)
+//                 .style("cursor", "pointer")
+//                 .append("text")
+//                 .attr("class", "text")
+//                 .text(`${d.price}`)
+//                 .attr("x", d => xScale(d.date) + 5)
+//                 .attr("y", d => yScale(d.price) - 10);
+//         })
+//         .on("mouseout", function (d) {
+//             d3.select(this)
+//                 .style("cursor", "none")
+//                 .transition()
+//                 .duration(duration)
+//                 .selectAll(".text").remove();
+//         })
+//         .append("circle")
+//         .attr("cx", d => xScale(d.date))
+//         .attr("cy", d => yScale(d.price))
+//         .attr("r", circleRadius)
+//         .style('opacity', circleOpacity)
+//         .on("mouseover", function (d) {
+//             d3.select(this)
+//                 .transition()
+//                 .duration(duration)
+//                 .attr("r", circleRadiusHover);
+//         })
+//         .on("mouseout", function (d) {
+//             d3.select(this)
+//                 .transition()
+//                 .duration(duration)
+//                 .attr("r", circleRadius);
+//         });
+
+
+//     /* Add Axis into SVG */
+//     var xAxis = d3.axisBottom(xScale).ticks(5);
+//     var yAxis = d3.axisLeft(yScale).ticks(5);
+
+//     svg.append("g")
+//         .attr("class", "x axis")
+//         .attr("transform", `translate(0, ${height-margin})`)
+//         .call(xAxis);
+
+//     svg.append("g")
+//         .attr("class", "y axis")
+//         .call(yAxis)
+//         .append('text')
+//         .attr("y", 15)
+//         .attr("transform", "rotate(-90)")
+//         .attr("fill", "#000")
+//         .text("Total values");
+// }
 
 function createImgDiv(id, isFirst, ismc, name) {
     let div = document.createElement('div');
     if (isFirst == true) {
         div.className = 'carousel-item active';
-    } else { div.className = 'carousel-item'; }
+    } else {
+        div.className = 'carousel-item';
+    }
     let img = document.createElement('img');
     img.className = 'd-block w-100';
     img.src = urlImg + id + '/' + ismc + '/' + name;
@@ -306,14 +630,49 @@ let u_doan_sat_lo = L.tileLayer.wms(geoserver, {
 
 
 let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
-        Format: 'image/png',
-        Layers: 'angiang:u_tram_do_thuy_van',
-        Version: '1.1.1',
-        Transparent: true,
-        SRS: 'EPSG:900913',
-        maxZoom: 21
-    })
-    //add Layer
+    Format: 'image/png',
+    Layers: 'angiang:u_tram_do_thuy_van',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let dem_2009 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:dem_2009',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let dem_2019 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:dem_2019',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:quy_hoach_khai_thac_cat_th',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:dieu_chinh_quy_hoach_th',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
+
+
+//add Layer
 
 var mapMinZoom = 10;
 var mapMaxZoom = 16;
@@ -328,51 +687,64 @@ let bandobosung = L.tileLayer('/storage/bandobosungvadieuchinh/{z}/{x}/{y}.png',
 let bandophantich = L.tileLayer('/storage/bandophantich/{z}/{x}/{y}.png', options);
 let bandotheoketqua = L.tileLayer('/storage/bandotheoketqua/{z}/{x}/{y}.png', options);
 
-$("#rungngapman").on('change', function() {
+$("#rungngapman").on('change', function () {
     toggleLayer(arrMarkers, map, this.checked);
 });
-$("#bandobosung").on('change', function() {
+$("#bandobosung").on('change', function () {
     toggleLayer(bandobosung, map, this.checked);
 });
-$("#bandoketqua").on('change', function() {
+$("#bandoketqua").on('change', function () {
     toggleLayer(bandotheoketqua, map, this.checked);
 });
-$("#bandophantich").on('change', function() {
+$("#bandophantich").on('change', function () {
     toggleLayer(bandophantich, map, this.checked);
 });
-$("#2009line").on('change', function() {
+$("#2009line").on('change', function () {
     toggleLayer(dangsau_2009_line, map, this.checked);
 });
-$("#diemdosau2019").on('change', function() {
+$("#diemdosau2019").on('change', function () {
     toggleLayer(diemdosau_2019_point, map, this.checked);
 });
-$("#satlomohinhthuyluch").on('change', function() {
+$("#satlomohinhthuyluch").on('change', function () {
     toggleLayer(satlo_mohinhthuyluc_line, map, this.checked);
 });
-$("#diemdosau").on('change', function() {
+$("#diemdosau").on('change', function () {
     toggleLayer(diemdosau_2009_point, map, this.checked);
 });
-$("#satlotruottongthe").on('change', function() {
+$("#satlotruottongthe").on('change', function () {
     toggleLayer(satlo_truottongthe_line, map, this.checked);
 });
-$("#satloduongbo").on('change', function() {
+$("#satloduongbo").on('change', function () {
     toggleLayer(satloduongbo_gis_line, map, this.checked);
 });
-$("#diemanh").on('change', function() {
+$("#diemanh").on('change', function () {
     toggleLayer(u_anh, map, this.checked);
 });
-$("#diemmatcatmoi").on('change', function() {
+$("#diemmatcatmoi").on('change', function () {
     toggleLayer(u_diem_mc_moi, map, this.checked);
 });
-$("#diemsatlo").on('change', function() {
+$("#diemsatlo").on('change', function () {
     toggleLayer(u_diem_sat_lo, map, this.checked);
 });
-$("#doansatlo").on('change', function() {
+$("#doansatlo").on('change', function () {
     toggleLayer(u_doan_sat_lo, map, this.checked);
 });
-$("#tramdothuyvan").on('change', function() {
+$("#tramdothuyvan").on('change', function () {
     toggleLayer(u_tram_do_thuy_van, map, this.checked);
 });
+$("#dem_2009").on('change', function() {
+    toggleLayer(dem_2009, map, this.checked);
+});
+$("#dem_2019").on('change', function() {
+    toggleLayer(dem_2019, map, this.checked);
+});
+$("#quy_hoach_khai_thac_cat_th").on('change', function() {
+    toggleLayer(quy_hoach_khai_thac_cat_th, map, this.checked);
+});
+$("#dieu_chinh_quy_hoach_th").on('change', function() {
+    toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
+});
+
 
 function toggleLayer(layer, map, status) {
     if (status == true) {
@@ -407,14 +779,14 @@ var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 var results = L.layerGroup().addTo(map);
 
 // listen for the results event and add every result to the map
-searchControl.on("results", function(data) {
+searchControl.on("results", function (data) {
     results.clearLayers();
     for (var i = data.results.length - 1; i >= 0; i--) {
         results.addLayer(L.marker(data.results[i].latlng));
     }
 });
 let self = this;
-map.on('pm:create', function(e) {
+map.on('pm:create', function (e) {
     console.log(e.layer.getLatLngs());
     let latlng = '';
     let url = api + 'api/get-matcat'
@@ -423,7 +795,9 @@ map.on('pm:create', function(e) {
     for (let i = 0; i < coordinates.length; i++) {
         if (i == coordinates.length - 1) {
             latlng += coordinates[i].lng + ' ' + coordinates[i].lat;
-        } else { latlng += coordinates[i].lng + ' ' + coordinates[i].lat + ','; }
+        } else {
+            latlng += coordinates[i].lng + ' ' + coordinates[i].lat + ',';
+        }
 
     }
     latlngmc = latlng;
@@ -432,9 +806,11 @@ map.on('pm:create', function(e) {
             method: 'post',
             url: url,
             data: bodyFormData,
-            headers: { 'Content-Type': 'multipart/form-data' }
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
-        .then(function(response) {
+        .then(function (response) {
             //handle success
             alert('Biểu đồ mặt cắt được cập nhật');
             coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
@@ -460,7 +836,7 @@ map.on('pm:create', function(e) {
 
 
         })
-        .catch(function(response) {
+        .catch(function (response) {
             //handle error
             console.log(response);
         });

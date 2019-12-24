@@ -261,6 +261,39 @@ let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
+let dem_2009 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:dem_2009',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let dem_2019 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:dem_2019',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:quy_hoach_khai_thac_cat_th',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:dieu_chinh_quy_hoach_th',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+
 
 
 
@@ -326,6 +359,18 @@ $("#doansatlo").on('change', function() {
 });
 $("#tramdothuyvan").on('change', function() {
     toggleLayer(u_tram_do_thuy_van, map, this.checked);
+});
+$("#dem_2009").on('change', function() {
+    toggleLayer(dem_2009, map, this.checked);
+});
+$("#dem_2019").on('change', function() {
+    toggleLayer(dem_2019, map, this.checked);
+});
+$("#quy_hoach_khai_thac_cat_th").on('change', function() {
+    toggleLayer(quy_hoach_khai_thac_cat_th, map, this.checked);
+});
+$("#dieu_chinh_quy_hoach_th").on('change', function() {
+    toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
 });
 
 

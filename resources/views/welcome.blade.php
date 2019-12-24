@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ mix('css/leaflet.elevation-0.0.4.css') }}" />
     <script type="text/javascript" src="{{ mix('js/leaflet-elevation.js') }}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
@@ -65,12 +66,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
+            <div id="" style="overflow-y:scroll; overflow-x:scroll; height:580px;">
                 <div class="container-content">
                     <div id="layer-content">
                         <div class="row">
                             <div class="col-8">
-                                <h6>Các điểm khảo sát</h6>
+                                <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -80,6 +81,131 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-8">
+                                <h6>ĐOẠN SẠT LỞ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="doansatlo" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemanh" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>ĐIỂM ĐỘ SÂU 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemdosau" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>ĐIỂM ĐỘ SÂU 2019</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="diemdosau20019" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="dem_2009" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2019</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="dem_2019" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satlomohinhthuyluch" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satlotruottongthe" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="satloduongbo" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>QUY HOẠCH KHAI THÁC CÁT</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="quy_hoach_khai_thac_cat_th" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="dieu_chinh_quy_hoach_th" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Bản đồ bổ sung và điều chỉnh các quy hoạch khai thác cát cho các khu vực trọng điểm
                                     của tỉnh An Giang</h6>
@@ -124,83 +250,13 @@
                                 </label>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Điểm độ sâu 2019</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="diemdosau20019" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Điểm độ sâu 2009</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="diemdosau" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Sạt lỡ mô hình thuỷ lực</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="satlomohinhthuyluch" type="checkbox" >
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Sạt lỡ trượt tổng thế</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="satlotruottongthe" type="checkbox" >
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Sạt lỡ đường bờ</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="satloduongbo" type="checkbox" >
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Điểm ảnh</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="diemanh" type="checkbox" >
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-8">
                                 <h6>Điểm mặt cắt mới</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemmatcatmoi" type="checkbox" >
+                                    <input id="diemmatcatmoi" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -211,33 +267,23 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemsatlo" type="checkbox" >
+                                    <input id="diemsatlo" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <h6>Đoạn sạt lỡ</h6>
-                            </div>
-                            <div class="col-4">
-                                <label class="switch">
-                                    <input id="doansatlo" type="checkbox" >
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
+
                         <div class="row">
                             <div class="col-8">
                                 <h6>Trạm đo thuỷ văn</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="tramdothuyvan" type="checkbox" >
+                                    <input id="tramdothuyvan" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -255,7 +301,7 @@
                     <div class="img-slider">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="img-slider">
-                              
+
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
