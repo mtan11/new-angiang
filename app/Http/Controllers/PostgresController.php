@@ -155,7 +155,7 @@ class PostgresController extends Controller
         $outputsplit = explode("\n", $output);
         $maqhpkranh = $outputsplit[count($outputsplit)-2];
         
-        return json_encode($maqhpkranh);
+        return $maqhpkranh;
         
     }
 
