@@ -390,17 +390,17 @@
                             <label class="input-group-text" for="inputGroupSelectNameShp">Chọn lớp dữ liệu:</label>
                         </div>
                         <select class="custom-select" id="inputGroupSelectNameShp">
-                            <option value="dangsau_2009_line">dangsau_2009_line</option>
-                            <option value="diemdosau_2019_point">diemdosau_2019_point</option>
-                            <option value="diemdosau_2009_point">diemdosau_2009_point</option>
-                            <option value="satlo_mohinhthuyluc_line">satlo_mohinhthuyluc_line</option>
-                            <option value="satlo_truottongthe_line">satlo_truottongthe_line</option>
-                            <option value="satloduongbo_gis_line">satloduongbo_gis_line</option>
-                            <option value="u_diem_mc_moi">u_diem_mc_moi</option>
-                            <option value="u_anh">u_anh</option>
-                            <option value="u_diem_sat_lo">u_diem_sat_lo</option>
-                            <option value="u_doan_sat_lo">u_doan_sat_lo</option>
-                            <option value="u_tram_do_thuy_van">u_tram_do_thuy_van</option>
+                            <!-- <option value="dangsau_2009_line">dangsau_2009_line</option> -->
+                            <option value="diemdosau_2009_point">ĐIỂM ĐỘ SÂU 2009</option>
+                            <option value="diemdosau_2019_point">ĐIỂM ĐỘ SÂU 2019</option>
+                            <option value="satlo_mohinhthuyluc_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</option>
+                            <option value="satlo_truottongthe_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</option>
+                            <option value="satloduongbo_gis_line">DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</option>
+                            <!-- <option value="u_diem_mc_moi">u_diem_mc_moi</option> -->
+                            <option value="u_anh">ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</option>
+                            <!-- <option value="u_diem_sat_lo">u_diem_sat_lo</option> -->
+                            <option value="u_doan_sat_lo">ĐOẠN SẠT LỞ</option>
+                            <!-- <option value="u_tram_do_thuy_van">u_tram_do_thuy_van</option> -->
                         </select>
                     </div>
 
