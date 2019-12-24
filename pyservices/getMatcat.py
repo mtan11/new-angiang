@@ -32,10 +32,10 @@ for row in result:
     for i in result0:
         khoangcach = i[0]
         dosau = i[1]
-        temp = {'khoangcach':str(khoangcach),'dosau':str(dosau)}
+        temp = {'date':str(khoangcach),'price':str(dosau)}
         value.append(temp)
     qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
-    done = {'thoigian':qparse,'values':value}
+    done = {'name':qparse,'values':value}
     final.append(done)
 print(final)
 # print(json.dumps(final))
