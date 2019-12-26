@@ -4,6 +4,10 @@
     "/css/style.css": "/css/style.css?id=7a3b51ec21c5a37e11da",
     "/css/app.css": "/css/app.css?id=43c5fc47f5f2748f45f5",
     "/js/leaflet-elevation.js": "/js/leaflet-elevation.js?id=9d8d921fad62092e9d4f",
-    "/js/map.js": "/js/map.js?id=17620163661b8f4ebfca",
-    "/js/map-edit.js": "/js/map-edit.js?id=788982aa47e8d94253cd"
+    "/js/map.js": "/js/map.js?id=23c0cd0d8b30716a4594",
+    "/js/map-edit.js": "/js/map-edit.js?id=5b29e75a48d7c477bb00",
+    "/img/elevation-lime.png": "/img/elevation-lime.png?id=14d3af42084644e13ff8",
+    "/img/elevation-purple.png": "/img/elevation-purple.png?id=4f93072df9ade947cce0",
+    "/img/elevation-steelblue.png": "/img/elevation-steelblue.png?id=10af95c429ebe58ad643",
+    "/img/icon-camera.png": "/img/icon-camera.png?id=61f328a43bae03cacdf3"
 }

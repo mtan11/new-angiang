@@ -15,8 +15,12 @@ let inputInfo = document.getElementById('input-info');
 let inputInfoShow = document.getElementById('input-info-show');
 let imgSlider = document.getElementById('img-slider');
 let btnCloseUpdate = document.getElementById('close-update-btn');
+var imgContainer = document.getElementById('container-img');
+var imgmcContainer = document.getElementById('container-imgmc');
 // let btnUploadShp = document.getElementById('btn-upload-shp');
+let selectKindMarker = document.getElementById('selectKindMarker');
 let btnUploadShpFile = document.getElementById('btn-upload-shp-file');
+let containerInfoInsert = document.getElementById('container-info-insert');
 let api = 'http://35.198.222.40/';
 let lat = 0;
 let lng = 0;
@@ -28,9 +32,36 @@ let geoserver = 'http://35.198.222.40:8080/geoserver/angiang/wms';
 let urlImg = 'http://35.198.222.40/storage/uploadedimages/';
 
 let markerGot = [];
+let markerGotSL = [];
 let arrMarkers = [];
+let arrSatLo = L.layerGroup();
+let arrDoanSL = L.layerGroup();
 arrMarkers = L.layerGroup();
+var ksIcon = new L.icon({
+    iconUrl: '/img/icon-camera.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 40],
+    popupAnchor: [0, -40],
+});
+var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
 
+selectKindMarker.addEventListener('change', () => {
+    containerInfoInsert.classList.remove('hidden');
+    if (selectKindMarker.value == 'diemks') {
+        imgmcContainer.classList.add('hidden');
+        imgContainer.classList.remove('hidden');
+    } else {
+        imgContainer.classList.add('hidden');
+        imgmcContainer.classList.remove('hidden');
+    }
+})
 btnClose.addEventListener('click', closePanel.bind(this));
 btnCloseUpdate.addEventListener('click', closePanelUpdate.bind(this));
 btnOpen.addEventListener('click', showPanel.bind(this));
@@ -88,13 +119,14 @@ function showPanelUpdate() {
 
 function acceptEditInfo() {
     var bodyFormData = new FormData();
+    var kindMarker = document.getElementById('selectKindMarker');
     var name = document.getElementById('input-name');
     var descr = document.getElementById('input-info');
     var img = document.getElementById('input-images');
     var imgmc = document.getElementById('input-images-mc');
     var xy = lng + ' ' + lat;
-    console.log(xy);
-    var url = api + 'api/insert-data-point';
+    var urlKS = api + 'api/insert-data-diemks';
+    var urlSL = api + 'api/insert-data-diemsl';
     if (name.value == null || descr.value == null) {
         alert('Vui lòng điền đầy đủ thông tin')
     } else {
@@ -102,67 +134,144 @@ function acceptEditInfo() {
         bodyFormData.set('info', descr.value);
         bodyFormData.set('xy', xy);
         // console.log(img.files.length);
-        for (let i = 0; i < img.files.length; i++) {
-            bodyFormData.append('photos[]', img.files[i]);
-        }
-        for (let i = 0; i < imgmc.files.length; i++) {
-            bodyFormData.append('excelmc', imgmc.files[i]);
-        }
 
-        axios({
-                method: 'post',
-                url: url,
-                data: bodyFormData,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(function (response) {
-                //handle success
-                alert('Cập nhật điểm thành công');
-                console.log(response);
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
+
+        if (selectKindMarker.value == 'diemks') {
+            for (let i = 0; i < img.files.length; i++) {
+                bodyFormData.append('photos[]', img.files[i]);
+            }
+            axios({
+                    method: 'post',
+                    url: urlKS,
+                    data: bodyFormData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function (response) {
+                    //handle success
+                    alert('Cập nhật điểm thành công');
+                    console.log(response);
+                })
+                .catch(function (response) {
+                    //handle error
+                    console.log(response);
+                });
+        } else {
+            for (let i = 0; i < imgmc.files.length; i++) {
+                bodyFormData.append('excelmc', imgmc.files[i]);
+            }
+            axios({
+                    method: 'post',
+                    url: urlSL,
+                    data: bodyFormData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function (response) {
+                    //handle success
+                    alert('Cập nhật điểm thành công');
+                    console.log(response);
+                })
+                .catch(function (response) {
+                    //handle error
+                    console.log(response);
+                });
+        }
     }
 
 }
 
 
 function getMarker() {
-    let url = api + 'api/get-all-imgpoint'
+    let url = api + 'api/get-all-data'
     axios({
             method: 'get',
             url: url,
         })
         .then(function (response) {
-            let markers = response.data;
+            let diemanhks = response.data.diemanhks;
+            let diemsl = response.data.diemsl;
+            let doansl = response.data.doansl;
+            console.log(response.data);
             markerGot = [];
-            for (var i = 0; i < markers.length; i++) {
-                console.log(markers[i]);
+            let doanGotSL = [];
+            let markerGotSL = [];
+            for (var i = 0; i < doansl.length; i++) {
+                // console.log(diemanhks[i]);
+                doanGotSL.push({
+                    type: 'Feature',
+                    geometry: {
+                        type: JSON.parse(doansl[i].st_asgeojson).type,
+                        coordinates: JSON.parse(doansl[i].st_asgeojson).coordinates
+                    },
+                    properties: {
+                        Name: doansl[i].name,
+                        Info: doansl[i].info,
+                        Id: doansl[i].gid,
+                        Photos: doansl[i].photos
+                    }
+                });
+            };
+            for (var i = 0; i < doanGotSL.length; i++) {
+                let mar = L.geoJson(doanGotSL[i], {
+                    onEachFeature: clickMarker.bind(this),
+                });
+                arrDoanSL.addLayer(mar);
+            }
+            for (var i = 0; i < diemsl.length; i++) {
+                // console.log(diemanhks[i]);
+                markerGotSL.push({
+                    type: 'Feature',
+                    geometry: {
+                        type: JSON.parse(diemsl[i].st_asgeojson).type,
+                        coordinates: JSON.parse(diemsl[i].st_asgeojson).coordinates
+                    },
+                    properties: {
+                        Name: diemsl[i].name,
+                        Info: diemsl[i].info,
+                        Id: diemsl[i].gid,
+                        Photos: diemsl[i].photos
+                    }
+                });
+            };
+            for (var i = 0; i < markerGotSL.length; i++) {
+                let mar = L.geoJson(markerGotSL[i], {
+                    onEachFeature: clickMarker.bind(this),
+                });
+                arrSatLo.addLayer(mar);
+            }
+            for (var i = 0; i < diemanhks.length; i++) {
+                // console.log(diemanhks[i]);
                 markerGot.push({
                     type: 'Feature',
                     geometry: {
-                        type: JSON.parse(markers[i].st_asgeojson).type,
-                        coordinates: JSON.parse(markers[i].st_asgeojson).coordinates
+                        type: JSON.parse(diemanhks[i].st_asgeojson).type,
+                        coordinates: JSON.parse(diemanhks[i].st_asgeojson).coordinates
                     },
                     properties: {
-                        Name: markers[i].name,
-                        Info: markers[i].info,
-                        Id: markers[i].gid,
-                        Photos: markers[i].photos
+                        Name: diemanhks[i].name,
+                        Info: diemanhks[i].info,
+                        Id: diemanhks[i].gid,
+                        Photos: diemanhks[i].photos
                     }
                 });
             };
             for (var i = 0; i < markerGot.length; i++) {
                 let mar = L.geoJson(markerGot[i], {
+                    pointToLayer: function (feature, latlng) {
+                        return L.marker(latlng, {
+                            icon: ksIcon
+                        });
+                    },
                     onEachFeature: clickMarker.bind(this),
                 });
                 arrMarkers.addLayer(mar);
             }
             arrMarkers.addTo(map);
+            arrSatLo.addTo(map);
+            arrDoanSL.addTo(map);
         });
 };
 
@@ -180,8 +289,15 @@ function clickMarker(feature, layer) {
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
         inputNameShow.value = feature.properties.Name;
+        console.log(feature.properties.Name);
         inputInfoShow.value = feature.properties.Info;
-        let photo = JSON.parse(feature.properties.Photos).img;
+        console.log(feature.properties.Photos);
+        if (feature.properties.Photos != null) {
+            let photo = JSON.parse(feature.properties.Photos).img;
+        } else {
+            let photo = [];
+        }
+
         // let photomc = JSON.parse(feature.properties.Photos).imgmc;
         for (let i = 0; i < photo.length; i++) {
             if (i == 0) {
@@ -198,8 +314,6 @@ function clickMarker(feature, layer) {
             })
             .then(function (response) {
                 //handle success
-                // createChart(response.data);
-                // console.log(response.data)
                 console.log(response.data);
 
                 var data = [{
@@ -669,6 +783,22 @@ let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
+let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:du_bao_long_dan_2030',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let du_bao_long_dan_2050 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:du_bao_long_dan_2025',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
 
 
 
@@ -732,18 +862,25 @@ $("#doansatlo").on('change', function () {
 $("#tramdothuyvan").on('change', function () {
     toggleLayer(u_tram_do_thuy_van, map, this.checked);
 });
-$("#dem_2009").on('change', function() {
+$("#dem_2009").on('change', function () {
     toggleLayer(dem_2009, map, this.checked);
 });
-$("#dem_2019").on('change', function() {
+$("#dem_2019").on('change', function () {
     toggleLayer(dem_2019, map, this.checked);
 });
-$("#quy_hoach_khai_thac_cat_th").on('change', function() {
+$("#quy_hoach_khai_thac_cat_th").on('change', function () {
     toggleLayer(quy_hoach_khai_thac_cat_th, map, this.checked);
 });
-$("#dieu_chinh_quy_hoach_th").on('change', function() {
+$("#dieu_chinh_quy_hoach_th").on('change', function () {
     toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
 });
+$("#du_bao_long_dan_2030").on('change', function () {
+    toggleLayer(du_bao_long_dan_2030, map, this.checked);
+});
+$("#du_bao_long_dan_2025").on('change', function () {
+    toggleLayer(du_bao_long_dan_2050, map, this.checked);
+});
+
 
 
 function toggleLayer(layer, map, status) {
@@ -804,7 +941,7 @@ map.on('pm:create', function (e) {
     bodyFormData.set('linestring', latlngmc);
     axios({
             method: 'post',
-            url: url,
+            url: urlKS,
             data: bodyFormData,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -812,34 +949,51 @@ map.on('pm:create', function (e) {
         })
         .then(function (response) {
             //handle success
-            alert('Biểu đồ mặt cắt được cập nhật');
-            coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
-            el.clear();
-
-            geojson = {
-                "name": "NewFeatureType",
-                "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": coormc
-                    },
-                    "properties": null
-                }]
-            };
-            el.addData(geojson);
-            var gjl = L.geoJson(geojson, {
-                onEachFeature: el.addData.bind(el)
-            }).addTo(map);
-
-
-
+            alert('Cập nhật điểm thành công');
+            console.log(response);
         })
         .catch(function (response) {
             //handle error
             console.log(response);
         });
+    // axios({
+    //         method: 'post',
+    //         url: url,
+    //         data: bodyFormData,
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data'
+    //         }
+    //     })
+    //     .then(function (response) {
+    //         //handle success
+    //         alert('Biểu đồ mặt cắt được cập nhật');
+    //         coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
+    //         el.clear();
+
+    //         geojson = {
+    //             "name": "NewFeatureType",
+    //             "type": "FeatureCollection",
+    //             "features": [{
+    //                 "type": "Feature",
+    //                 "geometry": {
+    //                     "type": "LineString",
+    //                     "coordinates": coormc
+    //                 },
+    //                 "properties": null
+    //             }]
+    //         };
+    //         el.addData(geojson);
+    //         var gjl = L.geoJson(geojson, {
+    //             onEachFeature: el.addData.bind(el)
+    //         }).addTo(map);
+
+
+
+    //     })
+    //     .catch(function (response) {
+    //         //handle error
+    //         console.log(response);
+    //     });
 
 
 })
@@ -857,5 +1011,5 @@ var geojson = {
     }]
 };
 
-var el = L.control.elevation();
-el.addTo(map);
+// var el = L.control.elevation();
+// el.addTo(map);
