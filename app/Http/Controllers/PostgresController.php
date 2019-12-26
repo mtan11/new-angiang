@@ -206,7 +206,7 @@ class PostgresController extends Controller
         $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
         Storage::disk('public')->put('/exceldiemsl/' . $id . '/excel/' . $excelfileName, File::get($excelmc));
         
-        $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+        $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$id} {$excelfileName}");
 
 
         return 'update data thanh cong';
