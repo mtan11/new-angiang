@@ -24,7 +24,7 @@ class PostgresController extends Controller
         $photos = $request->file('photos');
         // $photomc = $request->file('photomc');
         // $excelmc = $request->file('excelmc');
-        $point = "MultiPoint($xy)";
+        $point = "Point($xy)";
 
 
 
