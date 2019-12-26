@@ -283,7 +283,7 @@ class PostgresController extends Controller
 
 
 
-        $data = DoanSatLo::where('gid',"$id")->update([
+        $data = DoanSatLo::where('gid',$id)->update([
             // 'photos' => json_encode(array(
             //     'img' => []
             //     // 'imgmc' => []
@@ -318,7 +318,7 @@ class PostgresController extends Controller
         //         array_push($photomcFiles, $fileName);
         //     }
         // }
-        $data = DoanSatLo::where('gid',"$id")->update([
+        $data = DoanSatLo::where('gid',$id)->update([
             'photos' => json_encode(array(
                 'img' => $photoFiles
             ))]);
