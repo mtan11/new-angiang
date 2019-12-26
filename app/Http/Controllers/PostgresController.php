@@ -99,7 +99,11 @@ class PostgresController extends Controller
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
         
-        $curphotos = json_decode($data->photos);
+        $select = PointData::find($id);
+
+
+
+        $curphotos = json_decode($select->photos);
         $photoFiles = $curphotos->img;
 
         $photos = $request->file('photos');
@@ -292,8 +296,12 @@ class PostgresController extends Controller
             'info' => "'$info'",
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
+        $select = DoanSatLo::find($id);
+
+
+
+        $curphotos = json_decode($select->photos);
         
-        $curphotos = json_decode($data->photos);
         $photoFiles = $curphotos->img;
 
         $photos = $request->file('photos');
