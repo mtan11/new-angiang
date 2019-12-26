@@ -228,7 +228,7 @@ class PostgresController extends Controller
             )),
             'name' => $name,
             'info' => $info,
-            'geom' => DB::raw("st_transform(GeomFromEWKT('SRID=4326;MULTILINESTRING (($point))'),32648)")
+            'geom' => DB::raw("st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($point)'),32648)")
 
             
         ]);
