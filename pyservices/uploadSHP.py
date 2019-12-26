@@ -76,38 +76,38 @@ for path, subdirs, files in os.walk(root):
 i = listfile[0]
 # if checked == True:
 #     for i in listfile:
-if table == 'dangsau_2009_line':
-    tablename = table
-    sql_delete_query = """Delete from dangsau_2009_line"""
-    print(sql_delete_query)
-    cursor.execute(sql_delete_query)
-    connection.commit()
+if table == 'diem_anh_ks':
+    tablename = 'data_point'
+    # sql_delete_query = """Delete from dangsau_2009_line"""
+    # print(sql_delete_query)
+    # cursor.execute(sql_delete_query)
+    # connection.commit()
     # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
     cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
-    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (layer,elevation,shape_leng,geom) select layer,elevation,shape_leng,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (geom) select geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
     print(sql_append_query)
     cursor.execute(sql_append_query)
     connection.commit()
     print(i.split('/')[-1]+" imported")
-elif table == 'diemdosau_2009_point':
-    tablename = table
-    sql_delete_query = """Delete from diemdosau_2009_point"""
-    print(sql_delete_query)
-    cursor.execute(sql_delete_query)
-    connection.commit()
+elif table == 'doan_sl':
+    tablename = 'doan_sat_lo'
+    # sql_delete_query = """Delete from diemdosau_2009_point"""
+    # print(sql_delete_query)
+    # cursor.execute(sql_delete_query)
+    # connection.commit()
     # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
     cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
-    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (z,geom) select z,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (geom) select geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
     print(sql_append_query)
     cursor.execute(sql_append_query)
     connection.commit()
     print(i.split('/')[-1]+" imported")
-elif table == 'diemdosau_2019_point':
-    tablename = table
+elif table == 'diem_sl':
+    tablename = 'diem_khao_sat_mat_cat_ngang'
     sql_delete_query = """Delete from diemdosau_2019_point"""
     print(sql_delete_query)
     cursor.execute(sql_delete_query)
@@ -116,7 +116,7 @@ elif table == 'diemdosau_2019_point':
     cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
-    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (z,x,y,geom) select z,x,y,geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
+    sql_append_query = """insert into """+i.split('/')[-1].split('.')[0].lower()+""" (geom) select geom from """+tablename+"""_queue; DROP TABLE """+tablename+"""_queue;"""
     print(sql_append_query)
     cursor.execute(sql_append_query)
     connection.commit()

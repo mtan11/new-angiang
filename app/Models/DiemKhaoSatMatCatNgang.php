@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PointData extends Model
+class DiemKhaoSatMatCatNgang extends Model
 {
     protected $connection = "pgsql";
-    protected $table = 'hinh_anh_khao_sat_thuc_dia';
-    protected $fillable = ['photos','name','info','geom'];
+    protected $table = 'diem_khao_sat_mat_cat_ngang';
+    protected $fillable = ['name','info','geom'];
     protected $primaryKey = 'gid';
 }

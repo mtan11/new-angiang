@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\PointData;
+use App\Models\DiemKhaoSatMatCatNgang;
+use App\Models\DoanSatLo;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 // use Illuminate\Support\Facades\Redis;
@@ -14,22 +16,22 @@ class PostgresController extends Controller
 {
 
 
-    public function insertData(Request $request)
+    public function insertDataAnhKS(Request $request)
     {
         $name = $request->name;
         $info = $request->info;
         $xy = $request->xy;
         $photos = $request->file('photos');
         // $photomc = $request->file('photomc');
-        $excelmc = $request->file('excelmc');
+        // $excelmc = $request->file('excelmc');
         $point = "MultiPoint($xy)";
 
 
 
         $data = PointData::create([
             'photos' => json_encode(array(
-                'img' => [],
-                'imgmc' => []
+                'img' => []
+                // 'imgmc' => []
             )),
             'name' => $name,
             'info' => $info,
@@ -38,14 +40,14 @@ class PostgresController extends Controller
 
         $photos = $request->file('photos');
         // $photomc = $request->file('photomc');
-        
+
 
         $photoFiles = [];
         if ($photos) {
             foreach ($photos as $photo) {
                 $extension = $photo->getClientOriginalExtension();
                 $fileName = sprintf('%s.%s', $photo->getFilename(), $extension);
-                Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/img/' . $fileName, File::get($photo));
+                Storage::disk('public')->put('/uploadedimages/diemanhks/' . $data->gid . '/img/' . $fileName, File::get($photo));
                 array_push($photoFiles, $fileName);
             }
         }
@@ -63,15 +65,279 @@ class PostgresController extends Controller
                 'img' => $photoFiles
             ))]);
         
+        // $excelextension = $excelmc->getClientOriginalExtension();
+        // $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+        // Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/excel/' . $excelfileName, File::get($excelmc));
+        
+        // $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+
+
+        return 'thêm data thanh cong';
+    }
+
+
+    public function updateDataAnhKS(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $info = $request->info;
+        // $xy = $request->xy;
+        $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        // $excelmc = $request->file('excelmc');
+        // $point = "MultiPoint($xy)";
+
+
+
+        $data = PointData::where('id',"$id")->update([
+            // 'photos' => json_encode(array(
+            //     'img' => []
+            //     // 'imgmc' => []
+            // )),
+            'name' => $name,
+            'info' => $info,
+            // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
+        ]);
+        
+        $curphotos = json_decode($data->photos);
+        $photoFiles = $curphotos->img;
+
+        $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        
+
+        // $photoFiles = [];
+        if ($photos) {
+            foreach ($photos as $photo) {
+                $extension = $photo->getClientOriginalExtension();
+                $fileName = sprintf('%s.%s', $photo->getFilename(), $extension);
+                Storage::disk('public')->put('/uploadedimages/diemanhks/' . $id . '/img/' . $fileName, File::get($photo));
+                array_push($photoFiles, $fileName);
+            }
+        }
+        // $photomcFiles = [];
+        // if ($photomc) {
+        //     foreach ($photomc as $photom) {
+        //         $extension = $photom->getClientOriginalExtension();
+        //         $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
+        //         Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
+        //         array_push($photomcFiles, $fileName);
+        //     }
+        // }
+        $data = PointData::where('id',"$id")->update([
+            'photos' => json_encode(array(
+                'img' => $photoFiles
+            ))]);
+        
+        // $excelextension = $excelmc->getClientOriginalExtension();
+        // $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+        // Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/excel/' . $excelfileName, File::get($excelmc));
+        
+        // $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+
+
+        return 'update data thanh cong';
+    }
+
+
+
+    public function insertDataDiemSL(Request $request)
+    {
+        $name = $request->name;
+        $info = $request->info;
+        $xy = $request->xy;
+        // $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        $excelmc = $request->file('excelmc');
+        $point = "Point($xy)";
+
+
+
+        $data = DiemKhaoSatMatCatNgang::create([
+            // 'photos' => json_encode(array(
+            //     'img' => [],
+            //     'imgmc' => []
+            // )),
+            'name' => $name,
+            'info' => $info,
+            'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
+        ]);
+
+        
         $excelextension = $excelmc->getClientOriginalExtension();
         $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
-        Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/excel/' . $excelfileName, File::get($excelmc));
+        Storage::disk('public')->put('/exceldiemsl/' . $data->gid . '/' . $excelfileName, File::get($excelmc));
         
         $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
 
 
-        return 'thêm data thanh cong'.$process;
+        return 'thêm data thanh cong';
     }
+
+    public function updateDataDiemSL(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $info = $request->info;
+        $xy = $request->xy;
+        // $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        $excelmc = $request->file('excelmc');
+        // $point = "Point($xy)";
+
+
+
+        $data = DiemKhaoSatMatCatNgang::where('id',"$id")->update([
+            // 'photos' => json_encode(array(
+            //     'img' => [],
+            //     'imgmc' => []
+            // )),
+            'name' => $name,
+            'info' => $info,
+            // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
+        ]);
+
+        
+        $excelextension = $excelmc->getClientOriginalExtension();
+        $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+        Storage::disk('public')->put('/exceldiemsl/' . $id . '/excel/' . $excelfileName, File::get($excelmc));
+        
+        $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+
+
+        return 'update data thanh cong';
+    }
+
+
+    public function insertDataDoanSL(Request $request)
+    {
+        $name = $request->name;
+        $info = $request->info;
+        $xy = $request->xy;
+        $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        // $excelmc = $request->file('excelmc');
+        $point = $xy;
+
+
+
+        $data = DoanSatLo::create([
+            'photos' => json_encode(array(
+                'img' => []
+                // 'imgmc' => []
+            )),
+            'name' => $name,
+            'info' => $info,
+            'geom' => DB::raw("st_transform(GeomFromEWKT('SRID=4326;MULTILINESTRING (($point))'),32648)")
+
+            
+        ]);
+
+        $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        
+
+        $photoFiles = [];
+        if ($photos) {
+            foreach ($photos as $photo) {
+                $extension = $photo->getClientOriginalExtension();
+                $fileName = sprintf('%s.%s', $photo->getFilename(), $extension);
+                Storage::disk('public')->put('/uploadedimages/doansl/' . $data->gid . '/img/' . $fileName, File::get($photo));
+                array_push($photoFiles, $fileName);
+            }
+        }
+        // $photomcFiles = [];
+        // if ($photomc) {
+        //     foreach ($photomc as $photom) {
+        //         $extension = $photom->getClientOriginalExtension();
+        //         $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
+        //         Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
+        //         array_push($photomcFiles, $fileName);
+        //     }
+        // }
+        $data->update([
+            'photos' => json_encode(array(
+                'img' => $photoFiles
+            ))]);
+        
+        // $excelextension = $excelmc->getClientOriginalExtension();
+        // $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+        // Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/excel/' . $excelfileName, File::get($excelmc));
+        
+        // $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+
+
+        return 'thêm data thanh cong';
+    }
+
+    public function updateDataDoanSL(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $info = $request->info;
+        // $xy = $request->xy;
+        $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        // $excelmc = $request->file('excelmc');
+        // $point = "MultiPoint($xy)";
+
+
+
+        $data = DoanSatLo::where('id',"$id")->update([
+            // 'photos' => json_encode(array(
+            //     'img' => []
+            //     // 'imgmc' => []
+            // )),
+            'name' => $name,
+            'info' => $info,
+            // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
+        ]);
+        
+        $curphotos = json_decode($data->photos);
+        $photoFiles = $curphotos->img;
+
+        $photos = $request->file('photos');
+        // $photomc = $request->file('photomc');
+        
+
+        // $photoFiles = [];
+        if ($photos) {
+            foreach ($photos as $photo) {
+                $extension = $photo->getClientOriginalExtension();
+                $fileName = sprintf('%s.%s', $photo->getFilename(), $extension);
+                Storage::disk('public')->put('/uploadedimages/doansl/' . $id . '/img/' . $fileName, File::get($photo));
+                array_push($photoFiles, $fileName);
+            }
+        }
+        // $photomcFiles = [];
+        // if ($photomc) {
+        //     foreach ($photomc as $photom) {
+        //         $extension = $photom->getClientOriginalExtension();
+        //         $fileName = sprintf('%s.%s', $photom->getFilename(), $extension);
+        //         Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/imgmc/' . $fileName, File::get($photom));
+        //         array_push($photomcFiles, $fileName);
+        //     }
+        // }
+        $data = DoanSatLo::where('id',"$id")->update([
+            'photos' => json_encode(array(
+                'img' => $photoFiles
+            ))]);
+        
+        // $excelextension = $excelmc->getClientOriginalExtension();
+        // $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+        // Storage::disk('public')->put('/uploadedimages/' . $data->gid . '/excel/' . $excelfileName, File::get($excelmc));
+        
+        // $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+
+
+        return 'update data thanh cong';
+    }
+
+
+    //==================================
+
+    
+
 
     public function uploadShapeFile(Request $request)
     {
@@ -126,7 +392,7 @@ class PostgresController extends Controller
         ], 404);
     }
 
-    public function getAllPointImg()
+    public function getAllData()
     {
         // $all = PointData::all();
         // $all = DB::raw("select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
@@ -135,10 +401,20 @@ class PostgresController extends Controller
         //     'geom' => DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"))]);
         // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
         // return json_encode($all,200);
-        $qhpksdd = DB::connection('pgsql')->select(
-            "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from data_point");
+        $diemanhks = DB::connection('pgsql')->select(
+            "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from hinh_anh_khao_sat_thuc_dia");
+        $diemsl = DB::connection('pgsql')->select(
+            "select gid, name, info, ST_Asgeojson(ST_Transform(geom,4326)) from diem_khao_sat_mat_cat_ngang");
+        $doansl = DB::connection('pgsql')->select(
+            "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from doan_sat_lo");
         
-        return json_encode($qhpksdd);
+        $result = (object) array(
+            'diemanhks' => $diemanhks,
+            'diemsl' => $diemsl,
+            'doansl' => $doansl
+        );
+
+        return json_encode($result);
         
     }
 
@@ -163,22 +439,41 @@ class PostgresController extends Controller
     public function getMatCat(Request $request)
     {
         $linestring = $request->linestring;
-        $qhpksdd = DB::connection('pgsql')->select(
+        $dem2009 = DB::connection('pgsql')->select(
             "WITH line AS
             (SELECT st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($linestring)'),32648)::geometry AS geom),
           cells AS
-            (SELECT ST_Centroid((ST_Intersection(demelevation.rast, line.geom)).geom) AS geom,
-            (ST_Intersection(demelevation.rast, line.geom)).val AS val
-             FROM demelevation, line
-             WHERE ST_Intersects(demelevation.rast, line.geom)),
+            (SELECT ST_Centroid((ST_Intersection(dem2009.rast, line.geom)).geom) AS geom,
+            (ST_Intersection(dem2009.rast, line.geom)).val AS val
+             FROM dem2009, line
+             WHERE ST_Intersects(dem2009.rast, line.geom)),
           points3d AS
             (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
              FROM cells, line
              ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
+        SELECT ST_Asgeojson(ST_Transform(ST_GeomFromText(st_astext(ST_MakeLine(geom)),32648),4326)) FROM points3d;");
 
+        $dem2019 = DB::connection('pgsql')->select(
+            "WITH line AS
+            (SELECT st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($linestring)'),32648)::geometry AS geom),
+          cells AS
+            (SELECT ST_Centroid((ST_Intersection(dem2019.rast, line.geom)).geom) AS geom,
+            (ST_Intersection(dem2019.rast, line.geom)).val AS val
+             FROM dem2019, line
+             WHERE ST_Intersects(dem2019.rast, line.geom)),
+          points3d AS
+            (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
+             FROM cells, line
+             ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
         SELECT ST_Asgeojson(ST_Transform(ST_GeomFromText(st_astext(ST_MakeLine(geom)),32648),4326)) FROM points3d;");
         
-        return json_encode($qhpksdd);
+
+        $result = (object) array(
+            'dem2009' => $dem2009,
+            'dem2019' => $dem2019
+        );
+
+        return json_encode($result);
     }
     
 
