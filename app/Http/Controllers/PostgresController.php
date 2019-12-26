@@ -204,7 +204,7 @@ class PostgresController extends Controller
         
         $excelextension = $excelmc->getClientOriginalExtension();
         $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
-        Storage::disk('public')->put('/exceldiemsl/' . $id . '/excel/' . $excelfileName, File::get($excelmc));
+        Storage::disk('public')->put('/exceldiemsl/' . $id . '/' . $excelfileName, File::get($excelmc));
         
         $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$id} {$excelfileName}");
 
