@@ -18,7 +18,7 @@ mix
     .js('resources/js/map-edit.js', 'public/js')
     .js('resources/js/components/leaflet-elevation.js', 'public/js')
 
-    .copy('resources/images/*.*', 'public/img')
+.copy('resources/images/*.*', 'public/img')
 
 .sass('resources/sass/leaflet.elevation-0.0.4.scss', 'public/css')
     .sass('resources/sass/style.scss', 'public/css')

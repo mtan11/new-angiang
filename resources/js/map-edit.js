@@ -16,10 +16,13 @@ let inputInfoShow = document.getElementById('input-info-show');
 let imgSlider = document.getElementById('img-slider');
 let btnCloseUpdate = document.getElementById('close-update-btn');
 var imgContainer = document.getElementById('container-img');
+var swiperContainer = document.getElementById('swiper-container');
 var imgmcContainer = document.getElementById('container-imgmc');
 // let btnUploadShp = document.getElementById('btn-upload-shp');
 let selectKindMarker = document.getElementById('selectKindMarker');
 let btnUploadShpFile = document.getElementById('btn-upload-shp-file');
+let titleUpdate = document.getElementById('title-update');
+let updateBtnContainer = document.getElementById('container-update-btn');
 let containerInfoInsert = document.getElementById('container-info-insert');
 let api = 'http://35.198.222.40/';
 let lat = 0;
@@ -52,6 +55,28 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 
+var mySwiper = new Swiper('.swiper-container', {
+    // Optional parameters
+    direction: 'vertical',
+    loop: true,
+
+    // If we need pagination
+    pagination: {
+        el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+    // And if we need scrollbar
+    scrollbar: {
+        el: '.swiper-scrollbar',
+    },
+})
+
 selectKindMarker.addEventListener('change', () => {
     containerInfoInsert.classList.remove('hidden');
     if (selectKindMarker.value == 'diemks') {
@@ -71,6 +96,7 @@ btnUploadShpFile.addEventListener('click', uploadShpFIle.bind(this));
 function closePanel() {
     panel.style.right = '-450px';
     btnOpen.classList.remove('hidden');
+    swiperContainer.classList.add('hidden');
 }
 
 function closePanelUpdate() {
@@ -93,12 +119,12 @@ function uploadShpFIle() {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        .then(function (response) {
+        .then(function(response) {
             //handle success
             alert('Cập nhật dữ liệu thành công');
             console.log(response);
         })
-        .catch(function (response) {
+        .catch(function(response) {
             //handle error
             alert('Có lỗi xảy ra trong quá trình cập nhật');
             console.log(response);
@@ -111,6 +137,7 @@ function showPanel() {
     btnOpen.classList.add('hidden');
     infoContent.classList.add('hidden');
     layerContent.classList.remove('hidden');
+    swiperContainer.classList.remove('hidden');
 }
 
 function showPanelUpdate() {
@@ -148,12 +175,12 @@ function acceptEditInfo() {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
                     alert('Cập nhật điểm thành công');
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     console.log(response);
                 });
@@ -169,12 +196,12 @@ function acceptEditInfo() {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
                     alert('Cập nhật điểm thành công');
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     console.log(response);
                 });
@@ -190,7 +217,7 @@ function getMarker() {
             method: 'get',
             url: url,
         })
-        .then(function (response) {
+        .then(function(response) {
             let diemanhks = response.data.diemanhks;
             let diemsl = response.data.diemsl;
             let doansl = response.data.doansl;
@@ -216,7 +243,7 @@ function getMarker() {
             };
             for (var i = 0; i < doanGotSL.length; i++) {
                 let mar = L.geoJson(doanGotSL[i], {
-                    onEachFeature: clickMarker.bind(this),
+                    onEachFeature: clickLineSL.bind(this),
                 });
                 arrDoanSL.addLayer(mar);
             }
@@ -238,7 +265,7 @@ function getMarker() {
             };
             for (var i = 0; i < markerGotSL.length; i++) {
                 let mar = L.geoJson(markerGotSL[i], {
-                    onEachFeature: clickMarker.bind(this),
+                    onEachFeature: clickMarkerSL.bind(this),
                 });
                 arrSatLo.addLayer(mar);
             }
@@ -260,12 +287,12 @@ function getMarker() {
             };
             for (var i = 0; i < markerGot.length; i++) {
                 let mar = L.geoJson(markerGot[i], {
-                    pointToLayer: function (feature, latlng) {
+                    pointToLayer: function(feature, latlng) {
                         return L.marker(latlng, {
                             icon: ksIcon
                         });
                     },
-                    onEachFeature: clickMarker.bind(this),
+                    onEachFeature: clickMarkerKS.bind(this),
                 });
                 arrMarkers.addLayer(mar);
             }
@@ -279,24 +306,220 @@ getMarker();
 
 map.on('click', addMarker);
 
-function clickMarker(feature, layer) {
-    layer.on('click', function (e) {
+function clickMarkerKS(feature, layer) {
+    layer.on('click', function(e) {
         showPanel();
-        let url = api + 'api/get-matcat-by-pointid/' + feature.properties.Id;
+        let url = api + 'api/update-data-diemks';
+        console.log(feature.properties);
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
         inputNameShow.value = feature.properties.Name;
-        console.log(feature.properties.Name);
         inputInfoShow.value = feature.properties.Info;
-        console.log(feature.properties.Photos);
-        if (feature.properties.Photos != null) {
-            let photo = JSON.parse(feature.properties.Photos).img;
-        } else {
-            let photo = [];
+        titleUpdate.innerHTML = 'Chọn ảnh';
+
+
+        let photo = JSON.parse(feature.properties.Photos).img;
+        let updateBtn = document.createElement('button');
+        updateBtn.innerHTML = 'Cập nhật';
+        updateBtn.className = 'btn btn-primary';
+        updateBtn.addEventListener('click', () => {
+            console.log(id);
+            var bodyFormData = new FormData();
+            var name = document.getElementById('input-name-show');
+            var descr = document.getElementById('input-info-show');
+            var file = document.getElementById('input-file-show');
+            bodyFormData.set('name', name.value);
+            bodyFormData.set('info', descr.value);
+            bodyFormData.set('id', id);
+            for (let i = 0; i < file.files.length; i++) {
+                bodyFormData.append('photos[]', file.files[i]);
+            }
+            axios({
+                    method: 'post',
+                    url: url,
+                    data: bodyFormData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function(response) {
+                    //handle success
+                    alert('Cập nhật dữ liệu thành công');
+                    console.log(response);
+                })
+                .catch(function(response) {
+                    //handle error
+                    alert('Có lỗi xảy ra trong quá trình cập nhật');
+                    console.log(response);
+                });
+        })
+        updateBtnContainer.innerHTML = '';
+        updateBtnContainer.appendChild(updateBtn);
+
+
+        // let photomc = JSON.parse(feature.properties.Photos).imgmc;
+        for (let i = 0; i < photo.length; i++) {
+            if (i == 0) {
+                createImgDiv(id, true, 'img', photo[i], 'diemanhks')
+            }
+            createImgDiv(id, false, 'img', photo[i], 'diemanhks')
         }
+    })
+}
+
+function clickMarkerSL(feature, layer) {
+    layer.on('click', function(e) {
+        showPanel();
+        let url = api + 'api/update-data-diemsl';
+        console.log(feature.properties);
+        let id = feature.properties.Id;
+        titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        layerContent.classList.add("hidden");
+        infoContent.classList.remove("hidden");
+        imgSlider.innerHTML = '';
+        inputNameShow.value = feature.properties.Name;
+        inputInfoShow.value = feature.properties.Info;
+        titleUpdate.innerHTML = 'Chọn file excel';
+
+
+        let photo = JSON.parse(feature.properties.Photos).img;
+        let updateBtn = document.createElement('button');
+        updateBtn.innerHTML = 'Cập nhật';
+        updateBtn.className = 'btn btn-primary';
+        updateBtn.addEventListener('click', () => {
+            console.log(id);
+            var bodyFormData = new FormData();
+            var name = document.getElementById('input-name-show');
+            var descr = document.getElementById('input-info-show');
+            var file = document.getElementById('input-file-show');
+            bodyFormData.set('name', name.value);
+            bodyFormData.set('info', descr.value);
+            bodyFormData.set('id', id);
+            for (let i = 0; i < file.files.length; i++) {
+                bodyFormData.append('photos[]', file.files[i]);
+            }
+            axios({
+                    method: 'post',
+                    url: url,
+                    data: bodyFormData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function(response) {
+                    //handle success
+                    alert('Cập nhật dữ liệu thành công');
+                    console.log(response);
+                })
+                .catch(function(response) {
+                    //handle error
+                    alert('Có lỗi xảy ra trong quá trình cập nhật');
+                    console.log(response);
+                });
+        })
+        updateBtnContainer.innerHTML = '';
+        updateBtnContainer.appendChild(updateBtn);
+
+
+        // let photomc = JSON.parse(feature.properties.Photos).imgmc;
+        for (let i = 0; i < photo.length; i++) {
+            if (i == 0) {
+                createImgDiv(id, true, 'img', photo[i], 'diemanhks')
+            }
+            createImgDiv(id, false, 'img', photo[i], 'diemanhks')
+        }
+    })
+}
+
+function clickLineSL(feature, layer) {
+    layer.on('click', function(e) {
+        showPanel();
+        let url = api + 'api/update-data-doansl';
+        console.log(feature.properties);
+        let id = feature.properties.Id;
+        titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        layerContent.classList.add("hidden");
+        infoContent.classList.remove("hidden");
+        imgSlider.innerHTML = '';
+        inputNameShow.value = feature.properties.Name;
+        inputInfoShow.value = feature.properties.Info;
+        titleUpdate.innerHTML = 'Chọn ảnh';
+        let photo;
+        if (feature.properties.Photos != null) {
+            photo = JSON.parse(feature.properties.Photos).img;
+        }
+
+        let updateBtn = document.createElement('button');
+        updateBtn.innerHTML = 'Cập nhật';
+        updateBtn.className = 'btn btn-primary';
+        updateBtn.addEventListener('click', () => {
+            console.log(id);
+            var bodyFormData = new FormData();
+            var name = document.getElementById('input-name-show');
+            var descr = document.getElementById('input-info-show');
+            var file = document.getElementById('input-file-show');
+            bodyFormData.set('name', name.value);
+            bodyFormData.set('info', descr.value);
+            bodyFormData.set('id', id);
+            if (file.files.length != 0) {
+                for (let i = 0; i < file.files.length; i++) {
+                    bodyFormData.append('photos[]', file.files[i]);
+                }
+            }
+
+            axios({
+                    method: 'post',
+                    url: url,
+                    data: bodyFormData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function(response) {
+                    //handle success
+                    alert('Cập nhật dữ liệu thành công');
+                    console.log(response);
+                })
+                .catch(function(response) {
+                    //handle error
+                    alert('Có lỗi xảy ra trong quá trình cập nhật');
+                    console.log(response);
+                });
+        })
+        updateBtnContainer.innerHTML = '';
+        updateBtnContainer.appendChild(updateBtn);
+
+
+        // let photomc = JSON.parse(feature.properties.Photos).imgmc;
+        for (let i = 0; i < photo.length; i++) {
+            if (i == 0) {
+                createImgDiv(id, true, 'img', photo[i], 'doansl')
+            }
+            createImgDiv(id, false, 'img', photo[i], 'doansl')
+        }
+    })
+}
+
+
+
+function clickMarker(feature, layer) {
+    layer.on('click', function(e) {
+        showPanel();
+        let url = api + 'api/get-matcat-by-pointid/' + feature.properties.Id;
+        console.log(feature.properties);
+        let id = feature.properties.Id;
+        titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        layerContent.classList.add("hidden");
+        infoContent.classList.remove("hidden");
+        imgSlider.innerHTML = '';
+        inputNameShow.value = feature.properties.Name;
+        inputInfoShow.value = feature.properties.Info;
+
+        let photo = JSON.parse(feature.properties.Photos).img;
+
 
         // let photomc = JSON.parse(feature.properties.Photos).imgmc;
         for (let i = 0; i < photo.length; i++) {
@@ -312,7 +535,7 @@ function clickMarker(feature, layer) {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then(function (response) {
+            .then(function(response) {
                 //handle success
                 console.log(response.data);
 
@@ -450,13 +673,13 @@ function clickMarker(feature, layer) {
                     }
                 ];
                 console.log(data)
-                // let data = [];
-                // data.push(response.data);
+                    // let data = [];
+                    // data.push(response.data);
                 createChart(response.data);
 
                 // console.log(data);
             })
-            .catch(function (response) {
+            .catch(function(response) {
                 //handle error
                 console.log(response);
             });
@@ -626,7 +849,7 @@ function clickMarker(feature, layer) {
 //         .text("Total values");
 // }
 
-function createImgDiv(id, isFirst, ismc, name) {
+function createImgDiv(id, isFirst, ismc, name, kind) {
     let div = document.createElement('div');
     if (isFirst == true) {
         div.className = 'carousel-item active';
@@ -635,7 +858,7 @@ function createImgDiv(id, isFirst, ismc, name) {
     }
     let img = document.createElement('img');
     img.className = 'd-block w-100';
-    img.src = urlImg + id + '/' + ismc + '/' + name;
+    img.src = urlImg + kind + '/' + id + '/' + ismc + '/' + name;
     div.appendChild(img);
     imgSlider.appendChild(div);
 }
@@ -817,67 +1040,67 @@ let bandobosung = L.tileLayer('/storage/bandobosungvadieuchinh/{z}/{x}/{y}.png',
 let bandophantich = L.tileLayer('/storage/bandophantich/{z}/{x}/{y}.png', options);
 let bandotheoketqua = L.tileLayer('/storage/bandotheoketqua/{z}/{x}/{y}.png', options);
 
-$("#rungngapman").on('change', function () {
+$("#rungngapman").on('change', function() {
     toggleLayer(arrMarkers, map, this.checked);
 });
-$("#bandobosung").on('change', function () {
+$("#bandobosung").on('change', function() {
     toggleLayer(bandobosung, map, this.checked);
 });
-$("#bandoketqua").on('change', function () {
+$("#bandoketqua").on('change', function() {
     toggleLayer(bandotheoketqua, map, this.checked);
 });
-$("#bandophantich").on('change', function () {
+$("#bandophantich").on('change', function() {
     toggleLayer(bandophantich, map, this.checked);
 });
-$("#2009line").on('change', function () {
+$("#2009line").on('change', function() {
     toggleLayer(dangsau_2009_line, map, this.checked);
 });
-$("#diemdosau2019").on('change', function () {
+$("#diemdosau2019").on('change', function() {
     toggleLayer(diemdosau_2019_point, map, this.checked);
 });
-$("#satlomohinhthuyluch").on('change', function () {
+$("#satlomohinhthuyluch").on('change', function() {
     toggleLayer(satlo_mohinhthuyluc_line, map, this.checked);
 });
-$("#diemdosau").on('change', function () {
+$("#diemdosau").on('change', function() {
     toggleLayer(diemdosau_2009_point, map, this.checked);
 });
-$("#satlotruottongthe").on('change', function () {
+$("#satlotruottongthe").on('change', function() {
     toggleLayer(satlo_truottongthe_line, map, this.checked);
 });
-$("#satloduongbo").on('change', function () {
+$("#satloduongbo").on('change', function() {
     toggleLayer(satloduongbo_gis_line, map, this.checked);
 });
-$("#diemanh").on('change', function () {
+$("#diemanh").on('change', function() {
     toggleLayer(u_anh, map, this.checked);
 });
-$("#diemmatcatmoi").on('change', function () {
+$("#diemmatcatmoi").on('change', function() {
     toggleLayer(u_diem_mc_moi, map, this.checked);
 });
-$("#diemsatlo").on('change', function () {
+$("#diemsatlo").on('change', function() {
     toggleLayer(u_diem_sat_lo, map, this.checked);
 });
-$("#doansatlo").on('change', function () {
+$("#doansatlo").on('change', function() {
     toggleLayer(u_doan_sat_lo, map, this.checked);
 });
-$("#tramdothuyvan").on('change', function () {
+$("#tramdothuyvan").on('change', function() {
     toggleLayer(u_tram_do_thuy_van, map, this.checked);
 });
-$("#dem_2009").on('change', function () {
+$("#dem_2009").on('change', function() {
     toggleLayer(dem_2009, map, this.checked);
 });
-$("#dem_2019").on('change', function () {
+$("#dem_2019").on('change', function() {
     toggleLayer(dem_2019, map, this.checked);
 });
-$("#quy_hoach_khai_thac_cat_th").on('change', function () {
+$("#quy_hoach_khai_thac_cat_th").on('change', function() {
     toggleLayer(quy_hoach_khai_thac_cat_th, map, this.checked);
 });
-$("#dieu_chinh_quy_hoach_th").on('change', function () {
+$("#dieu_chinh_quy_hoach_th").on('change', function() {
     toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
 });
-$("#du_bao_long_dan_2030").on('change', function () {
+$("#du_bao_long_dan_2030").on('change', function() {
     toggleLayer(du_bao_long_dan_2030, map, this.checked);
 });
-$("#du_bao_long_dan_2025").on('change', function () {
+$("#du_bao_long_dan_2025").on('change', function() {
     toggleLayer(du_bao_long_dan_2050, map, this.checked);
 });
 
@@ -916,14 +1139,14 @@ var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 var results = L.layerGroup().addTo(map);
 
 // listen for the results event and add every result to the map
-searchControl.on("results", function (data) {
+searchControl.on("results", function(data) {
     results.clearLayers();
     for (var i = data.results.length - 1; i >= 0; i--) {
         results.addLayer(L.marker(data.results[i].latlng));
     }
 });
 let self = this;
-map.on('pm:create', function (e) {
+map.on('pm:create', function(e) {
     console.log(e.layer.getLatLngs());
     let latlng = '';
     let url = api + 'api/get-matcat'
@@ -947,12 +1170,12 @@ map.on('pm:create', function (e) {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        .then(function (response) {
+        .then(function(response) {
             //handle success
             alert('Cập nhật điểm thành công');
             console.log(response);
         })
-        .catch(function (response) {
+        .catch(function(response) {
             //handle error
             console.log(response);
         });
