@@ -89,7 +89,7 @@ class PostgresController extends Controller
 
 
 
-        $data = PointData::where('id',"$id")->update([
+        $data = PointData::where('gid',"$id")->update([
             // 'photos' => json_encode(array(
             //     'img' => []
             //     // 'imgmc' => []
@@ -124,7 +124,7 @@ class PostgresController extends Controller
         //         array_push($photomcFiles, $fileName);
         //     }
         // }
-        $data = PointData::where('id',"$id")->update([
+        $data = PointData::where('gid',"$id")->update([
             'photos' => json_encode(array(
                 'img' => $photoFiles
             ))]);
@@ -187,7 +187,7 @@ class PostgresController extends Controller
 
 
 
-        $data = DiemKhaoSatMatCatNgang::where('id',"$id")->update([
+        $data = DiemKhaoSatMatCatNgang::where('gid',"$id")->update([
             // 'photos' => json_encode(array(
             //     'img' => [],
             //     'imgmc' => []
@@ -283,7 +283,7 @@ class PostgresController extends Controller
 
 
 
-        $data = DoanSatLo::where('id',"$id")->update([
+        $data = DoanSatLo::where('gid',"$id")->update([
             // 'photos' => json_encode(array(
             //     'img' => []
             //     // 'imgmc' => []
@@ -318,7 +318,7 @@ class PostgresController extends Controller
         //         array_push($photomcFiles, $fileName);
         //     }
         // }
-        $data = DoanSatLo::where('id',"$id")->update([
+        $data = DoanSatLo::where('gid',"$id")->update([
             'photos' => json_encode(array(
                 'img' => $photoFiles
             ))]);
