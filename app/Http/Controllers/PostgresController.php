@@ -94,8 +94,8 @@ class PostgresController extends Controller
             //     'img' => []
             //     // 'imgmc' => []
             // )),
-            'name' => "'$name'",
-            'info' => "'$info'",
+            'name' => $name,
+            'info' => $info,
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
         
@@ -196,8 +196,8 @@ class PostgresController extends Controller
             //     'img' => [],
             //     'imgmc' => []
             // )),
-            'name' => "'$name'",
-            'info' => "'$info'",
+            'name' => $name,
+            'info' => $info,
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
 
@@ -292,8 +292,8 @@ class PostgresController extends Controller
             //     'img' => []
             //     // 'imgmc' => []
             // )),
-            'name' => "'$name'",
-            'info' => "'$info'",
+            'name' => $name,
+            'info' => $info,
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
         $select = DoanSatLo::find($id);
