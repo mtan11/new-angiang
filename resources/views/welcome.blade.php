@@ -184,6 +184,29 @@
 
                         <div class="row">
                             <div class="col-8">
+                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="du_bao_long_dan_2030" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2025</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="du_bao_long_dan_2025" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
                                 <h6>QUY HOẠCH KHAI THÁC CÁT</h6>
                             </div>
                             <div class="col-4">

@@ -21,6 +21,9 @@ let coormc;
 
 let markerGot = [];
 let arrMarkers = [];
+let markerKhaoSat = L.layerGroup();
+let markerKS = L.geoJSON();
+// let arrMarkersKhaoSat = [];
 arrMarkers = L.layerGroup();
 let geoserver = 'http://35.198.222.40:8080/geoserver/angiang/wms';
 let urlImg = 'http://35.198.222.40/storage/uploadedimages/';
@@ -82,11 +85,11 @@ function getMarker() {
             url: url,
         })
         .then(function(response) {
+            // console.log(response.data, "1");
             let markers = response.data;
             markerGot = [];
             for (var i = 0; i < markers.length; i++) {
-
-                console.log(markers[i]);
+                // console.log(markers[i]);
                 markerGot.push({
                     type: 'Feature',
                     geometry: {
@@ -110,10 +113,60 @@ function getMarker() {
             arrMarkers.addTo(map);
         });
 };
+function getMarkerKhaoSat() {
+    let url = 'http://35.198.222.40:8080/geoserver/angiang/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=angiang%3Adiem_khao_sat_mat_cat_ngang&maxFeatures=50&outputFormat=application%2Fjson'
+    axios({
+            method: 'get',
+            url: url,
+        })
+        .then(function(response) {
+            console.log(response.data);
+            let markers = response.data.features;
+            let markerks = L.geoJson(response.data, {
+                style: function (feature) {
+                    return {
+                        stroke: false,
+                        fillColor: 'FFFFFF',
+                        fillOpacity: 0
+                    };
+                },
+                onEachFeature: clickMarkerKhaoSat.bind(this)
+            }).addTo(map);
+            // markerKhaoSat = L.layerGroup();
+            // for (var i = 0; i < markers.length; i++) {
+            //     console.log(markers[i]);
+            //     // markers[i].addTo(map);
+            //     markerKhaoSat.addLayer(markers[i]);
+                
+                // markerKhaoSat.push({
+                //     type: 'Feature',
+                //     geometry: {
+                //         type: JSON.parse(markers[i].st_asgeojson).type,
+                //         coordinates: JSON.parse(markers[i].st_asgeojson).coordinates
+                //     },
+                //     properties: {
+                //         Name: markers[i].name,
+                //         Info: markers[i].info,
+                //         Id: markers[i].gid,
+                //         Photos: markers[i].photos
+                //     }
+                // });
+            // };
+            // for (var i = 0; i < markerKhaoSat.length; i++) {
+            //     let mar = L.geoJson(markerKhaoSat[i], {
+            //         onEachFeature: clickMarker.bind(this),
+            //     });
+            //     arrMarkersKhaoSat.addLayer(mar);
+            //     console.log(markerKhaoSat);
+            // }
+            // console.log(markerKhaoSat);
+            // markerKhaoSat.addTo(map);
+        });
+};
 
 
 getMarker();
-
+getMarkerKhaoSat();
 
 function clickMarker(feature, layer) {
     layer.on('click', function(e) {
@@ -138,6 +191,32 @@ function clickMarker(feature, layer) {
 
             createImgDiv(id, false, 'imgmc', photomc[i])
         }
+    })
+}
+
+function clickMarkerKhaoSat(feature, layer) {
+    layer.on('click', function(e) {
+        console.log(feature.properties);
+        let id = feature.properties.Id;
+        titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        layerContent.classList.add("hidden");
+        infoContent.classList.remove("hidden");
+        imgSlider.innerHTML = '';
+        inputName.value = feature.properties.name;
+        inputInfo.value = feature.properties.info;
+        // let photo = JSON.parse(feature.properties.Photos).img;
+        // let photomc = JSON.parse(feature.properties.Photos).imgmc;
+        // for (let i = 0; i < photo.length; i++) {
+        //     if (i == 0) {
+        //         createImgDiv(id, true, 'img', photo[i])
+        //     }
+        //     createImgDiv(id, false, 'img', photo[i])
+        // }
+        // for (let i = 0; i < photomc.length; i++) {
+        //     console.log(photomc);
+
+        //     createImgDiv(id, false, 'imgmc', photomc[i])
+        // }
     })
 }
 
@@ -242,9 +321,9 @@ let u_diem_sat_lo = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
-let u_doan_sat_lo = L.tileLayer.wms(geoserver, {
+let doan_sat_lo = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
-    Layers: 'angiang:u_doan_sat_lo',
+    Layers: 'angiang:doan_sat_lo',
     Version: '1.1.1',
     Transparent: true,
     SRS: 'EPSG:900913',
@@ -288,6 +367,22 @@ let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
 let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:dieu_chinh_quy_hoach_th',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:du_bao_long_dan_2030',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let du_bao_long_dan_2050 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:du_bao_long_dan_2025',
     Version: '1.1.1',
     Transparent: true,
     SRS: 'EPSG:900913',
@@ -355,7 +450,7 @@ $("#diemsatlo").on('change', function() {
     toggleLayer(u_diem_sat_lo, map, this.checked);
 });
 $("#doansatlo").on('change', function() {
-    toggleLayer(u_doan_sat_lo, map, this.checked);
+    toggleLayer(doan_sat_lo, map, this.checked);
 });
 $("#tramdothuyvan").on('change', function() {
     toggleLayer(u_tram_do_thuy_van, map, this.checked);
@@ -371,6 +466,12 @@ $("#quy_hoach_khai_thac_cat_th").on('change', function() {
 });
 $("#dieu_chinh_quy_hoach_th").on('change', function() {
     toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
+});
+$("#du_bao_long_dan_2030").on('change', function() {
+    toggleLayer(du_bao_long_dan_2030, map, this.checked);
+});
+$("#du_bao_long_dan_2025").on('change', function() {
+    toggleLayer(du_bao_long_dan_2050, map, this.checked);
 });
 
 
@@ -439,6 +540,7 @@ map.on('pm:create', function(e) {
         })
         .then(function(response) {
             //handle success
+            console.log(response.data);
             alert('Biểu đồ mặt cắt được cập nhật');
             coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
             el.clear();

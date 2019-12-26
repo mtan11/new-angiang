@@ -90,29 +90,41 @@
                 </button>
             </div>
             <div id="" style="overflow-y:scroll; overflow-x:scroll; height:580px;">
-
                 <div class="container-form" style="padding: 10px;">
-                    <div class="form-group">
-                        <label for="input-name">Tên</label>
-                        <input class="form-control" id="input-name">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="selectKindMarker">Loại</label>
+                        </div>
+                        <select class="custom-select" id="selectKindMarker">
+                            <option selected>Vui lòng chọn</option>
+                            <option value="diemks">Điểm khảo sát</option>
+                            <option value="diemsl">Điểm sạt lỡ</option>
+                            <!-- <option value="3">Three</option> -->
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="input-info">Thông tin</label>
-                        <input class="form-control" id="input-info">
+                    <div id="container-info-insert" class="hidden">
+                        <div class="form-group">
+                            <label for="input-name">Tên</label>
+                            <input class="form-control" id="input-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Thông tin</label>
+                            <input class="form-control" id="input-info">
+                        </div>
+                        <div class="form-group" id="container-img">
+                            <label for="input-images">Chọn hình ảnh</label>
+                            <input type="file" class="form-control-file" multiple name="img" id="input-images">
+                        </div>
+                        <div class="form-group" id="container-imgmc">
+                            <label for="input-images">Chọn dữ liệu mặt cắt</label>
+                            <input type="file" class="form-control-file" name="img" id="input-images-mc">
+                        </div>
+                        <div class="d-flex" style="justify-content: center"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
                     </div>
-                    <div class="form-group">
-                        <label for="input-images">Chọn hình ảnh</label>
-                        <input type="file" class="form-control-file" multiple name="img" id="input-images">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-images">Chọn dữ liệu mặt cắt</label>
-                        <input type="file" class="form-control-file" name="img" id="input-images-mc">
-                    </div>
-                    <div class="d-flex"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
+
                 </div>
             </div>
         </div>
-
     </div>
     <div id="panel" class="panel-container">
         <div>
@@ -124,7 +136,7 @@
             </div>
             <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
                 <div class="container-content">
-                <div id="layer-content">
+                    <div id="layer-content">
                         <div class="row">
                             <div class="col-8">
                                 <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6>
@@ -237,7 +249,28 @@
                                 </label>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="du_bao_long_dan_2030" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2025</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="du_bao_long_dan_2025" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-8">
                                 <h6>QUY HOẠCH KHAI THÁC CÁT</h6>
@@ -347,11 +380,11 @@
                     <div class="container-form" style="padding: 10px;">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
-                            <input class="form-control" id="input-name-show" disabled>
+                            <input class="form-control" id="input-name-show">
                         </div>
                         <div class="form-group">
                             <label for="input-info">Thông tin</label>
-                            <input class="form-control" id="input-info-show" disabled>
+                            <input class="form-control" id="input-info-show">
                         </div>
                     </div>
                     <div class="img-slider">
@@ -370,6 +403,7 @@
                         </div>
                     </div>
                     <div id="chart"></div>
+                    <div class="d-flex" style="justify-content: center"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
                 </div>
             </div>
         </div>
