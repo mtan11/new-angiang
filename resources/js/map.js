@@ -32,7 +32,7 @@ let arrDoanSL = L.layerGroup();
 // let arrMarkersKhaoSat = [];
 arrMarkers = L.layerGroup();
 var ksIcon = new L.icon({
-    iconUrl: '/img/icon-red.png',
+    iconUrl: '/images/icon-red.png',
     iconSize: [30, 35],
     iconAnchor: [15, 40],
     popupAnchor: [0, -40],
