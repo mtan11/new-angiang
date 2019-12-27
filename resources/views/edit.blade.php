@@ -157,7 +157,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="doansatlo" type="checkbox">
+                                    <input id="doansatlo" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemanh" type="checkbox">
+                                    <input id="diemanh" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
