@@ -387,10 +387,10 @@
                         </div>
                         <div class="form-group">
                             <label for="input-info">Thông tin</label>
-                            <input class="form-control" id="input-info-show">
+                            <textarea class="form-control" id="input-info-show" rows="5"></textarea>
                         </div>
                         <div class="form-group">
-                            <label id="title-update">Thông tin</label>
+                            <label id="title-update"></label>
                             <input type="file" class="form-control-file" id="input-file-show" required>
                         </div>
                     </div>
@@ -409,10 +409,10 @@
                             </a>
                         </div>
                     </div> -->
-                    <div id="chart"></div>
+
                     <div class="d-flex" style="justify-content: center" id="container-update-btn">
                         <button class="btn btn-primary">Cập nhật</button>
-                        <button>acb</button>
+
                     </div>
                 </div>
             </div>
@@ -465,8 +465,11 @@
             </div>
         </div>
     </div>
-
-    <div class="swiper-container" id="swiper-container">
+    <div class="container-chart hidden" id="container-chart">
+        <h3 style="text-align: center;">Biểu đồ mặt cắt</h3>
+        <div id="chart"></div>
+    </div>
+    <div class="swiper-container hidden" id="swiper-container">
         <div class="img-slider">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" id="img-slider">

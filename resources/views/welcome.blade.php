@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="doansatlo" type="checkbox">
+                                    <input id="doansatlo" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemanh" type="checkbox">
+                                    <input id="diemanh" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -319,14 +319,14 @@
                     <div class="container-form" style="padding: 10px;">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
-                            <input class="form-control" id="input-name" disabled>
+                            <input class="form-control" id="input-name-show" disabled>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Thông tin</label>
-                            <input class="form-control" id="input-info" disabled>
+                            <input class="form-control" id="input-info-show" disabled>
                         </div>
                     </div>
-                    <div class="img-slider">
+                    <!-- <div class="img-slider">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="img-slider">
 
@@ -340,8 +340,29 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-chart hidden" id="container-chart">
+        <h3 style="text-align: center;">Biểu đồ mặt cắt</h3>
+        <div id="chart"></div>
+    </div>
+    <div class="swiper-container hidden" id="swiper-container">
+        <div class="img-slider">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="img-slider">
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </div>
