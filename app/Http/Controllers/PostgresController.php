@@ -101,12 +101,16 @@ class PostgresController extends Controller
         
         $select = PointData::find($id);
 
-
-
-        $curphotos = json_decode($select->photos);
-        $photoFiles = $curphotos->img;
-
         $photos = $request->file('photos');
+
+
+        if (strpos($select->photos, '"img"') == true) {
+            $curphotos = json_decode($select->photos);  
+            $photoFiles = $curphotos->img;
+        } else {
+            $photoFiles = [];
+        }
+
         // $photomc = $request->file('photomc');
         
 
@@ -298,17 +302,21 @@ class PostgresController extends Controller
         ]);
         $select = DoanSatLo::find($id);
 
-
-
-        $curphotos = json_decode($select->photos);
-        
-        $photoFiles = $curphotos->img;
-
         $photos = $request->file('photos');
+
+        if (strpos($select->photos, '"img"') == true) {
+            $curphotos = json_decode($select->photos);  
+            $photoFiles = $curphotos->img;
+        } else {
+            $photoFiles = [];
+        }
+
+        
+
         // $photomc = $request->file('photomc');
         
 
-        // $photoFiles = [];
+        // 
         if ($photos) {
             foreach ($photos as $photo) {
                 $extension = $photo->getClientOriginalExtension();
