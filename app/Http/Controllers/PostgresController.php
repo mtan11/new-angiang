@@ -493,7 +493,14 @@ class PostgresController extends Controller
         return json_encode($resulttt);
     }
     
-
+    public function downloadData()
+    {
+        $process = shell_exec("python3 /var/www/new-angiang/pyservices/downloadData.py");
+        // $output = shell_exec("source /root/.bashrc && python3 /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/pyservices/downloadSHP_new.py {$stt} {$maqh}");
+        // dd($output);
+        // Ghi log
+        return response()->download(storage_path("app/public/shp.zip"));
+    }
 
 
       
