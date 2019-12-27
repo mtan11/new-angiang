@@ -38,6 +38,9 @@
     <!-- Esri Leaflet Geocoder -->
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css">
     <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <link rel="stylesheet" href="https://swiperjs.com/package/css/swiper.min.css">
+
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
     <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
@@ -386,8 +389,12 @@
                             <label for="input-info">Thông tin</label>
                             <input class="form-control" id="input-info-show">
                         </div>
+                        <div class="form-group">
+                            <label id="title-update">Thông tin</label>
+                            <input type="file" class="form-control-file" id="input-file-show" required>
+                        </div>
                     </div>
-                    <div class="img-slider">
+                    <!-- <div class="img-slider">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="img-slider">
 
@@ -401,9 +408,12 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                     <div id="chart"></div>
-                    <div class="d-flex" style="justify-content: center"><button id="accept-new-info" class="btn btn-primary">Cập nhật</button></div>
+                    <div class="d-flex" style="justify-content: center" id="container-update-btn">
+                        <button class="btn btn-primary">Cập nhật</button>
+                        <button>acb</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -455,7 +465,27 @@
             </div>
         </div>
     </div>
+
+    <div class="swiper-container" id="swiper-container">
+        <div class="img-slider">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="img-slider">
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
+
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 <script src="{{ mix('js/map-edit.js') }}"></script>
 
 </html>
