@@ -21,10 +21,11 @@ doansl = "SELECT * FROM public.doan_sat_lo"
 
 
 
-os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiangstorage/app/public/temp/diemsl.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+diemsl+'''" -lco ENCODING=UTF-8''')
-os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiangstorage/app/public/temp/diemks.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+diemks+'''" -lco ENCODING=UTF-8''')
-os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiangstorage/app/public/temp/doansl.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+doansl+'''" -lco ENCODING=UTF-8''')
+os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiang/storage/app/public/temp/diemsl.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+diemsl+'''" -lco ENCODING=UTF-8''')
+os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiang/storage/app/public/temp/diemks.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+diemks+'''" -lco ENCODING=UTF-8''')
+os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiang/storage/app/public/temp/doansl.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+doansl+'''" -lco ENCODING=UTF-8''')
 # os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiangstorage/app/public/temp/qhpktimduong.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+sqltimduong+'''" -lco ENCODING=UTF-8''')
 # os.system('''ogr2ogr -f "ESRI Shapefile" /var/www/new-angiangstorage/app/public/temp/qhpkgiaothong.shp PG:"host=127.0.0.1 port=5432 user=postgres dbname=postgres password=nguyenq12345678" -sql "'''+sqlgiaothong+'''" -lco ENCODING=UTF-8''')
-os.system('''rm /var/www/new-angiangstorage/app/public/shp.zip''')
-os.system('''cd /var/www/new-angiangstorage/app/public/temp/ && /usr/bin/zip -rm /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/storage/app/public/shp.zip ./*''')
+os.system('''rm /var/www/new-angiang/storage/app/public/shp.zip''')
+os.system('''cd /var/www/new-angiang/storage/app/public/temp/ && /usr/bin/zip -rm /var/www/ttqh-hcm-dev.thongtinquyhoach.vn/storage/app/public/shp.zip ./*''')
+
