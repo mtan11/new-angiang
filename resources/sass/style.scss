@@ -60,6 +60,18 @@ body {
     padding-top: 10px;
 }
 
+.container-chart {
+    width: 500px;
+    padding: 10px;
+    background-color: #fff;
+    height: 300px;
+    border-radius: 10px;
+    z-index: 9999;
+    position: absolute;
+    bottom: 10px;
+    left: 30%;
+}
+
 .swiper-container {
     width: 600px;
     height: 300px;
