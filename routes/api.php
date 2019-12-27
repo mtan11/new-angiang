@@ -30,3 +30,4 @@ Route::get('/get-all-data','PostgresController@getAllData');
 Route::get('/get-matcat-by-pointid/{pointid}','PostgresController@getMatCatByPointID');
 Route::post('/get-matcat','PostgresController@getMatCat');
 
+Route::get('/download-data','PostgresController@downloadData');
