@@ -7,7 +7,7 @@ import json
 import datetime
 pointid = sys.argv[1]
 
-conn = psycopg2.connect(host='localhost',
+conn = psycopg2.connect(host='35.198.222.40',
                         port='5432',
                         user='postgres',
                         password='nguyenq12345678',
@@ -32,7 +32,7 @@ for row in result:
     for i in result0:
         khoangcach = i[0]
         dosau = i[1]
-        temp = {'khoangcach':str(khoangcach),'dosau':str(dosau)}
+        temp = {'khoangcach':khoangcach,'dosau':dosau}
         value.append(temp)
     qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
     done = {'thoigian':qparse,'values':value}

@@ -187,7 +187,7 @@ class PostgresController extends Controller
         $id = $request->id;
         $name = $request->name;
         $info = $request->info;
-        $xy = $request->xy;
+        // $xy = $request->xy;
         // $photos = $request->file('photos');
         // $photomc = $request->file('photomc');
         $excelmc = $request->file('excelmc');
