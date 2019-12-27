@@ -81,6 +81,28 @@ checkmap.onAdd = function(e) {
     return div;
 };
 checkmap.addTo(map);
+document.getElementById('googlepic').addEventListener('click', function (e) {
+    map.removeLayer(basemap);
+    map.addLayer(googleSat);
+    document.getElementById("switchwrapper").setAttribute("value", "googlemap");
+    document.getElementById('googlepic').style.display = "none";
+    document.getElementById('basepic').style.display = "block";
+    var buttonText = document.getElementsByClassName("buttonText");
+    for (var i = 0; i < buttonText.length; i++) {
+        buttonText[i].style.color = "#ffff";
+    }
+});
+document.getElementById('basepic').addEventListener('click', function (e) {
+    map.removeLayer(googleSat);
+    map.addLayer(basemap);
+    document.getElementById("switchwrapper").setAttribute("value", "basemap");
+    document.getElementById('googlepic').style.display = "block";
+    document.getElementById('basepic').style.display = "none";
+    var buttonText = document.getElementsByClassName("buttonText");
+    for (var i = 0; i < buttonText.length; i++) {
+        buttonText[i].style.color = "#000000";
+    }
+});
 
 let markerGot = [];
 let markerGotSL = [];
