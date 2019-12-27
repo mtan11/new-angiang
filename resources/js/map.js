@@ -328,8 +328,8 @@ function clickMarkerSL(feature, layer) {
                 }
                 document.getElementById('chart').innerHTML = '';
                 var data = response.data;
-                var width = 400;
-                var height = 200;
+                var width = 800;
+                var height = 300;
                 var margin = 50;
                 var duration = 250;
 
@@ -362,7 +362,7 @@ function clickMarkerSL(feature, layer) {
                     .range([0, width - margin]);
 
                 var yScale = d3.scaleLinear()
-                    .domain([0, maxY])
+                    .domain([maxY, 0])
                     .range([height - margin, 0]);
 
                 var color = d3.scaleOrdinal(d3.schemeCategory10);

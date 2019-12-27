@@ -391,7 +391,7 @@
                         </div>
                         <div class="form-group">
                             <label id="title-update"></label>
-                            <input type="file" class="form-control-file" id="input-file-show" required>
+                            <input type="file" multiple class="form-control-file" id="input-file-show" required>
                         </div>
                     </div>
                     <!-- <div class="img-slider">
