@@ -35,6 +35,75 @@ let coormc;
 let geoserver = 'http://35.198.222.40:8080/geoserver/angiang/wms';
 let urlImg = 'http://35.198.222.40/storage/uploadedimages/';
 
+let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+});
+let basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox.streets'
+});
+
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox.streets'
+}).addTo(map);
+
+var base = {
+    "Satellite": googleSat,
+    "Basemap": basemap
+};
+
+//Switch base map
+var checkmap = L.control({ position: 'bottomleft' });
+checkmap.onAdd = function(e) {
+    var div = L.DomUtil.create('div');
+    div.innerHTML = `
+  <div value="basemap" id="switchwrapper" class="switchwrapper">
+  <figure id="googlepic" class="item-wrapper">
+  <figcaption class="item-title">
+  <span class="item-text">Satellite</span></figcaption>
+  <img class="item-img" src="/images/earth-layer.png" alt="Google map" title="Satellite">
+  </figure>
+  <figure id="basepic" class="item-wrapper" style="display: none;">
+  <figcaption class="item-title">
+  <span class="item-text">Base map</span></figcaption>
+  <img class="item-img" src="/images/base-layer.png" alt="Mapbox" title="Base map">
+  </figure>
+  </div>`;
+    return div;
+};
+checkmap.addTo(map);
+document.getElementById('googlepic').addEventListener('click', function (e) {
+    map.removeLayer(basemap);
+    map.addLayer(googleSat);
+    document.getElementById("switchwrapper").setAttribute("value", "googlemap");
+    document.getElementById('googlepic').style.display = "none";
+    document.getElementById('basepic').style.display = "block";
+    var buttonText = document.getElementsByClassName("buttonText");
+    for (var i = 0; i < buttonText.length; i++) {
+        buttonText[i].style.color = "#ffff";
+    }
+});
+document.getElementById('basepic').addEventListener('click', function (e) {
+    map.removeLayer(googleSat);
+    map.addLayer(basemap);
+    document.getElementById("switchwrapper").setAttribute("value", "basemap");
+    document.getElementById('googlepic').style.display = "block";
+    document.getElementById('basepic').style.display = "none";
+    var buttonText = document.getElementsByClassName("buttonText");
+    for (var i = 0; i < buttonText.length; i++) {
+        buttonText[i].style.color = "#000000";
+    }
+});
+
 let markerGot = [];
 let markerGotSL = [];
 let arrMarkers = [];
@@ -418,8 +487,8 @@ function clickMarkerSL(feature, layer) {
                 }
                 document.getElementById('chart').innerHTML = '';
                 var data = response.data;
-                var width = 400;
-                var height = 200;
+                var width = 800;
+                var height = 300;
                 var margin = 50;
                 var duration = 250;
 
@@ -452,7 +521,7 @@ function clickMarkerSL(feature, layer) {
                     .range([0, width - margin]);
 
                 var yScale = d3.scaleLinear()
-                    .domain([0, maxY])
+                    .domain([maxY, 0 ])
                     .range([height - margin, 0]);
 
                 var color = d3.scaleOrdinal(d3.schemeCategory10);
