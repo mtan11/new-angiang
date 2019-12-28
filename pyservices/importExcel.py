@@ -21,7 +21,7 @@ for i in df.index:
     khoangcach = df['KhoangCach'][i]
     dosau = df['DoSau'][i]
     thoigian = df['ThoiGian'][i]
-    sql_delete_query = """set DateStyle='ISO, DMY';INSERT INTO excel_matcat (pointid,khoangcach,dosau,thoigian) VALUES ('"""+str(pointid)+"""','"""+str(khoangcach)+"""','"""+str(dosau)+"""','"""+str(thoigian)+"""')"""
+    sql_delete_query = """INSERT INTO excel_matcat (pointid,khoangcach,dosau,thoigian) VALUES ('"""+str(pointid)+"""','"""+str(khoangcach)+"""','"""+str(dosau)+"""','"""+str(thoigian)+"""')"""
     cursor.execute(sql_delete_query)
     conn.commit()
 

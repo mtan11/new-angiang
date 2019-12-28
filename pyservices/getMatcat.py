@@ -34,8 +34,8 @@ for row in result:
         dosau = i[1]
         temp = {'khoangcach':khoangcach,'dosau':dosau}
         value.append(temp)
-    qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
-    done = {'thoigian':qparse,'values':value}
+    # qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
+    done = {'thoigian':str(q),'values':value}
     final.append(done)
 print(final)
 # print(json.dumps(final))
