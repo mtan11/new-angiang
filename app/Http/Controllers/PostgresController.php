@@ -500,16 +500,19 @@ class PostgresController extends Controller
         // $resulttt = '{"name": "NewFeatureType","type": "FeatureCollection","features": [{"type": "Feature","geometry": '.$dem2009[0]->st_asgeojson.',"properties": "dem2009"},{"type": "Feature","geometry": '.$dem2019[0]->st_asgeojson.',"properties": "dem2019"}]}';
         // dd($dem2009[0]->st_asgeojson);
 
-        $res09 = '{"dem":"2009","values":'.json_encode($dem2009).'}';
-        $res19 = '{"dem":"2019","values":'.json_encode($dem2019).'}';
+        $res09 = "{'dem':'2009','values':".json_encode($dem2009)."}";
+        $res19 = "{'dem':'2019','values':".json_encode($dem2019)."}";
         $result = '['.$res09.','.$res19.']';
-        $resStr = str_replace('"', '', $result);
+        $resStr1 = str_replace('"', '', $result);
+        $resStr2 = str_replace("'", '"', $resStr1);
+        $resStr3 = str_replace('x', '"x"', $resStr2);
+        $resStr4 = str_replace('y', '"y"', $resStr3);
         // $result = (object) array(
         //     $res09,
         //     $res19
         // );
 
-        return $resStr;
+        return $resStr4;
     }
     
     public function downloadData()
