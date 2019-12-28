@@ -458,39 +458,53 @@ class PostgresController extends Controller
         $dem2009 = DB::connection('pgsql')->select(
             "WITH line AS
             (SELECT st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($linestring)'),32648)::geometry AS geom),
-          cells AS
+            cells AS
             (SELECT ST_Centroid((ST_Intersection(dem2009.rast, line.geom)).geom) AS geom,
             (ST_Intersection(dem2009.rast, line.geom)).val AS val
              FROM dem2009, line
              WHERE ST_Intersects(dem2009.rast, line.geom)),
-          points3d AS
-            (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
-             FROM cells, line
-             ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
-        SELECT ST_Asgeojson(ST_Transform(ST_GeomFromText(st_astext(ST_MakeLine(geom)),32648),4326)) FROM points3d;");
+            points3d AS
+                (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
+                FROM cells, line
+                ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom)),
+            linez AS 
+                (SELECT ST_MakeLine(geom) as geom_3d FROM points3d),
+            points3dd AS
+                (SELECT (ST_DumpPoints(geom_3d)).geom AS geom,
+                        ST_StartPoint(geom_3d) AS origin
+                FROM linez)
+            SELECT ST_distance(origin, geom) AS x, ST_Z(geom) AS y
+            FROM points3dd;");
         
         $dem2019 = DB::connection('pgsql')->select(
             "WITH line AS
             (SELECT st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($linestring)'),32648)::geometry AS geom),
-          cells AS
+            cells AS
             (SELECT ST_Centroid((ST_Intersection(dem2019.rast, line.geom)).geom) AS geom,
             (ST_Intersection(dem2019.rast, line.geom)).val AS val
              FROM dem2019, line
              WHERE ST_Intersects(dem2019.rast, line.geom)),
-          points3d AS
-            (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
-             FROM cells, line
-             ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom))
-        SELECT ST_Asgeojson(ST_Transform(ST_GeomFromText(st_astext(ST_MakeLine(geom)),32648),4326)) FROM points3d;");
+            points3d AS
+                (SELECT ST_SetSRID(ST_MakePoint(ST_X(cells.geom), ST_Y(cells.geom), val), 32632) AS geom
+                FROM cells, line
+                ORDER BY ST_Distance(ST_StartPoint(line.geom), cells.geom)),
+            linez AS 
+                (SELECT ST_MakeLine(geom) as geom_3d FROM points3d),
+            points3dd AS
+                (SELECT (ST_DumpPoints(geom_3d)).geom AS geom,
+                        ST_StartPoint(geom_3d) AS origin
+                FROM linez)
+            SELECT ST_distance(origin, geom) AS x, ST_Z(geom) AS y
+            FROM points3dd;");
         
-        $resulttt = '{"name": "NewFeatureType","type": "FeatureCollection","features": [{"type": "Feature","geometry": '.$dem2009[0]->st_asgeojson.',"properties": "dem2009"},{"type": "Feature","geometry": '.$dem2019[0]->st_asgeojson.',"properties": "dem2019"}]}';
+        // $resulttt = '{"name": "NewFeatureType","type": "FeatureCollection","features": [{"type": "Feature","geometry": '.$dem2009[0]->st_asgeojson.',"properties": "dem2009"},{"type": "Feature","geometry": '.$dem2019[0]->st_asgeojson.',"properties": "dem2019"}]}';
         // dd($dem2009[0]->st_asgeojson);
-        // $result = (object) array(
-        //     'dem2009' => $dem2009,
-        //     'dem2019' => $dem2019
-        // );
+        $result = (object) array(
+            'dem2009' => $dem2009,
+            'dem2019' => $dem2019
+        );
 
-        return json_encode($resulttt);
+        return json_encode($result);
     }
     
     public function downloadData()
