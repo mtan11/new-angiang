@@ -39,5 +39,8 @@ for row in result:
     # qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
     done = {'thoigian':str(q),'values':value}
     final.append(done)
-sys.stdout.write(str(final))
+ENCODING = sys.stdout.encoding if sys.stdout.encoding else 'utf-8'
+# print unicode("<div class='line'>%s</div>" % l, encoding).encode(ENCODING)
+# print(final).encode(ENCODING)
+print(unicode(final % l, encoding).encode(ENCODING))
 # print(json.dumps(final))
