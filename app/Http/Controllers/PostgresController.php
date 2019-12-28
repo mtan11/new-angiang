@@ -443,8 +443,8 @@ class PostgresController extends Controller
         //     'geom' => DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"))]);
         // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
         // return json_encode($all,200);
-        $output = shell_exec("python3 /var/www/new-angiang/pyservices/getMatcat.py {$pointid}");
-        dd($output);
+        $output = shell_exec("source /root/.bashrc && python3 /var/www/new-angiang/pyservices/getMatcat.py {$pointid}");
+        // dd($output);
         $outputsplit = explode("\n", $output);
         $maqhpkranh = $outputsplit[count($outputsplit)-2];
         $resStr = str_replace("'", '"', $maqhpkranh);
