@@ -445,6 +445,7 @@ class PostgresController extends Controller
         // return json_encode($all,200);
         $output = shell_exec("python3 /var/www/new-angiang/pyservices/getMatcat.py {$pointid}");
         $outputsplit = explode("\n", $output);
+        dd($outputsplit);
         $maqhpkranh = $outputsplit[count($outputsplit)-2];
         $resStr = str_replace("'", '"', $maqhpkranh);
         return $resStr;
