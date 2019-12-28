@@ -1,13 +1,13 @@
-import pandas as pd
-from pandas import ExcelWriter
-from pandas import ExcelFile
+# import pandas as pd
+# from pandas import ExcelWriter
+# from pandas import ExcelFile
 import psycopg2
 import sys
 import json
-import datetime
+# import datetime
 pointid = sys.argv[1]
 
-conn = psycopg2.connect(host='35.198.222.40',
+conn = psycopg2.connect(host='localhost',
                         port='5432',
                         user='postgres',
                         password='nguyenq12345678',
