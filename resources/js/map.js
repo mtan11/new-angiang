@@ -79,12 +79,12 @@ checkmap.onAdd = function (e) {
   <div value="basemap" id="switchwrapper" class="switchwrapper">
   <figure id="googlepic" class="item-wrapper">
   <figcaption class="item-title">
-  <span class="item-text">Satellite</span></figcaption>
-  <img class="item-img" src="/images/earth-layer.png" alt="Google map" title="Satellite">
+  <span class="item-text">Vệ tinh</span></figcaption>
+  <img class="item-img" src="/images/earth-layer.png" alt="Bản đồ" title="Satellite">
   </figure>
   <figure id="basepic" class="item-wrapper" style="display: none;">
   <figcaption class="item-title">
-  <span class="item-text">Base map</span></figcaption>
+  <span class="item-text">Bản đồ</span></figcaption>
   <img class="item-img" src="/images/base-layer.png" alt="Mapbox" title="Base map">
   </figure>
   </div>`;
@@ -320,43 +320,6 @@ function clickMarkerKS(feature, layer) {
             photo = JSON.parse(feature.properties.Photos).img;
         }
 
-        // let updateBtn = document.createElement('button');
-        // updateBtn.innerHTML = 'Cập nhật';
-        // updateBtn.className = 'btn btn-primary';
-        // updateBtn.addEventListener('click', () => {
-        //     console.log(id);
-        //     var bodyFormData = new FormData();
-        //     var name = document.getElementById('input-name-show');
-        //     var descr = document.getElementById('input-info-show');
-        //     var file = document.getElementById('input-file-show');
-        //     bodyFormData.set('name', name.value);
-        //     bodyFormData.set('info', descr.value);
-        //     bodyFormData.set('id', id);
-        //     for (let i = 0; i < file.files.length; i++) {
-        //         bodyFormData.append('photos[]', file.files[i]);
-        //     }
-        //     axios({
-        //             method: 'post',
-        //             url: url,
-        //             data: bodyFormData,
-        //             headers: {
-        //                 'Content-Type': 'multipart/form-data'
-        //             }
-        //         })
-        //         .then(function (response) {
-        //             //handle success
-        //             alert('Cập nhật dữ liệu thành công');
-        //             console.log(response);
-        //         })
-        //         .catch(function (response) {
-        //             //handle error
-        //             alert('Có lỗi xảy ra trong quá trình cập nhật');
-        //             console.log(response);
-        //         });
-        // })
-        // updateBtnContainer.innerHTML = '';
-        // updateBtnContainer.appendChild(updateBtn);
-
 
         // let photomc = JSON.parse(feature.properties.Photos).imgmc;
         for (let i = 0; i < photo.length; i++) {
@@ -401,6 +364,7 @@ function clickMarkerSL(feature, layer) {
                     chartContainer.classList.remove('hidden');
                 }
                 createD3Chart(response);
+                console.log(response.data);
 
             })
             .catch(function (response) {
@@ -408,50 +372,15 @@ function clickMarkerSL(feature, layer) {
                 console.log(response);
             });
 
-        // let updateBtn = document.createElement('button');
-        // updateBtn.innerHTML = 'Cập nhật';
-        // updateBtn.className = 'btn btn-primary';
-        // updateBtn.addEventListener('click', () => {
-        //     console.log(id);
-        //     var bodyFormData = new FormData();
-        //     var name = document.getElementById('input-name-show');
-        //     var descr = document.getElementById('input-info-show');
-        //     var file = document.getElementById('input-file-show');
-        //     bodyFormData.set('name', name.value);
-        //     bodyFormData.set('info', descr.value);
-        //     bodyFormData.set('id', id);
-        //     for (let i = 0; i < file.files.length; i++) {
-        //         bodyFormData.append('excelmc', file.files[i]);
-        //     }
-        //     axios({
-        //             method: 'post',
-        //             url: url,
-        //             data: bodyFormData,
-        //             headers: {
-        //                 'Content-Type': 'multipart/form-data'
-        //             }
-        //         })
-        //         .then(function (response) {
-        //             //handle success
-        //             alert('Cập nhật dữ liệu thành công');
-        //             console.log(response);
-        //         })
-        //         .catch(function (response) {
-        //             //handle error
-        //             alert('Có lỗi xảy ra trong quá trình cập nhật');
-        //             console.log(response);
-        //         });
-        // })
-        // updateBtnContainer.innerHTML = '';
-        // updateBtnContainer.appendChild(updateBtn);
-
-
     })
 }
 
-function createD3Chart(response) {
+function createD3Chart(response, year) {
     document.getElementById('chart').innerHTML = '';
     var data = response.data;
+    if(year == 2009) {
+        data = response.data.dem2009;
+    }
     var width = 800;
     var height = 300;
     var margin = 50;
@@ -620,6 +549,179 @@ function createD3Chart(response) {
         .html("Độ sâu (m)");
 }
 
+function createD3ChartDraw(response) {
+    document.getElementById('chart').innerHTML = '';
+
+    var data = response.data;
+    
+    var width = 800;
+    var height = 300;
+    var margin = 50;
+    var duration = 250;
+
+    var lineOpacity = "0.25";
+    var lineOpacityHover = "0.85";
+    var otherLinesOpacityHover = "0.1";
+    var lineStroke = "1.5px";
+    var lineStrokeHover = "2.5px";
+
+    var circleOpacity = '0.85';
+    var circleOpacityOnLineHover = "0.25"
+    var circleRadius = 3;
+    var circleRadiusHover = 6;
+
+    var maxX = 0;
+    var maxY = 0;
+    /* Format Data */
+    // var parseDate = d3.timeParse("%Y");
+    data.forEach(function (d) {
+        d.values.forEach(function (d) {
+            maxX = (d.x > maxX) ? d.x : maxX;
+            maxY = (d.y < maxY) ? d.y : maxY;
+        });
+    });
+
+
+    /* Scale */
+    var xScale = d3.scaleLinear()
+        .domain([0, maxX])
+        .range([0, width - margin]);
+
+    var yScale = d3.scaleLinear()
+        .domain([maxY, 0])
+        .range([height - margin, 0]);
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    /* Add SVG */
+    var svg = d3.select("#chart").append("svg")
+        .attr("width", (width + margin) + "px")
+        .attr("height", (height + margin) + "px")
+        .append('g')
+        .attr("transform", `translate(${margin}, ${margin})`);
+
+    /* Add line into SVG */
+    var line = d3.line()
+        .x(d => xScale(d.x))
+        .y(d => yScale(d.y));
+
+    let lines = svg.append('g')
+        .attr('class', 'lines');
+    lines.selectAll('.line-group')
+        .data(data).enter()
+        .append('g')
+        .attr('class', 'line-group')
+        .on("mouseover", function (d, i) {
+            svg.append("text")
+                .attr("class", "title-text")
+                .style("fill", color(i))
+                .text(d.dem)
+                .attr("text-anchor", "middle")
+                .attr("x", (width - margin) / 2)
+                .attr("y", 5);
+        })
+        .on("mouseout", function (d) {
+            svg.select(".title-text").remove();
+        })
+        .append('path')
+        .attr('class', 'line')
+        .attr('d', d => line(d.values))
+        .style('stroke', (d, i) => color(i))
+        .style('opacity', lineOpacity)
+        .on("mouseover", function (d) {
+            d3.selectAll('.line')
+                .style('opacity', otherLinesOpacityHover);
+            d3.selectAll('.circle')
+                .style('opacity', circleOpacityOnLineHover);
+            d3.select(this)
+                .style('opacity', lineOpacityHover)
+                .style("stroke-width", lineStrokeHover)
+                .style("cursor", "pointer");
+        })
+        .on("mouseout", function (d) {
+            d3.selectAll(".line")
+                .style('opacity', lineOpacity);
+            d3.selectAll('.circle')
+                .style('opacity', circleOpacity);
+            d3.select(this)
+                .style("stroke-width", lineStroke)
+                .style("cursor", "none");
+        });
+
+
+    /* Add circles in the line */
+    lines.selectAll("circle-group")
+        .data(data).enter()
+        .append("g")
+        .style("fill", (d, i) => color(i))
+        .selectAll("circle")
+        .data(d => d.values).enter()
+        .append("g")
+        .attr("class", "circle")
+        .on("mouseover", function (d) {
+            d3.select(this)
+                .style("cursor", "pointer")
+                .append("text")
+                .attr("class", "text")
+                .text(`${d.y}`)
+                .attr("x", d => xScale(d.x) + 5)
+                .attr("y", d => yScale(d.y) - 10);
+        })
+        .on("mouseout", function (d) {
+            d3.select(this)
+                .style("cursor", "none")
+                .transition()
+                .duration(duration)
+                .selectAll(".text").remove();
+        })
+        .append("circle")
+        .attr("cx", d => xScale(d.x))
+        .attr("cy", d => yScale(d.y))
+        .attr("r", circleRadius)
+        .style('opacity', circleOpacity)
+        .on("mouseover", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(duration)
+                .attr("r", circleRadiusHover);
+        })
+        .on("mouseout", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(duration)
+                .attr("r", circleRadius);
+        });
+
+
+    /* Add Axis into SVG */
+    var xAxis = d3.axisBottom(xScale).ticks(10);
+    var yAxis = d3.axisLeft(yScale).ticks(10);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", `translate(0, ${height-margin})`)
+        .call(xAxis)
+        .append("text")
+        .attr("transform",
+            "translate(" + (width / 2) + " ," + 40 + ")")
+        .style("text-anchor", "middle")
+        .attr("fill", "#000")
+        .html("Khoảng cách (m)");
+
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append('text')
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .attr("fill", "#000")
+        .html("Độ sâu (m)");
+}
+
 function clickLineSL(feature, layer) {
     layer.setStyle({
         color: 'blue'
@@ -664,49 +766,6 @@ function clickLineSL(feature, layer) {
         if (feature.properties.Photos != null) {
             photo = JSON.parse(feature.properties.Photos).img;
         }
-
-
-        // let updateBtn = document.createElement('button');
-        // updateBtn.innerHTML = 'Cập nhật';
-        // updateBtn.className = 'btn btn-primary';
-        // updateBtn.addEventListener('click', () => {
-        //     console.log(id);
-        //     var bodyFormData = new FormData();
-        //     var name = document.getElementById('input-name-show');
-        //     var descr = document.getElementById('input-info-show');
-        //     var file = document.getElementById('input-file-show');
-        //     bodyFormData.set('name', name.value);
-        //     bodyFormData.set('info', descr.value);
-        //     bodyFormData.set('id', id);
-        //     if (file.files.length != 0) {
-        //         for (let i = 0; i < file.files.length; i++) {
-        //             bodyFormData.append('photos[]', file.files[i]);
-        //         }
-        //     }
-
-        //     axios({
-        //             method: 'post',
-        //             url: url,
-        //             data: bodyFormData,
-        //             headers: {
-        //                 'Content-Type': 'multipart/form-data'
-        //             }
-        //         })
-        //         .then(function (response) {
-        //             //handle success
-        //             alert('Cập nhật dữ liệu thành công');
-        //             console.log(response);
-        //         })
-        //         .catch(function (response) {
-        //             //handle error
-        //             alert('Có lỗi xảy ra trong quá trình cập nhật');
-        //             console.log(response);
-        //         });
-        // })
-        // updateBtnContainer.innerHTML = '';
-        // updateBtnContainer.appendChild(updateBtn);
-
-
         // let photomc = JSON.parse(feature.properties.Photos).imgmc;
         for (let i = 0; i < photo.length; i++) {
             if (i == 0) {
@@ -735,9 +794,6 @@ function createImgDiv(id, isFirst, ismc, name, kind) {
     div.appendChild(img);
     imgSlider.appendChild(div);
 }
-
-
-
 
 
 let dangsau_2009_line = L.tileLayer.wms(geoserver, {
@@ -886,6 +942,14 @@ let du_bao_long_dan_2050 = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
+let thuadat = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:thuadat',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
 
 
 
@@ -971,6 +1035,9 @@ $("#du_bao_long_dan_2030").on('change', function () {
 $("#du_bao_long_dan_2025").on('change', function () {
     toggleLayer(du_bao_long_dan_2050, map, this.checked);
 });
+$("#thuadat").on('change', function () {
+    toggleLayer(thuadat, map, this.checked);
+});
 
 
 
@@ -1042,27 +1109,34 @@ map.on('pm:create', function (e) {
         })
         .then(function (response) {
             //handle success
-            console.log(response.data);
             alert('Biểu đồ mặt cắt được cập nhật');
-            coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
-            el.clear();
+            if (response.data[0].values.length < 1) {
+                chartContainer.classList.add('hidden');
+                alert('Vui lòng vẽ lại mặt cắt');
+            } else {
+                chartContainer.classList.remove('hidden');
+            }
+            createD3ChartDraw(response);
+            
+            // coormc = JSON.parse(response.data[0].st_asgeojson).coordinates;
+            // el.clear();
 
-            geojson = {
-                "name": "NewFeatureType",
-                "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": coormc
-                    },
-                    "properties": null
-                }]
-            };
-            el.addData(geojson);
-            var gjl = L.geoJson(geojson, {
-                onEachFeature: el.addData.bind(el)
-            }).addTo(map);
+            // geojson = {
+            //     "name": "NewFeatureType",
+            //     "type": "FeatureCollection",
+            //     "features": [{
+            //         "type": "Feature",
+            //         "geometry": {
+            //             "type": "LineString",
+            //             "coordinates": coormc
+            //         },
+            //         "properties": null
+            //     }]
+            // };
+            // el.addData(geojson);
+            // var gjl = L.geoJson(geojson, {
+            //     onEachFeature: el.addData.bind(el)
+            // }).addTo(map);
 
 
 

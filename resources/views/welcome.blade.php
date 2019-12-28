@@ -71,7 +71,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="" style="overflow-y:scroll; overflow-x:scroll; height:580px;">
+            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
                 <div class="container-content">
                     <div id="layer-content">
                         <div class="row">
@@ -232,6 +232,17 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>THỬA ĐẤT</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="thuadat" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
 
                         <!-- <div class="row">
                             <div class="col-8">
@@ -319,11 +330,11 @@
                     <div class="container-form" style="padding: 10px;">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
-                            <input class="form-control" id="input-name-show" disabled>
+                            <textarea class="form-control" id="input-name-show" disabled rows="2"> </textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Thông tin</label>
-                            <input class="form-control" id="input-info-show" disabled>
+                            <textarea class="form-control" id="input-info-show" disabled rows="4"></textarea>
                         </div>
                     </div>
                     <!-- <div class="img-slider">
