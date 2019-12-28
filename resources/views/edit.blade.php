@@ -80,8 +80,8 @@
     </form>
     </div> --}}
 
-    <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     @endauth
+    <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     <div id="map"></div>
     <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel-update" class="panel-container-update">
@@ -435,15 +435,20 @@
                         </div>
                         <select class="custom-select" id="inputGroupSelectNameShp">
                             <!-- <option value="dangsau_2009_line">dangsau_2009_line</option> -->
-                            <option value="diemdosau_2009_point">ĐIỂM ĐỘ SÂU 2009</option>
-                            <option value="diemdosau_2019_point">ĐIỂM ĐỘ SÂU 2019</option>
-                            <option value="satlo_mohinhthuyluc_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</option>
-                            <option value="satlo_truottongthe_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</option>
-                            <option value="satloduongbo_gis_line">DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</option>
+                            <option value="diemks">HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</option>
+                            <option value="doansl">ĐOẠN SẠT LỠ</option>
+                            <option value="diemsl">ĐIỂM MẶT CẮT KHẢO SÁT</option>
+                            <option value="quyhoach">QUY HOẠCH KHAI THÁC CÁT</option>
+                            <option value="quyhoach_diemgoc">ĐIỂM GỐC QUY HOẠCH KHAI THÁC CÁT</option>
+                            <option value="quyhoach_dieuchinh">ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</option>
+                            <option value="quyhoach_dieuchinh_diemgoc">ĐIỂM GỐC ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</option>
+                            <!-- <option value="satlo_mohinhthuyluc_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</option> -->
+                            <!-- <option value="satlo_truottongthe_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</option> -->
+                            <!-- <option value="satloduongbo_gis_line">DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</option> -->
                             <!-- <option value="u_diem_mc_moi">u_diem_mc_moi</option> -->
-                            <option value="u_anh">ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</option>
+                            <!-- <option value="u_anh">ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</option> -->
                             <!-- <option value="u_diem_sat_lo">u_diem_sat_lo</option> -->
-                            <option value="u_doan_sat_lo">ĐOẠN SẠT LỞ</option>
+                            <!-- <option value="u_doan_sat_lo">ĐOẠN SẠT LỞ</option> -->
                             <!-- <option value="u_tram_do_thuy_van">u_tram_do_thuy_van</option> -->
                         </select>
                     </div>

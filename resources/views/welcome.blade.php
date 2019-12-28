@@ -367,6 +367,7 @@
         </div>
     </div>
 </body>
+<script src="{{ mix('js/d3.legend.js') }}"></script>
 <script src="{{ mix('js/map.js') }}"></script>
 
 </html>

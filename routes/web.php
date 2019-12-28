@@ -17,11 +17,11 @@ Route::get('/', function () {
 Route::get('/3dmap', function () {
     return view('3dmap');
 });
-Route::group(['middleware' => ['auth']], function () {
+// Route::group(['middleware' => ['auth']], function () {
     Route::get('/edit', function () {
         return view('edit');
     })->name('edit');
-});
+// });
 
 Auth::routes();
 
