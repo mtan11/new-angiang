@@ -70,12 +70,12 @@ checkmap.onAdd = function(e) {
   <div value="basemap" id="switchwrapper" class="switchwrapper">
   <figure id="googlepic" class="item-wrapper">
   <figcaption class="item-title">
-  <span class="item-text">Satellite</span></figcaption>
-  <img class="item-img" src="/images/earth-layer.png" alt="Google map" title="Satellite">
+  <span class="item-text">Vệ tinh</span></figcaption>
+  <img class="item-img" src="/images/earth-layer.png" alt="Bản đồ" title="Satellite">
   </figure>
   <figure id="basepic" class="item-wrapper" style="display: none;">
   <figcaption class="item-title">
-  <span class="item-text">Base map</span></figcaption>
+  <span class="item-text">Bản đồ</span></figcaption>
   <img class="item-img" src="/images/base-layer.png" alt="Mapbox" title="Base map">
   </figure>
   </div>`;
