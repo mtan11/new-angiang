@@ -499,10 +499,14 @@ class PostgresController extends Controller
         
         // $resulttt = '{"name": "NewFeatureType","type": "FeatureCollection","features": [{"type": "Feature","geometry": '.$dem2009[0]->st_asgeojson.',"properties": "dem2009"},{"type": "Feature","geometry": '.$dem2019[0]->st_asgeojson.',"properties": "dem2019"}]}';
         // dd($dem2009[0]->st_asgeojson);
-        $result = (object) array(
-            'dem2009' => $dem2009,
-            'dem2019' => $dem2019
-        );
+
+        $res09 = '{"dem":"2009","values":'.json_encode($dem2009).'}';
+        $res19 = '{"dem":"2019","values":'.json_encode($dem2019).'}';
+        $result = '['.$res09.','.$res19.']';
+        // $result = (object) array(
+        //     $res09,
+        //     $res19
+        // );
 
         return json_encode($result);
     }
