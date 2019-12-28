@@ -509,7 +509,7 @@ class PostgresController extends Controller
         //     $res19
         // );
 
-        return $resStr;
+        return json_encode($resStr);
     }
     
     public function downloadData()
