@@ -444,7 +444,7 @@ class PostgresController extends Controller
         // $all->update($all->geom = DB::raw("ST_Asgeojson(ST_Transform(geom,4326))"));
         // return json_encode($all,200);
         $output = shell_exec("python3 /var/www/new-angiang/pyservices/getMatcat.py {$pointid} 2>&1");
-        // dd($output);
+        dd($output);
         $outputsplit = explode("\n", $output);
         $maqhpkranh = $outputsplit[count($outputsplit)-2];
         $resStr = str_replace("'", '"', $maqhpkranh);
