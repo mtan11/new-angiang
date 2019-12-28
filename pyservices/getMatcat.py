@@ -39,5 +39,5 @@ for row in result:
     # qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
     done = {'thoigian':str(q),'values':value}
     final.append(done)
-print(str(final).encode('utf-8'))
+sys.stdout.write(final)
 # print(json.dumps(final))
