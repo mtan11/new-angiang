@@ -503,12 +503,13 @@ class PostgresController extends Controller
         $res09 = '{"dem":"2009","values":'.json_encode($dem2009).'}';
         $res19 = '{"dem":"2019","values":'.json_encode($dem2019).'}';
         $result = '['.$res09.','.$res19.']';
+        $resStr = str_replace('"', '', $result);
         // $result = (object) array(
         //     $res09,
         //     $res19
         // );
 
-        return json_encode($result);
+        return $resStr;
     }
     
     public function downloadData()
