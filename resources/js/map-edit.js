@@ -26,6 +26,7 @@ let titleUpdate = document.getElementById('title-update');
 let updateBtnContainer = document.getElementById('container-update-btn');
 let containerInfoInsert = document.getElementById('container-info-insert');
 let api = 'http://35.198.222.40/';
+let apiGeo = 'http://35.198.222.40:8080/';
 let lat = 0;
 let lng = 0;
 var weightLineHover = 8;
