@@ -50,25 +50,8 @@ let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
 });
 let basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox.streets'
-});
-
-
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     id: 'mapbox.streets'
 }).addTo(map);
-
-var base = {
-    "Satellite": googleSat,
-    "Basemap": basemap
-};
 
 //Switch base map
 var checkmap = L.control({
@@ -99,7 +82,7 @@ checkmap.addTo(map);
 document.getElementById('googlepic').addEventListener('click', function (e) {
     map.removeLayer(basemap);
     map.addLayer(googleSat);
-    googleSat.bringToBack();
+    googleSat.setZIndex(-1);
     document.getElementById("switchwrapper").setAttribute("value", "googlemap");
     document.getElementById('googlepic').style.display = "none";
     document.getElementById('basepic').style.display = "block";
@@ -111,7 +94,7 @@ document.getElementById('googlepic').addEventListener('click', function (e) {
 document.getElementById('basepic').addEventListener('click', function (e) {
     map.removeLayer(googleSat);
     map.addLayer(basemap);
-    basemap.bringToBack();
+    basemap.setZIndex(-1);
     document.getElementById("switchwrapper").setAttribute("value", "basemap");
     document.getElementById('googlepic').style.display = "block";
     document.getElementById('basepic').style.display = "none";
