@@ -796,25 +796,25 @@ function createImgDiv(id, isFirst, ismc, name, kind) {
     imgSlider.appendChild(div);
 }
 
-// video
-var videoUrls_2010 = [
-    '/images/v_2010.webm',
-],
-bounds = L.latLngBounds([[ 10.301955638, 104.871579184], [ 10.978093201, 105.978488438]]);
-var videoUrls_2013 = [
-    '/images/v_2013.webm',
-],
-bounds = L.latLngBounds([[ 10.301955638, 104.871579184], [ 10.978093201, 105.978488438]]);
-var vantocnam2010 = L.videoOverlay(videoUrls_2010, bounds, {
-    opacity: 1.0,
-    interactive: false,
-    autoplay: true
-});
-var vantocnam2013 = L.videoOverlay(videoUrls_2013, bounds, {
-    opacity: 1.0,
-    interactive: false,
-    autoplay: true
-});
+// // video
+// var videoUrls_2010 = [
+//     '/images/v_2010.webm',
+// ],
+// bounds = L.latLngBounds([[ 10.301955638, 104.871579184], [ 10.978093201, 105.978488438]]);
+// var videoUrls_2013 = [
+//     '/images/v_2013.webm',
+// ],
+// bounds = L.latLngBounds([[ 10.301955638, 104.871579184], [ 10.978093201, 105.978488438]]);
+// var vantocnam2010 = L.videoOverlay(videoUrls_2010, bounds, {
+//     opacity: 1.0,
+//     interactive: false,
+//     autoplay: true
+// });
+// var vantocnam2013 = L.videoOverlay(videoUrls_2013, bounds, {
+//     opacity: 1.0,
+//     interactive: false,
+//     autoplay: true
+// });
 // var PauseControl = L.Control.extend({
 //     onAdd: function() {
 //         var button = L.DomUtil.create('button');
@@ -835,9 +835,6 @@ var vantocnam2013 = L.videoOverlay(videoUrls_2013, bounds, {
 //         return button;
 //     }
 // });
-
-// var pauseControl = (new PauseControl()).addTo(map);
-// var playControl = (new PlayControl()).addTo(map);
 
 let dangsau_2009_line = L.tileLayer.wms(geoserver, {
     Format: 'image/png',

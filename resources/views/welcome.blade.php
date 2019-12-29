@@ -62,6 +62,8 @@
     <div id="map"></div>
     <a class="btn btn-light btn-login" href="/login">Đăng nhập</a>
     <a class="btn btn-light btn-3d" href="/3dmap">Bản đồ 3D</a>
+    <a class="btn btn-light btn-2010" href="/vantoc2010">Bản đồ 2010</a>
+    <a class="btn btn-light btn-2013" href="/vantoc2013">Bản đồ 2013</a>
     <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel" class="panel-container">
         <div>
@@ -252,6 +254,7 @@
                                 </label>
                             </div>
                         </div>
+
 
                         <!-- <div class="row">
                             <div class="col-8">
