@@ -1,13 +1,15 @@
-import pandas as pd
-from pandas import ExcelWriter
-from pandas import ExcelFile
+# # -*- coding: utf-8 -*-
+
+# import pandas as pd
+# from pandas import ExcelWriter
+# from pandas import ExcelFile
 import psycopg2
 import sys
 import json
-import datetime
+# import datetime
 pointid = sys.argv[1]
 
-conn = psycopg2.connect(host='35.198.222.40',
+conn = psycopg2.connect(host='localhost',
                         port='5432',
                         user='postgres',
                         password='nguyenq12345678',
@@ -37,5 +39,8 @@ for row in result:
     # qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
     done = {'thoigian':str(q),'values':value}
     final.append(done)
+# ENCODING = sys.stdout.encoding if sys.stdout.encoding else 'utf-8'
+# print unicode("<div class='line'>%s</div>" % l, encoding).encode(ENCODING)
+# print(final).encode(ENCODING)
 print(final)
 # print(json.dumps(final))
