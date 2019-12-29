@@ -128,7 +128,7 @@ elif table == 'quyhoach':
     # cursor.execute(sql_delete_query)
     # connection.commit()
     # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-    cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
     sql_append_query = """insert into """+tablename+""" (sohieuvung,name,geom) select sohieuvung,name,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
@@ -143,7 +143,7 @@ elif table == 'quyhoach_diemgoc':
     # cursor.execute(sql_delete_query)
     # connection.commit()
     # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-    cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
     sql_append_query = """insert into """+tablename+""" (sohieuvung,diemkhepgo,geom) select sohieuvung,diemkhepgo,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
@@ -158,7 +158,7 @@ elif table == 'quyhoach_dieuchinh':
     # cursor.execute(sql_delete_query)
     # connection.commit()
     # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-    cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
     sql_append_query = """insert into """+tablename+""" (de_xuat,name,geom) select de_xuat,name,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
@@ -173,7 +173,7 @@ elif table == 'quyhoach_dieuchinh_diemgoc':
     # cursor.execute(sql_delete_query)
     # connection.commit()
     # cmd = '''ogr2ogr -f "PostgreSQL" "PG:host=gis.vlab.tech port=5433 user=test dbname=thongtinquyhoach_hcm_test password=123qwe" "'''+i+'''" -lco GEOMETRY_NAME=geom -lco FID=gid -lco PRECISION=no -nlt MULTIPOLYGON -nln '''+tablename+'''_queue -append'''
-    cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
+    cmd = '''shp2pgsql -c -D -I -s 32648 -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
     sql_append_query = """insert into """+tablename+""" (sohieuvung,diemkhepgo,geom) select sohieuvung,diemkhepgo,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
