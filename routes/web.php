@@ -17,6 +17,12 @@ Route::get('/', function () {
 Route::get('/3dmap', function () {
     return view('3dmap');
 });
+Route::get('/vantoc2010', function () {
+    return view('vantoc2010');
+});
+Route::get('/vantoc2013', function () {
+    return view('vantoc2013');
+});
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/edit', function () {
         return view('edit');
