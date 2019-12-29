@@ -45,11 +45,11 @@ let urlImg = 'http://35.198.222.40/storage/uploadedimages/';
 
 
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    maxZoom: 23,
+    maxZoom: 21,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 });
 let basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 23,
+    maxZoom: 21,
     id: 'mapbox.streets'
 }).addTo(map);
 
