@@ -99,6 +99,7 @@ checkmap.addTo(map);
 document.getElementById('googlepic').addEventListener('click', function (e) {
     map.removeLayer(basemap);
     map.addLayer(googleSat);
+    googleSat.bringToBack();
     document.getElementById("switchwrapper").setAttribute("value", "googlemap");
     document.getElementById('googlepic').style.display = "none";
     document.getElementById('basepic').style.display = "block";
@@ -110,6 +111,7 @@ document.getElementById('googlepic').addEventListener('click', function (e) {
 document.getElementById('basepic').addEventListener('click', function (e) {
     map.removeLayer(googleSat);
     map.addLayer(basemap);
+    basemap.bringToBack();
     document.getElementById("switchwrapper").setAttribute("value", "basemap");
     document.getElementById('googlepic').style.display = "block";
     document.getElementById('basepic').style.display = "none";
