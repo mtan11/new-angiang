@@ -76,7 +76,8 @@
                     <div id="layer-content">
                         <div class="row">
                             <div class="col-8">
-                                <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6>
+                                <!-- <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6> -->
+                                <h6>Hình ảnh khảo sát thực địa 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -87,7 +88,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐOẠN SẠT LỞ</h6>
+                                <h6>Đoạn sạt lở</h6>
+                                <!-- <h6>ĐOẠN SẠT LỞ</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -98,7 +100,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</h6>
+                                <h6>Điểm khảo sát mặt cắt ngang thường xuyên</h6>
+                                <!-- <h6>ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -109,7 +112,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỂM ĐỘ SÂU 2009</h6>
+                                <h6>Điểm độ sâu 2009</h6>
+                                <!-- <h6>ĐIỂM ĐỘ SÂU 2009</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -120,7 +124,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỂM ĐỘ SÂU 2019</h6>
+                                <h6>Điểm độ sâu 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -131,7 +135,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6>
+                                <!-- <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6> -->
+                                <h6>Mô hình số độ cao (DEM) năm 2009</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -142,7 +147,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2019</h6>
+                                <h6>Mô hình số độ cao (DEM) năm 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -154,7 +159,8 @@
 
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</h6>
+                                <h6>Dự báo sạt lở đường bờ bằng mô hình</h6>
+                                <!-- <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -166,7 +172,8 @@
 
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</h6>
+                                <h6>Dự báo sạt lở đường bờ bằng phương pháp trượt tổng thể </h6>
+                                <!-- <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -177,7 +184,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</h6>
+                                <!-- <h6>DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</h6> -->
+                                <h6>Diễn biến đường bờ bằng phương pháp viễn thám & GIS</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -189,7 +197,8 @@
 
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6>
+                                <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm 2030</h6>
+                                <!-- <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -200,7 +209,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2025</h6>
+                                <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm2025</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -212,7 +221,7 @@
 
                         <div class="row">
                             <div class="col-8">
-                                <h6>QUY HOẠCH KHAI THÁC CÁT</h6>
+                                <h6>Quy hoạch khai thác cát</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -223,7 +232,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</h6>
+                                <h6>Điều chỉnh quy hoạch khai thác cát</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -234,7 +243,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>THỬA ĐẤT</h6>
+                                <h6>Thửa đất</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">

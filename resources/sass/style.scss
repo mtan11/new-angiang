@@ -60,6 +60,18 @@ body {
     padding-top: 10px;
 }
 
+@media only screen and (max-width: 1600px) {
+    .container-chart {
+        width: 500px !important;
+        height: 300px !important;
+    }
+    .swiper-container {
+        width: 500px !important;
+        height: 300px !important;
+    }
+
+  }
+
 .container-chart {
     width: 900px;
     padding: 10px;
