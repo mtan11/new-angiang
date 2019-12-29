@@ -19,6 +19,7 @@ let imgSlider = document.getElementById('img-slider');
 var swiperContainer = document.getElementById('swiper-container');
 var chartContainer = document.getElementById('container-chart');
 let api = 'http://35.198.222.40/';
+let apiGeo = 'http://35.198.222.40:8080/';
 let lat = 0;
 let lng = 0;
 
@@ -91,6 +92,9 @@ checkmap.onAdd = function (e) {
     return div;
 };
 checkmap.addTo(map);
+// map.addLayer(googleSat);
+// map.addLayer(basemap);
+
 
 document.getElementById('googlepic').addEventListener('click', function (e) {
     map.removeLayer(basemap);
@@ -381,8 +385,15 @@ function createD3Chart(response, year) {
     if(year == 2009) {
         data = response.data.dem2009;
     }
+    var x = window.matchMedia("(max-width: 1600px)");
     var width = 800;
     var height = 300;
+    if(x.matches) {
+        width = 400;
+        height = 200;
+    }
+    
+    // var height = 300;
     var margin = 50;
     var duration = 250;
 
@@ -553,9 +564,14 @@ function createD3ChartDraw(response) {
     document.getElementById('chart').innerHTML = '';
 
     var data = response.data;
-    
+    var x = window.matchMedia("(max-width: 1600px)");
     var width = 800;
     var height = 300;
+    if(x.matches) {
+        width = 400;
+        height = 200;
+    }
+    
     var margin = 50;
     var duration = 250;
 
@@ -795,6 +811,48 @@ function createImgDiv(id, isFirst, ismc, name, kind) {
     imgSlider.appendChild(div);
 }
 
+// video
+var videoUrls_2010 = [
+    '/images/v_2010.webm',
+],
+bounds = L.latLngBounds([[ 10.301955638, 104.871579184], [ 10.978093201, 105.978488438]]);
+var videoUrls_2013 = [
+    '/images/v_2013.webm',
+],
+bounds = L.latLngBounds([[ 10.301955638, 104.871579184], [ 10.978093201, 105.978488438]]);
+var vantocnam2010 = L.videoOverlay(videoUrls_2010, bounds, {
+    opacity: 1.0,
+    interactive: false,
+    autoplay: true
+});
+var vantocnam2013 = L.videoOverlay(videoUrls_2013, bounds, {
+    opacity: 1.0,
+    interactive: false,
+    autoplay: true
+});
+// var PauseControl = L.Control.extend({
+//     onAdd: function() {
+//         var button = L.DomUtil.create('button');
+//         button.innerHTML = '⏸';
+//         L.DomEvent.on(button, 'click', function () {
+//             overlay_2010.getElement().pause();
+//         });
+//         return button;
+//     }
+// });
+// var PlayControl = L.Control.extend({
+//     onAdd: function() {
+//         var button = L.DomUtil.create('button');
+//         button.innerHTML = '▶️';
+//         L.DomEvent.on(button, 'click', function () {
+//             overlay_2010.getElement().play();
+//         });
+//         return button;
+//     }
+// });
+
+// var pauseControl = (new PauseControl()).addTo(map);
+// var playControl = (new PlayControl()).addTo(map);
 
 let dangsau_2009_line = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
@@ -804,49 +862,62 @@ let dangsau_2009_line = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let diemdosau_2019_point = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:diemdosau_2019_point',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+let diemdosau_2019_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2019_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
-let diemdosau_2009_point = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:diemdosau_2009_point',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+// let diemdosau_2019_point = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:diemdosau_2019_point',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+let diemdosau_2009_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2009_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
-let satlo_mohinhthuyluc_line = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:satlo_mohinhthuyluc_line',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
 
-let satlo_truottongthe_line = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:satlo_truottongthe_line',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:satloduongbo_gis_line',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+// let diemdosau_2009_point = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:diemdosau_2009_point',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let satlo_mohinhthuyluc_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_mohinhthuyluc_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let satlo_mohinhthuyluc_line = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:satlo_mohinhthuyluc_line',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let satlo_truottongthe_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_truottongthe_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let satlo_truottongthe_line = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:satlo_truottongthe_line',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let satloduongbo_gis_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatloduongbo_gis_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:satloduongbo_gis_line',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
 
 let u_diem_mc_moi = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
@@ -894,22 +965,28 @@ let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
-let dem_2009 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:dem_2009',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let dem_2019 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:dem_2019',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+let dem_2009 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adem_2009&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let dem_2009 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:dem_2009',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let dem_2019 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adem_2019&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let dem_2019 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:dem_2019',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
 let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:quy_hoach_khai_thac_cat_th',
@@ -926,22 +1003,26 @@ let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:du_bao_long_dan_2030',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let du_bao_long_dan_2050 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:du_bao_long_dan_2025',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+
+let du_bao_long_dan_2030 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2030&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let du_bao_long_dan_2025 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2025&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:du_bao_long_dan_2030',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+// let du_bao_long_dan_2025 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:du_bao_long_dan_2025',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
 let thuadat = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:thuadat',
@@ -1033,10 +1114,16 @@ $("#du_bao_long_dan_2030").on('change', function () {
     toggleLayer(du_bao_long_dan_2030, map, this.checked);
 });
 $("#du_bao_long_dan_2025").on('change', function () {
-    toggleLayer(du_bao_long_dan_2050, map, this.checked);
+    toggleLayer(du_bao_long_dan_2025, map, this.checked);
 });
 $("#thuadat").on('change', function () {
     toggleLayer(thuadat, map, this.checked);
+});
+$("#vantocnam2010").on('change', function () {
+    toggleLayer(vantocnam2010, map, this.checked);
+});
+$("#vantocnam2013").on('change', function () {
+    toggleLayer(vantocnam2013, map, this.checked);
 });
 
 

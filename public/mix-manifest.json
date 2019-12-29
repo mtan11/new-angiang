@@ -1,15 +1,17 @@
 {
     "/js/app.js": "/js/app.js?id=183aea015fdb5255890d",
     "/css/leaflet.elevation-0.0.4.css": "/css/leaflet.elevation-0.0.4.css?id=313369d1c85a21f7c223",
-    "/css/style.css": "/css/style.css?id=860cd23491794eadd865",
+    "/css/style.css": "/css/style.css?id=efc20dc484a56cb9ed10",
     "/css/app.css": "/css/app.css?id=43c5fc47f5f2748f45f5",
     "/js/d3.legend.js": "/js/d3.legend.js?id=84d606e58600d1829af7",
     "/js/leaflet-elevation.js": "/js/leaflet-elevation.js?id=1e5e169bdf853001d35e",
-    "/js/map.js": "/js/map.js?id=d7fd32ca91fe512d6eea",
-    "/js/map-edit.js": "/js/map-edit.js?id=92bd3391f3c6d9296454",
+    "/js/map.js": "/js/map.js?id=6d0eedadcb715361bc75",
+    "/js/map-edit.js": "/js/map-edit.js?id=4f887b1c536b26b073fb",
     "/img/elevation-lime.png": "/img/elevation-lime.png?id=14d3af42084644e13ff8",
     "/img/elevation-purple.png": "/img/elevation-purple.png?id=4f93072df9ade947cce0",
     "/img/elevation-steelblue.png": "/img/elevation-steelblue.png?id=10af95c429ebe58ad643",
     "/img/icon-camera.png": "/img/icon-camera.png?id=61f328a43bae03cacdf3",
-    "/img/icon-red.png": "/img/icon-red.png?id=36394273eef6485ede25"
+    "/img/icon-red.png": "/img/icon-red.png?id=36394273eef6485ede25",
+    "/img/v_2010.webm": "/img/v_2010.webm?id=9ccf817da15523755b96",
+    "/img/v_2013.webm": "/img/v_2013.webm?id=6a73b2fa1fb4513426ac"
 }

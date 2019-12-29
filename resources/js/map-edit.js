@@ -1194,46 +1194,63 @@ let dangsau_2009_line = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let diemdosau_2019_point = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:diemdosau_2019_point',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let diemdosau_2009_point = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:diemdosau_2009_point',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let satlo_mohinhthuyluc_line = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:satlo_mohinhthuyluc_line',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let satlo_truottongthe_line = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:satlo_truottongthe_line',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:satloduongbo_gis_line',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+let diemdosau_2019_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2019_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let diemdosau_2019_point = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:diemdosau_2019_point',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+let diemdosau_2009_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2009_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let diemdosau_2009_point = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:diemdosau_2009_point',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let satlo_mohinhthuyluc_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_mohinhthuyluc_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let satlo_mohinhthuyluc_line = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:satlo_mohinhthuyluc_line',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let satlo_truottongthe_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_truottongthe_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let satlo_truottongthe_line = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:satlo_truottongthe_line',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let satloduongbo_gis_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatloduongbo_gis_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:satloduongbo_gis_line',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
 let u_diem_mc_moi = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:u_diem_mc_moi',
@@ -1261,9 +1278,9 @@ let u_diem_sat_lo = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
-let u_doan_sat_lo = L.tileLayer.wms(geoserver, {
+let doan_sat_lo = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
-    Layers: 'angiang:u_doan_sat_lo',
+    Layers: 'angiang:doan_sat_lo',
     Version: '1.1.1',
     Transparent: true,
     SRS: 'EPSG:900913',
@@ -1279,22 +1296,29 @@ let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let dem_2009 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:dem_2009',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let dem_2019 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:dem_2019',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
+
+let dem_2009 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adem_2009&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+
+// let dem_2009 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:dem_2009',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+
+let dem_2019 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adem_2019&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let dem_2019 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:dem_2019',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
 let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:quy_hoach_khai_thac_cat_th',
@@ -1311,17 +1335,29 @@ let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
+
+let du_bao_long_dan_2030 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2030&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let du_bao_long_dan_2025 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2025&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+
+// let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:du_bao_long_dan_2030',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+// let du_bao_long_dan_2025 = L.tileLayer.wms(geoserver, {
+//     Format: 'image/png',
+//     Layers: 'angiang:du_bao_long_dan_2025',
+//     Version: '1.1.1',
+//     Transparent: true,
+//     SRS: 'EPSG:900913',
+//     maxZoom: 21
+// })
+let thuadat = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
-    Layers: 'angiang:du_bao_long_dan_2030',
-    Version: '1.1.1',
-    Transparent: true,
-    SRS: 'EPSG:900913',
-    maxZoom: 21
-})
-let du_bao_long_dan_2050 = L.tileLayer.wms(geoserver, {
-    Format: 'image/png',
-    Layers: 'angiang:du_bao_long_dan_2025',
+    Layers: 'angiang:thuadat',
     Version: '1.1.1',
     Transparent: true,
     SRS: 'EPSG:900913',
@@ -1408,6 +1444,10 @@ $("#du_bao_long_dan_2030").on('change', function() {
 $("#du_bao_long_dan_2025").on('change', function() {
     toggleLayer(du_bao_long_dan_2050, map, this.checked);
 });
+$("#thuadat").on('change', function () {
+    toggleLayer(thuadat, map, this.checked);
+});
+
 
 
 
