@@ -211,7 +211,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm2025</h6>
+                                <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm 2025</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
