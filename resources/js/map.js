@@ -18,8 +18,8 @@ let inputInfoShow = document.getElementById('input-info-show');
 let imgSlider = document.getElementById('img-slider');
 var swiperContainer = document.getElementById('swiper-container');
 var chartContainer = document.getElementById('container-chart');
-let api = 'http://localhost/';
-let apiGeo = 'http://localhost:8080/';
+let api = '/';
+let apiGeo = '/';
 let lat = 0;
 let lng = 0;
 
@@ -40,8 +40,8 @@ var ksIcon = new L.icon({
     iconAnchor: [15, 40],
     popupAnchor: [0, -40],
 });
-let geoserver = 'http://localhost:8080/geoserver/angiang/wms';
-let urlImg = 'http://localhost/storage/uploadedimages/';
+let geoserver = '/geoserver/angiang/wms';
+let urlImg = '/storage/uploadedimages/';
 
 
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {

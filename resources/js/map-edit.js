@@ -25,8 +25,8 @@ let btnUploadShpFile = document.getElementById('btn-upload-shp-file');
 let titleUpdate = document.getElementById('title-update');
 let updateBtnContainer = document.getElementById('container-update-btn');
 let containerInfoInsert = document.getElementById('container-info-insert');
-let api = 'http://35.198.222.40/';
-let apiGeo = 'http://35.198.222.40:8080/';
+let api = '/';
+let apiGeo = '/';
 let lat = 0;
 let lng = 0;
 var weightLineHover = 8;
@@ -34,8 +34,8 @@ var weightLineHover = 8;
 let latlngmc = '';
 let coormc;
 
-let geoserver = 'http://35.198.222.40:8080/geoserver/angiang/wms';
-let urlImg = 'http://35.198.222.40/storage/uploadedimages/';
+let geoserver = '/geoserver/angiang/wms';
+let urlImg = '/storage/uploadedimages/';
 
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
     maxZoom: 21,
