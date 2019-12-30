@@ -26,7 +26,7 @@ let titleUpdate = document.getElementById('title-update');
 let updateBtnContainer = document.getElementById('container-update-btn');
 let containerInfoInsert = document.getElementById('container-info-insert');
 let api = '/';
-let apiGeo = 'https://satlo-angiang.online:8080/';
+let apiGeo = 'https://satlo-angiang.online:8443/';
 let lat = 0;
 let lng = 0;
 var weightLineHover = 8;
@@ -34,7 +34,7 @@ var weightLineHover = 8;
 let latlngmc = '';
 let coormc;
 
-let geoserver = 'https://satlo-angiang.online:8080/geoserver/angiang/wms';
+let geoserver = 'https://satlo-angiang.online:8443/geoserver/angiang/wms';
 let urlImg = '/storage/uploadedimages/';
 
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
