@@ -458,13 +458,14 @@
                         </div>
                         <select class="custom-select" id="inputGroupSelectNameShp">
                             <!-- <option value="dangsau_2009_line">dangsau_2009_line</option> -->
-                            <option value="diemks">HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</option>
-                            <option value="doansl">ĐOẠN SẠT LỠ</option>
-                            <option value="diemsl">ĐIỂM MẶT CẮT KHẢO SÁT</option>
-                            <option value="quyhoach">QUY HOẠCH KHAI THÁC CÁT</option>
-                            <option value="quyhoach_diemgoc">ĐIỂM GỐC QUY HOẠCH KHAI THÁC CÁT</option>
-                            <option value="quyhoach_dieuchinh">ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</option>
-                            <option value="quyhoach_dieuchinh_diemgoc">ĐIỂM GỐC ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</option>
+                            <option value="diemks">Hình ảnh khảo sát thực địa 2019</option>
+                            <option value="doansl">Đoạn sạt lỡ</option>
+                            <option value="diemsl">Điểm mặt cắt khảo sát</option>
+                            <option value="quyhoach">Quy hoạch khai thác cát</option>
+                            <option value="quyhoach_diemgoc">Điểm gốc quy hoạch khai thác cát</option>
+                            <option value="quyhoach_dieuchinh">Điều chỉnh quy hoạch khai thác cát</option>
+                            <option value="quyhoach_dieuchinh_diemgoc">Điểm gốc điều chỉnh quy hoạch khai thác cát</option>
+                            <option value="thudat">Thửa đất</option>
                             <!-- <option value="satlo_mohinhthuyluc_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</option> -->
                             <!-- <option value="satlo_truottongthe_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</option> -->
                             <!-- <option value="satloduongbo_gis_line">DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</option> -->
