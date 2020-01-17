@@ -221,7 +221,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Quy hoạch khai thác cát</h6>
                             </div>
@@ -242,7 +242,7 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-8">
                                 <h6>Thửa đất</h6>
