@@ -4,6 +4,10 @@ let btnClose = document.getElementById('close-btn');
 let panel = document.getElementById('panel');
 let panelUpdate = document.getElementById('panel-update');
 
+let btnCloseLegend = document.getElementById('close-legend-btn');
+let legendBtn = document.getElementById('btn-legend');
+let legendPanel = document.getElementById('legend-panel');
+
 let btnOpen = document.getElementById('show-btn');
 let btnSubmit = document.getElementById('accept-new-info');
 let titlePanel = document.getElementById('panel-title');
@@ -150,6 +154,28 @@ btnCloseUpdate.addEventListener('click', closePanelUpdate.bind(this));
 btnOpen.addEventListener('click', showPanel.bind(this));
 btnSubmit.addEventListener('click', acceptEditInfo.bind(this));
 btnUploadShpFile.addEventListener('click', uploadShpFIle.bind(this));
+legendBtn.addEventListener('click', showLegendPanel.bind(this));
+btnCloseLegend.addEventListener('click', closeLegendPanel.bind(this));
+
+//tree view
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+function closeLegendPanel() {
+    legendPanel.style.right = '-450px';
+}
+
+function showLegendPanel() {
+    legendPanel.style.right = '10px';
+    btnOpen.classList.add('hidden');
+}
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
 
 function closePanel() {
     panel.style.right = '-450px';

@@ -4,6 +4,9 @@ import {
 
 var map = L.map('map').setView([10.6079209, 105.1175397], 11);
 
+let btnCloseLegend = document.getElementById('close-legend-btn');
+let legendBtn = document.getElementById('btn-legend');
+let legendPanel = document.getElementById('legend-panel');
 let btnClose = document.getElementById('close-btn');
 let panel = document.getElementById('panel');
 let btnOpen = document.getElementById('show-btn');
@@ -106,13 +109,34 @@ document.getElementById('basepic').addEventListener('click', function (e) {
 
 btnClose.addEventListener('click', closePanel.bind(this));
 btnOpen.addEventListener('click', showPanel.bind(this));
+legendBtn.addEventListener('click', showLegendPanel.bind(this));
+btnCloseLegend.addEventListener('click', closeLegendPanel.bind(this));
 // btnSubmit.addEventListener('click', acceptEditInfo.bind(this));
+
+//tree view
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
 
 function closePanel() {
     panel.style.right = '-450px';
     btnOpen.classList.remove('hidden');
     swiperContainer.classList.add('hidden');
     chartContainer.classList.add('hidden');
+}
+function closeLegendPanel() {
+    legendPanel.style.right = '-450px';
+}
+
+function showLegendPanel() {
+    legendPanel.style.right = '10px';
+    btnOpen.classList.add('hidden');
 }
 
 function showPanel() {

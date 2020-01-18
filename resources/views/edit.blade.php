@@ -82,6 +82,7 @@
 
     @endauth
     <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
+    <a class="btn btn-light btn-legend-edit" id="btn-legend">Chú giải</a>
     <div id="map"></div>
     <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel-update" class="panel-container-update">
@@ -437,6 +438,43 @@
                         <button class="btn btn-primary">Cập nhật</button>
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="legend-panel" class="panel-container legend-panel">
+        <div>
+            <div class="d-flex panel-header">
+                <h5 class="card-title">Chú giải</h5>
+                <button type="button" id="close-legend-btn" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
+                <div class="container-content">
+                    <ul id="myUL">
+                        <li><span class="caret">Biến đổi lòng dẫn</span>
+                            <ul class="nested">
+                            <img src="/img/legend_biendoilongdan.png">
+                            </ul>
+                        </li>
+                        <li><span class="caret">DEM</span>
+                            <ul class="nested">
+                            <img src="/img/legend_dem.png">
+                            </ul>
+                        </li>
+                        <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS</span>
+                            <ul class="nested">
+                            <img src="/img/legend_duongbo_gis.png">
+                            </ul>
+                        </li>
+                        <li><span class="caret">Dự báo sạt lở đường bờ bằng mô hình</span>
+                            <ul class="nested">
+                            <img src="/img/legend_ruiro_satlo.png">
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
