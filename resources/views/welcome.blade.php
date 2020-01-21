@@ -386,12 +386,12 @@
                             <img src="/img/legend_biendoilongdan.png">
                             </ul>
                         </li>
-                        <li><span class="caret">DEM</span>
+                        <li><span class="caret">Độ sâu địa hình đáy</span>
                             <ul class="nested">
                             <img src="/img/legend_dem.png">
                             </ul>
                         </li>
-                        <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS</span>
+                        <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS qua các năm</span>
                             <ul class="nested">
                             <img src="/img/legend_duongbo_gis.png">
                             </ul>
