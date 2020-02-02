@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
@@ -80,8 +80,9 @@
     </form>
     </div> --}}
 
-    <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     @endauth
+    <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
+    <a class="btn btn-light btn-legend-edit" id="btn-legend">Chú giải</a>
     <div id="map"></div>
     <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel-update" class="panel-container-update">
@@ -140,9 +141,10 @@
             <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
                 <div class="container-content">
                     <div id="layer-content">
-                        <div class="row">
+                    <div class="row">
                             <div class="col-8">
-                                <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6>
+                                <!-- <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6> -->
+                                <h6>Hình ảnh khảo sát thực địa 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -153,29 +155,32 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐOẠN SẠT LỞ</h6>
+                                <h6>Đoạn sạt lở</h6>
+                                <!-- <h6>ĐOẠN SẠT LỞ</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="doansatlo" type="checkbox">
+                                    <input id="doansatlo" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</h6>
+                                <h6>Điểm khảo sát mặt cắt ngang thường xuyên</h6>
+                                <!-- <h6>ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="diemanh" type="checkbox">
+                                    <input id="diemanh" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỂM ĐỘ SÂU 2009</h6>
+                                <h6>Điểm độ sâu 2009</h6>
+                                <!-- <h6>ĐIỂM ĐỘ SÂU 2009</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -186,7 +191,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỂM ĐỘ SÂU 2019</h6>
+                                <h6>Điểm độ sâu 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -197,7 +202,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6>
+                                <!-- <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6> -->
+                                <h6>Mô hình số độ cao (DEM) năm 2009</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -208,7 +214,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2019</h6>
+                                <h6>Mô hình số độ cao (DEM) năm 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -220,7 +226,8 @@
 
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</h6>
+                                <h6>Dự báo sạt lở đường bờ bằng mô hình</h6>
+                                <!-- <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -232,7 +239,8 @@
 
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</h6>
+                                <h6>Dự báo sạt lở đường bờ bằng phương pháp trượt tổng thể </h6>
+                                <!-- <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -243,7 +251,8 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</h6>
+                                <!-- <h6>DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</h6> -->
+                                <h6>Diễn biến đường bờ bằng phương pháp viễn thám & GIS</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -252,9 +261,11 @@
                                 </label>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6>
+                                <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm 2030</h6>
+                                <!-- <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -265,7 +276,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2025</h6>
+                                <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm 2025</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -274,9 +285,10 @@
                                 </label>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-8">
-                                <h6>QUY HOẠCH KHAI THÁC CÁT</h6>
+                                <h6>Quy hoạch khai thác cát</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -287,7 +299,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <h6>ĐIỀU CHỈNH QUY HOẠCH KHAI THÁC CÁT</h6>
+                                <h6>Điều chỉnh quy hoạch khai thác cát</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -296,7 +308,19 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Thửa đất</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="thuadat" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
 
+                        
                         <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Bản đồ bổ sung và điều chỉnh các quy hoạch khai thác cát cho các khu vực trọng điểm
@@ -387,11 +411,11 @@
                         </div>
                         <div class="form-group">
                             <label for="input-info">Thông tin</label>
-                            <input class="form-control" id="input-info-show">
+                            <textarea class="form-control" id="input-info-show" rows="5"></textarea>
                         </div>
                         <div class="form-group">
-                            <label id="title-update">Thông tin</label>
-                            <input type="file" class="form-control-file" id="input-file-show" required>
+                            <label id="title-update"></label>
+                            <input type="file" multiple class="form-control-file" id="input-file-show" required>
                         </div>
                     </div>
                     <!-- <div class="img-slider">
@@ -409,11 +433,48 @@
                             </a>
                         </div>
                     </div> -->
-                    <div id="chart"></div>
+
                     <div class="d-flex" style="justify-content: center" id="container-update-btn">
                         <button class="btn btn-primary">Cập nhật</button>
                     
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="legend-panel" class="panel-container legend-panel">
+        <div>
+            <div class="d-flex panel-header">
+                <h5 class="card-title">Chú giải</h5>
+                <button type="button" id="close-legend-btn" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
+                <div class="container-content">
+                    <ul id="myUL">
+                        <li><span class="caret">Biến đổi lòng dẫn</span>
+                            <ul class="nested">
+                            <img src="/img/legend_biendoilongdan.png">
+                            </ul>
+                        </li>
+                        <li><span class="caret">Độ sâu địa hình đáy</span>
+                            <ul class="nested">
+                            <img src="/img/legend_dem.png">
+                            </ul>
+                        </li>
+                        <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS qua các năm</span>
+                            <ul class="nested">
+                            <img src="/img/legend_duongbo_gis.png">
+                            </ul>
+                        </li>
+                        <li><span class="caret">Dự báo sạt lở đường bờ bằng mô hình</span>
+                            <ul class="nested">
+                            <img src="/img/legend_ruiro_satlo.png">
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -435,15 +496,21 @@
                         </div>
                         <select class="custom-select" id="inputGroupSelectNameShp">
                             <!-- <option value="dangsau_2009_line">dangsau_2009_line</option> -->
-                            <option value="diemdosau_2009_point">ĐIỂM ĐỘ SÂU 2009</option>
-                            <option value="diemdosau_2019_point">ĐIỂM ĐỘ SÂU 2019</option>
-                            <option value="satlo_mohinhthuyluc_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</option>
-                            <option value="satlo_truottongthe_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</option>
-                            <option value="satloduongbo_gis_line">DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</option>
+                            <option value="diemks">Hình ảnh khảo sát thực địa 2019</option>
+                            <option value="doansl">Đoạn sạt lỡ</option>
+                            <option value="diemsl">Điểm mặt cắt khảo sát</option>
+                            <option value="quyhoach">Quy hoạch khai thác cát</option>
+                            <option value="quyhoach_diemgoc">Điểm gốc quy hoạch khai thác cát</option>
+                            <option value="quyhoach_dieuchinh">Điều chỉnh quy hoạch khai thác cát</option>
+                            <option value="quyhoach_dieuchinh_diemgoc">Điểm gốc điều chỉnh quy hoạch khai thác cát</option>
+                            <option value="thudat">Thửa đất</option>
+                            <!-- <option value="satlo_mohinhthuyluc_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</option> -->
+                            <!-- <option value="satlo_truottongthe_line">DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</option> -->
+                            <!-- <option value="satloduongbo_gis_line">DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</option> -->
                             <!-- <option value="u_diem_mc_moi">u_diem_mc_moi</option> -->
-                            <option value="u_anh">ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</option>
+                            <!-- <option value="u_anh">ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</option> -->
                             <!-- <option value="u_diem_sat_lo">u_diem_sat_lo</option> -->
-                            <option value="u_doan_sat_lo">ĐOẠN SẠT LỞ</option>
+                            <!-- <option value="u_doan_sat_lo">ĐOẠN SẠT LỞ</option> -->
                             <!-- <option value="u_tram_do_thuy_van">u_tram_do_thuy_van</option> -->
                         </select>
                     </div>
@@ -465,8 +532,11 @@
             </div>
         </div>
     </div>
-
-    <div class="swiper-container" id="swiper-container">
+    <div class="container-chart hidden" id="container-chart">
+        <h3 style="text-align: center;">Biểu đồ mặt cắt</h3>
+        <div id="chart"></div>
+    </div>
+    <div class="swiper-container hidden" id="swiper-container">
         <div class="img-slider">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" id="img-slider">

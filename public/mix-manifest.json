@@ -1,13 +1,21 @@
 {
     "/js/app.js": "/js/app.js?id=183aea015fdb5255890d",
     "/css/leaflet.elevation-0.0.4.css": "/css/leaflet.elevation-0.0.4.css?id=313369d1c85a21f7c223",
-    "/css/style.css": "/css/style.css?id=e2db647dd88525d72e06",
+    "/css/style.css": "/css/style.css?id=e3203c5842be35b76f52",
     "/css/app.css": "/css/app.css?id=43c5fc47f5f2748f45f5",
-    "/js/leaflet-elevation.js": "/js/leaflet-elevation.js?id=9d8d921fad62092e9d4f",
-    "/js/map.js": "/js/map.js?id=23c0cd0d8b30716a4594",
-    "/js/map-edit.js": "/js/map-edit.js?id=83ec82acb09db604140c",
+    "/js/d3.legend.js": "/js/d3.legend.js?id=84d606e58600d1829af7",
+    "/js/leaflet-elevation.js": "/js/leaflet-elevation.js?id=1e5e169bdf853001d35e",
+    "/js/map.js": "/js/map.js?id=74e06a66f1f02381aeb2",
+    "/js/map-edit.js": "/js/map-edit.js?id=88b3b59d7589d14ce2a1",
     "/img/elevation-lime.png": "/img/elevation-lime.png?id=14d3af42084644e13ff8",
     "/img/elevation-purple.png": "/img/elevation-purple.png?id=4f93072df9ade947cce0",
     "/img/elevation-steelblue.png": "/img/elevation-steelblue.png?id=10af95c429ebe58ad643",
-    "/img/icon-camera.png": "/img/icon-camera.png?id=61f328a43bae03cacdf3"
+    "/img/icon-camera.png": "/img/icon-camera.png?id=61f328a43bae03cacdf3",
+    "/img/icon-red.png": "/img/icon-red.png?id=36394273eef6485ede25",
+    "/img/legend_biendoilongdan.png": "/img/legend_biendoilongdan.png?id=a443adb3f6a24cd92196",
+    "/img/legend_dem.png": "/img/legend_dem.png?id=d133d1d9031a67181520",
+    "/img/legend_duongbo_gis.png": "/img/legend_duongbo_gis.png?id=2efc3bbd9e91a6a85a76",
+    "/img/legend_ruiro_satlo.png": "/img/legend_ruiro_satlo.png?id=b13d957d76b03b1d6c2a",
+    "/img/v_2010.webm": "/img/v_2010.webm?id=212ec163e682814806a8",
+    "/img/v_2013.webm": "/img/v_2013.webm?id=a9b215467bc06a6d2d72"
 }

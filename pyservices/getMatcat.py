@@ -1,10 +1,12 @@
-import pandas as pd
-from pandas import ExcelWriter
-from pandas import ExcelFile
+# # -*- coding: utf-8 -*-
+
+# import pandas as pd
+# from pandas import ExcelWriter
+# from pandas import ExcelFile
 import psycopg2
 import sys
 import json
-import datetime
+# import datetime
 pointid = sys.argv[1]
 
 conn = psycopg2.connect(host='localhost',
@@ -32,10 +34,13 @@ for row in result:
     for i in result0:
         khoangcach = i[0]
         dosau = i[1]
-        temp = {'khoangcach':str(khoangcach),'dosau':str(dosau)}
+        temp = {'khoangcach':khoangcach,'dosau':dosau}
         value.append(temp)
-    qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
-    done = {'thoigian':qparse,'values':value}
+    # qparse = datetime.datetime.strptime(q, "%Y-%m-%d").strftime("%d-%m-%Y")
+    done = {'thoigian':str(q),'values':value}
     final.append(done)
+# ENCODING = sys.stdout.encoding if sys.stdout.encoding else 'utf-8'
+# print unicode("<div class='line'>%s</div>" % l, encoding).encode(ENCODING)
+# print(final).encode(ENCODING)
 print(final)
 # print(json.dumps(final))
