@@ -381,12 +381,12 @@
             <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
                 <div class="container-content">
                     <ul id="myUL">
-                        <li><span class="caret">Biến đổi lòng dẫn</span>
+                        <li><span class="caret">Biến đổi lòng dẫn (m)</span>
                             <ul class="nested">
                             <img src='/images/legend_biendoilongdan.png'>
                             </ul>
                         </li>
-                        <li><span class="caret">Độ sâu địa hình đáy</span>
+                        <li><span class="caret">Độ sâu địa hình đáy (m)</span>
                             <ul class="nested">
                             <img src='/images/legend_dem.png'>
                             </ul>
