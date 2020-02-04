@@ -59,6 +59,7 @@
 </head>
 
 <body>
+
     <div id="map"></div>
     <a class="btn btn-light btn-login" href="/login">Đăng nhập</a>
     <a class="btn btn-light btn-3d" href="/3dmap">Bản đồ 3D</a>
@@ -74,7 +75,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
+            <div class="main-content-panel">
                 <div class="container-content">
                     <div id="layer-content">
                         <div class="row">
@@ -378,7 +379,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
+            <div class="main-content-panel">
                 <div class="container-content">
                     <ul id="myUL">
                         <li><span class="caret">Biến đổi lòng dẫn</span>
@@ -408,7 +409,7 @@
     </div>
 
     <div class="container-chart hidden" id="container-chart">
-        <h3 style="text-align: center;">Biểu đồ mặt cắt</h3>
+        <h3 style="text-align: center;" class="title-chart">Biểu đồ mặt cắt</h3>
         <div id="chart"></div>
     </div>
     <div class="swiper-container hidden" id="swiper-container">

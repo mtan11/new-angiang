@@ -21,7 +21,8 @@ let inputInfoShow = document.getElementById('input-info-show');
 let imgSlider = document.getElementById('img-slider');
 var swiperContainer = document.getElementById('swiper-container');
 var chartContainer = document.getElementById('container-chart');
-let api = '/';
+// let api = '/';
+let api = 'https://satlo-angiang.online/';
 let apiGeo = 'https://satlo-angiang.online:8443/';
 let lat = 0;
 let lng = 0;
@@ -395,11 +396,20 @@ function createD3Chart(response, year) {
         data = response.data.dem2009;
     }
     var x = window.matchMedia("(max-width: 1600px)");
+    var y = window.matchMedia("(max-width: 375px)");
     var width = 800;
     var height = 300;
-    if (x.matches) {
+    if (window.matchMedia("(max-width: 376px)").matches) {
+        console.log("1")
+        width = 300;
+        height = 180;
+    } else if (window.matchMedia("(max-width: 1600px)").matches) {
+        console.log("2")
         width = 400;
         height = 200;
+    } else {
+        width = 800;
+        height = 300;
     }
 
     // var height = 300;

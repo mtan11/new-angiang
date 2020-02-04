@@ -1,13 +1,10 @@
-body {
-    margin: 0;
-}
-
 html,
 body {
     height: 100%;
+    margin: 0;
     width: 100%;
     overflow: hidden;
-    /* margin: 0; */
+    position: relative;
 }
 
 #map {
@@ -27,7 +24,7 @@ body {
     height: 670px;
     margin: 10px 0px;
     background-color: #ffffff;
-    z-index: 999;
+    z-index: 9991;
     width: 400px;
     transition: 1s;
     &.legend-panel {
@@ -64,6 +61,12 @@ body {
     padding-top: 10px;
 }
 
+.main-content-panel {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 600px;
+}
+
 @media only screen and (max-width: 1600px) {
     .container-chart {
         width: 500px !important;
@@ -76,9 +79,6 @@ body {
 }
 
 @media screen and (max-width: 414px) {
-    .arrow-btn {
-        width: 50px !important;
-    }
     .container-chart {
         width: 375px !important;
     }
@@ -101,11 +101,28 @@ body {
 }
 
 @media screen and (max-width: 375px) {
+    .swiper-container {
+        width: 325px !important;
+        left: 5% !important;
+        bottom: 14% !important;
+        height: 200px !important;
+    }
+    .title-chart {
+        font-size: 15px;
+    }
     .container-chart {
-        width: 375px !important;
+        width: 325px !important;
+        left: 2% !important;
+        bottom: 14% !important;
+        height: 200px !important;
+    }
+    #swiper-container img {
+        height: 200px !important;
     }
     .panel-container {
-        width: 300px;
+        width: 360px;
+        height: 635px;
+        top: 0% !important;
     }
     .item-img {
         width: 50px !important;
