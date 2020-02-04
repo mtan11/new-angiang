@@ -70,7 +70,7 @@ checkmap.onAdd = function(e) {
     return div;
 };
 checkmap.addTo(map);
-document.getElementById('googlepic').addEventListener('click', function (e) {
+document.getElementById('googlepic').addEventListener('click', function(e) {
     map.removeLayer(basemap);
     map.addLayer(googleSat);
     googleSat.setZIndex(-1);
@@ -82,7 +82,7 @@ document.getElementById('googlepic').addEventListener('click', function (e) {
         buttonText[i].style.color = "#ffff";
     }
 });
-document.getElementById('basepic').addEventListener('click', function (e) {
+document.getElementById('basepic').addEventListener('click', function(e) {
     map.removeLayer(googleSat);
     map.addLayer(basemap);
     basemap.setZIndex(-1);
@@ -167,14 +167,13 @@ function closeLegendPanel() {
 
 function showLegendPanel() {
     legendPanel.style.right = '10px';
-    btnOpen.classList.add('hidden');
 }
 
 for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function() {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-  });
+    toggler[i].addEventListener("click", function() {
+        this.parentElement.querySelector(".nested").classList.toggle("active");
+        this.classList.toggle("caret-down");
+    });
 }
 
 function closePanel() {
@@ -204,12 +203,12 @@ function uploadShpFIle() {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        .then(function (response) {
+        .then(function(response) {
             //handle success
             alert('Cập nhật dữ liệu thành công');
             console.log(response);
         })
-        .catch(function (response) {
+        .catch(function(response) {
             //handle error
             alert('Có lỗi xảy ra trong quá trình cập nhật');
             console.log(response);
@@ -261,12 +260,12 @@ function acceptEditInfo() {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
                     alert('Cập nhật điểm thành công');
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     console.log(response);
                 });
@@ -282,12 +281,12 @@ function acceptEditInfo() {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
                     alert('Cập nhật điểm thành công');
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     console.log(response);
                 });
@@ -303,7 +302,7 @@ function getMarker() {
             method: 'get',
             url: url,
         })
-        .then(function (response) {
+        .then(function(response) {
             let diemanhks = response.data.diemanhks;
             let diemsl = response.data.diemsl;
             let doansl = response.data.doansl;
@@ -351,7 +350,7 @@ function getMarker() {
             };
             for (var i = 0; i < markerGotSL.length; i++) {
                 let mar = L.geoJson(markerGotSL[i], {
-                    pointToLayer: function (feature, latlng) {
+                    pointToLayer: function(feature, latlng) {
                         return L.marker(latlng, {
                             icon: ksIcon
                         });
@@ -378,7 +377,7 @@ function getMarker() {
             };
             for (var i = 0; i < markerGot.length; i++) {
                 let mar = L.geoJson(markerGot[i], {
-                   
+
                     onEachFeature: clickMarkerKS.bind(this),
                 });
                 arrMarkers.addLayer(mar);
@@ -394,7 +393,7 @@ getMarker();
 // map.on('click', addMarker);
 
 function clickMarkerKS(feature, layer) {
-    layer.on('click', function (e) {
+    layer.on('click', function(e) {
         showPanel();
         chartContainer.classList.add('hidden');
         let url = api + 'api/update-data-diemks';
@@ -441,13 +440,13 @@ function clickMarkerKS(feature, layer) {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
                     alert('Cập nhật dữ liệu thành công');
                     file.value = '';
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     alert('Có lỗi xảy ra trong quá trình cập nhật');
                     console.log(response);
@@ -470,7 +469,7 @@ function clickMarkerKS(feature, layer) {
 }
 
 function clickMarkerSL(feature, layer) {
-    layer.on('click', function (e) {
+    layer.on('click', function(e) {
         showPanel();
         swiperContainer.classList.add('hidden');
         let url = api + 'api/update-data-diemsl';
@@ -492,7 +491,7 @@ function clickMarkerSL(feature, layer) {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then(function (response) {
+            .then(function(response) {
                 //handle success
                 console.log(response.data);
                 if (response.data.length < 1) {
@@ -503,7 +502,7 @@ function clickMarkerSL(feature, layer) {
                 createD3Chart(response);
 
             })
-            .catch(function (response) {
+            .catch(function(response) {
                 //handle error
                 console.log(response);
             });
@@ -531,14 +530,14 @@ function clickMarkerSL(feature, layer) {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
-                    
+
                     file.value = '';
                     alert('Cập nhật dữ liệu thành công');
                     console.log(file);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     alert('Có lỗi xảy ra trong quá trình cập nhật');
                     console.log(response);
@@ -574,8 +573,8 @@ function createD3Chart(response) {
     var maxY = 0;
     /* Format Data */
     // var parseDate = d3.timeParse("%Y");
-    data.forEach(function (d) {
-        d.values.forEach(function (d) {
+    data.forEach(function(d) {
+        d.values.forEach(function(d) {
             maxX = (d.khoangcach > maxX) ? d.khoangcach : maxX;
             maxY = (d.dosau < maxY) ? d.dosau : maxY;
         });
@@ -588,7 +587,7 @@ function createD3Chart(response) {
         .range([0, width - margin]);
 
     var yScale = d3.scaleLinear()
-        .domain([maxY, 0 ])
+        .domain([maxY, 0])
         .range([height - margin, 0]);
 
     var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -613,7 +612,7 @@ function createD3Chart(response) {
         .data(data).enter()
         .append('g')
         .attr('class', 'line-group')
-        .on("mouseover", function (d, i) {
+        .on("mouseover", function(d, i) {
             svg.append("text")
                 .attr("class", "title-text")
                 .style("fill", color(i))
@@ -622,7 +621,7 @@ function createD3Chart(response) {
                 .attr("x", (width - margin) / 2)
                 .attr("y", 5);
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", function(d) {
             svg.select(".title-text").remove();
         })
         .append('path')
@@ -630,7 +629,7 @@ function createD3Chart(response) {
         .attr('d', d => line(d.values))
         .style('stroke', (d, i) => color(i))
         .style('opacity', lineOpacity)
-        .on("mouseover", function (d) {
+        .on("mouseover", function(d) {
             d3.selectAll('.line')
                 .style('opacity', otherLinesOpacityHover);
             d3.selectAll('.circle')
@@ -640,7 +639,7 @@ function createD3Chart(response) {
                 .style("stroke-width", lineStrokeHover)
                 .style("cursor", "pointer");
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", function(d) {
             d3.selectAll(".line")
                 .style('opacity', lineOpacity);
             d3.selectAll('.circle')
@@ -660,7 +659,7 @@ function createD3Chart(response) {
         .data(d => d.values).enter()
         .append("g")
         .attr("class", "circle")
-        .on("mouseover", function (d) {
+        .on("mouseover", function(d) {
             d3.select(this)
                 .style("cursor", "pointer")
                 .append("text")
@@ -669,7 +668,7 @@ function createD3Chart(response) {
                 .attr("x", d => xScale(d.khoangcach) + 5)
                 .attr("y", d => yScale(d.dosau) - 10);
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", function(d) {
             d3.select(this)
                 .style("cursor", "none")
                 .transition()
@@ -681,13 +680,13 @@ function createD3Chart(response) {
         .attr("cy", d => yScale(d.dosau))
         .attr("r", circleRadius)
         .style('opacity', circleOpacity)
-        .on("mouseover", function (d) {
+        .on("mouseover", function(d) {
             d3.select(this)
                 .transition()
                 .duration(duration)
                 .attr("r", circleRadiusHover);
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", function(d) {
             d3.select(this)
                 .transition()
                 .duration(duration)
@@ -725,8 +724,8 @@ function createD3Chart(response) {
 }
 
 function clickLineSL(feature, layer) {
-    layer.setStyle({color:'blue'});
-    layer.on('mouseover', function (e) {
+    layer.setStyle({ color: 'blue' });
+    layer.on('mouseover', function(e) {
         // var popup = e.target.getPopup();
         // popup.setLatLng(e.latlng).openOn(mymap);
 
@@ -735,13 +734,13 @@ function clickLineSL(feature, layer) {
             weight: weightLineHover,
         });
     });
-    layer.on('mouseout', function (e) {
+    layer.on('mouseout', function(e) {
         this.setStyle({
             color: 'blue',
             weight: 3,
         });
     });
-    layer.on('click', function (e) {
+    layer.on('click', function(e) {
         showPanel();
         chartContainer.classList.add('hidden');
         let url = api + 'api/update-data-doansl';
@@ -791,13 +790,13 @@ function clickLineSL(feature, layer) {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(function (response) {
+                .then(function(response) {
                     //handle success
                     file.value = '';
                     alert('Cập nhật dữ liệu thành công');
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch(function(response) {
                     //handle error
                     alert('Có lỗi xảy ra trong quá trình cập nhật');
                     console.log(response);
@@ -822,7 +821,7 @@ function clickLineSL(feature, layer) {
 
 
 function clickMarker(feature, layer) {
-    layer.on('click', function (e) {
+    layer.on('click', function(e) {
         showPanel();
         let url = api + 'api/get-matcat-by-pointid/' + feature.properties.Id;
         console.log(feature.properties);
@@ -851,18 +850,18 @@ function clickMarker(feature, layer) {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then(function (response) {
+            .then(function(response) {
                 //handle success
                 console.log(response.data);
 
                 console.log(data)
-                // let data = [];
-                // data.push(response.data);
+                    // let data = [];
+                    // data.push(response.data);
                 createChart(response.data);
 
                 // console.log(data);
             })
-            .catch(function (response) {
+            .catch(function(response) {
                 //handle error
                 console.log(response);
             });
@@ -1066,7 +1065,7 @@ let dangsau_2009_line = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let diemdosau_2019_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2019_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let diemdosau_2019_point = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2019_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 // let diemdosau_2019_point = L.tileLayer.wms(geoserver, {
 //     Format: 'image/png',
@@ -1076,7 +1075,7 @@ let diemdosau_2019_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=
 //     SRS: 'EPSG:900913',
 //     maxZoom: 21
 // })
-let diemdosau_2009_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2009_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let diemdosau_2009_point = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Adiemdosau_2009_point&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 
 // let diemdosau_2009_point = L.tileLayer.wms(geoserver, {
@@ -1088,7 +1087,7 @@ let diemdosau_2009_point = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=
 //     maxZoom: 21
 // })
 
-let satlo_mohinhthuyluc_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_mohinhthuyluc_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let satlo_mohinhthuyluc_line = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_mohinhthuyluc_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 
 // let satlo_mohinhthuyluc_line = L.tileLayer.wms(geoserver, {
@@ -1100,7 +1099,7 @@ let satlo_mohinhthuyluc_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?la
 //     maxZoom: 21
 // })
 
-let satlo_truottongthe_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_truottongthe_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let satlo_truottongthe_line = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Asatlo_truottongthe_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 
 // let satlo_truottongthe_line = L.tileLayer.wms(geoserver, {
@@ -1112,7 +1111,7 @@ let satlo_truottongthe_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?lay
 //     maxZoom: 21
 // })
 
-let satloduongbo_gis_line = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Asatloduongbo_gis_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let satloduongbo_gis_line = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Asatloduongbo_gis_line&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 // let satloduongbo_gis_line = L.tileLayer.wms(geoserver, {
 //     Format: 'image/png',
@@ -1169,7 +1168,7 @@ let u_tram_do_thuy_van = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
-let dem_2009 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adem_2009&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let dem_2009 = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Adem_2009&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 
 // let dem_2009 = L.tileLayer.wms(geoserver, {
@@ -1181,7 +1180,7 @@ let dem_2009 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Ade
 //     maxZoom: 21
 // })
 
-let dem_2019 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adem_2019&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let dem_2019 = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Adem_2019&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 // let dem_2019 = L.tileLayer.wms(geoserver, {
 //     Format: 'image/png',
@@ -1208,8 +1207,8 @@ let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     maxZoom: 21
 })
 
-let du_bao_long_dan_2030 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2030&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
-let du_bao_long_dan_2025 = L.tileLayer(apiGeo+'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2025&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let du_bao_long_dan_2030 = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2030&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
+let du_bao_long_dan_2025 = L.tileLayer(apiGeo + 'geoserver/gwc/service/wmts?layer=angiang%3Adu_bao_long_dan_2025&style=&tilematrixset=EPSG%3A900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A900913%3A{z}&TileCol={x}&TileRow={y}');
 
 // let du_bao_long_dan_2030 = L.tileLayer.wms(geoserver, {
 //     Format: 'image/png',
@@ -1316,7 +1315,7 @@ $("#du_bao_long_dan_2030").on('change', function() {
 $("#du_bao_long_dan_2025").on('change', function() {
     toggleLayer(du_bao_long_dan_2050, map, this.checked);
 });
-$("#thuadat").on('change', function () {
+$("#thuadat").on('change', function() {
     toggleLayer(thuadat, map, this.checked);
 });
 
@@ -1356,14 +1355,14 @@ var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 var results = L.layerGroup().addTo(map);
 
 // listen for the results event and add every result to the map
-searchControl.on("results", function (data) {
+searchControl.on("results", function(data) {
     results.clearLayers();
     for (var i = data.results.length - 1; i >= 0; i--) {
         results.addLayer(L.marker(data.results[i].latlng));
     }
 });
 let self = this;
-map.on('pm:create', function (e) {
+map.on('pm:create', function(e) {
     console.log(e.layer.getLatLngs());
     let latlng = '';
     let url = api + 'api/get-matcat'
@@ -1387,12 +1386,12 @@ map.on('pm:create', function (e) {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        .then(function (response) {
+        .then(function(response) {
             //handle success
             alert('Cập nhật điểm thành công');
             console.log(response);
         })
-        .catch(function (response) {
+        .catch(function(response) {
             //handle error
             console.log(response);
         });

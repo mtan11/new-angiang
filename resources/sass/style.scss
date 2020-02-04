@@ -31,7 +31,7 @@ body {
     width: 400px;
     transition: 1s;
     &.legend-panel {
-        right: -450px ;
+        right: -450px;
     }
 }
 
@@ -73,8 +73,54 @@ body {
         width: 500px !important;
         height: 300px !important;
     }
+}
 
-  }
+@media screen and (max-width: 414px) {
+    .arrow-btn {
+        width: 50px !important;
+    }
+    .container-chart {
+        width: 375px !important;
+    }
+    .panel-container {
+        width: 300px;
+    }
+    .item-img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    .btn-2010 {
+        top: 55px !important;
+    }
+    .btn-2013 {
+        top: 55px !important;
+    }
+    .btn-legend {
+        top: 100px !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .container-chart {
+        width: 375px !important;
+    }
+    .panel-container {
+        width: 300px;
+    }
+    .item-img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .btn-2010 {
+        top: 55px !important;
+    }
+    .btn-2013 {
+        top: 55px !important;
+    }
+    .btn-legend {
+        top: 100px !important;
+    }
+}
 
 .container-chart {
     width: 900px;
@@ -155,6 +201,7 @@ body {
     width: 115px;
     z-index: 1000;
 }
+
 .btn-2013 {
     position: absolute;
     top: 70px;
@@ -162,6 +209,7 @@ body {
     right: 170px;
     z-index: 1000;
 }
+
 .btn-legend {
     position: absolute;
     top: 120px;
@@ -169,6 +217,7 @@ body {
     right: 45px;
     z-index: 1000;
 }
+
 .btn-legend-edit {
     position: absolute;
     top: 60px;
@@ -307,41 +356,46 @@ svg {
     font-size: 12px;
 }
 
-
-ul, #myUL {
+ul,
+#myUL {
     list-style-type: none;
-  }
-  
-  #myUL {
+}
+
+#myUL {
     margin: 0;
     padding: 0;
-  }
-  
-  .caret {
+}
+
+.caret {
     cursor: pointer;
-    -webkit-user-select: none; /* Safari 3.1+ */
-    -moz-user-select: none; /* Firefox 2+ */
-    -ms-user-select: none; /* IE 10+ */
+    -webkit-user-select: none;
+    /* Safari 3.1+ */
+    -moz-user-select: none;
+    /* Firefox 2+ */
+    -ms-user-select: none;
+    /* IE 10+ */
     user-select: none;
-  }
-  
-  .caret::before {
+}
+
+.caret::before {
     content: "\25B6";
     color: black;
     display: inline-block;
     margin-right: 6px;
-  }
-  
-  .caret-down::before {
-    -ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Safari */
-    transform: rotate(90deg);  
-  }
-  
-  .nested {
+}
+
+.caret-down::before {
+    -ms-transform: rotate(90deg);
+    /* IE 9 */
+    -webkit-transform: rotate(90deg);
+    /* Safari */
+    transform: rotate(90deg);
+}
+
+.nested {
     display: none;
-  }
-  
-  .active {
+}
+
+.active {
     display: block;
-  }
+}
