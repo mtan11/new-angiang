@@ -382,24 +382,24 @@
             <div class="main-content-panel">
                 <div class="container-content">
                     <ul id="myUL">
-                        <li><span class="caret">Biến đổi lòng dẫn</span>
+                        <li><span class="caret">Biến đổi lòng dẫn (m)</span>
                             <ul class="nested">
-                            <img src="/img/legend_biendoilongdan.png">
+                            <img src='/images/legend_biendoilongdan.png'>
                             </ul>
                         </li>
-                        <li><span class="caret">Độ sâu địa hình đáy</span>
+                        <li><span class="caret">Độ sâu địa hình đáy (m)</span>
                             <ul class="nested">
-                            <img src="/img/legend_dem.png">
+                            <img src='/images/legend_dem.png'>
                             </ul>
                         </li>
                         <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS qua các năm</span>
                             <ul class="nested">
-                            <img src="/img/legend_duongbo_gis.png">
+                            <img src='/images/legend_duongbo_gis.png'>
                             </ul>
                         </li>
                         <li><span class="caret">Dự báo sạt lở đường bờ bằng mô hình</span>
                             <ul class="nested">
-                            <img src="/img/legend_ruiro_satlo.png">
+                            <img src='/images/legend_ruiro_satlo.png'>
                             </ul>
                         </li>
                     </ul>
