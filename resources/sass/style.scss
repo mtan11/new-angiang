@@ -79,6 +79,17 @@ body {
 }
 
 @media screen and (max-width: 414px) {
+    .btn {
+        width: 100px !important;
+    }
+    .btn-2013, .btn-2010, .btn-3d, .btn-login ,.leaflet-pm-toolbar {
+        display: none;
+    }
+    .btn-legend {
+        right: 10px !important;
+        top: 10px !important;
+
+    }
     .swiper-container {
         width: 370px !important;
         left: 5% !important;
@@ -105,15 +116,6 @@ body {
     .item-img {
         width: 50px !important;
         height: 50px !important;
-    }
-    .btn-2010 {
-        top: 55px !important;
-    }
-    .btn-2013 {
-        top: 55px !important;
-    }
-    .btn-legend {
-        top: 100px !important;
     }
 }
 
@@ -152,23 +154,10 @@ body {
     .btn-2013 {
         top: 55px !important;
     }
-    .btn-legend {
-        top: 100px !important;
-    }
 }
 
 @media screen and (max-width: 320px) {
-    .btn {
-        width: 100px !important;
-    }
-    .btn-2013, .btn-2010, .btn-3d, .btn-login ,.leaflet-pm-toolbar {
-        display: none;
-    }
-    .btn-legend {
-        right: 10px !important;
-        top: 10px !important;
 
-    }
     .swiper-container {
         width: 280px !important;
         left: 5% !important;
