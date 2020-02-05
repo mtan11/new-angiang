@@ -84,7 +84,7 @@
     <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     <a class="btn btn-light btn-legend-edit" id="btn-legend">Chú giải</a>
     <div id="map"></div>
-    <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
+    <div id="show-btn" class="arrow-btn"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel-update" class="panel-container-update">
         <div>
             <div class="d-flex panel-header">

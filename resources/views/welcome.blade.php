@@ -66,7 +66,7 @@
     <a class="btn btn-light btn-2010" href="/vantoc2010">Bản đồ 2010</a>
     <a class="btn btn-light btn-2013" href="/vantoc2013">Bản đồ 2013</a>
     <a class="btn btn-light btn-legend" id="btn-legend">Chú giải</a>
-    <div id="show-btn" class="arrow-btn hidden"><i class="fa fa-angle-double-left"></i></div>
+    <div id="show-btn" class="arrow-btn"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel" class="panel-container">
         <div>
             <div class="d-flex panel-header">

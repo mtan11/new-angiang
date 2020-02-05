@@ -19,7 +19,7 @@ body {
 .panel-container {
     position: absolute;
     top: 25%;
-    right: 10px;
+    right: -450px;
     border-radius: 5px;
     height: 670px;
     margin: 10px 0px;
@@ -79,15 +79,32 @@ body {
 }
 
 @media screen and (max-width: 414px) {
+    .swiper-container {
+        width: 370px !important;
+        left: 5% !important;
+        bottom: 20% !important;
+        height: 220px !important;
+    }
+    .title-chart {
+        font-size: 15px;
+    }
     .container-chart {
-        width: 375px !important;
+        width: 380px !important;
+        left: 5% !important;
+        bottom: 25% !important;
+        height: 200px !important;
+    }
+    #swiper-container img {
+        height: 220px !important;
     }
     .panel-container {
-        width: 300px;
+        width: 395px;
+        height: 635px;
+        top: 0% !important;
     }
     .item-img {
-        width: 70px !important;
-        height: 70px !important;
+        width: 50px !important;
+        height: 50px !important;
     }
     .btn-2010 {
         top: 55px !important;
@@ -99,6 +116,7 @@ body {
         top: 100px !important;
     }
 }
+
 
 @media screen and (max-width: 375px) {
     .swiper-container {
@@ -139,6 +157,76 @@ body {
     }
 }
 
+@media screen and (max-width: 320px) {
+    .btn {
+        width: 100px !important;
+    }
+    .btn-2013, .btn-2010, .btn-3d, .btn-login ,.leaflet-pm-toolbar {
+        display: none;
+    }
+    .btn-legend {
+        right: 10px !important;
+        top: 10px !important;
+
+    }
+    .swiper-container {
+        width: 280px !important;
+        left: 5% !important;
+        bottom: 14% !important;
+        height: 200px !important;
+    }
+    .title-chart {
+        font-size: 15px;
+    }
+    .container-chart {
+        width: 280px !important;
+        left: 5% !important;
+        bottom: 14% !important;
+        height: 200px !important;
+    }
+    #swiper-container img {
+        height: 200px !important;
+    }
+    .panel-container {
+        width: 300px;
+        height: 635px;
+        top: 0% !important;
+    }
+    .item-img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .btn-2010 {
+        top: 55px !important;
+    }
+    .btn-2013 {
+        top: 55px !important;
+    }
+}
+
+
+@media screen and (min-height: 823px) {
+    .swiper-container {
+        width: 335px !important;
+        left: 5% !important;
+        bottom: 10% !important;
+        height: 200px !important;
+    }
+    .container-chart {
+        width: 335px !important;
+        left: 2% !important;
+        bottom: 10% !important;
+        height: 200px !important;
+    }
+    #swiper-container img {
+        height: 200px !important;
+    }
+    .panel-container {
+        width: 360px;
+        height: 635px;
+        top: 19% !important;
+    }
+}
 .container-chart {
     width: 900px;
     padding: 10px;
