@@ -28,7 +28,7 @@ Route::post('/update-data-doansl', 'PostgresController@updateDataDoanSL');
 Route::post('/upload-shapefile','PostgresController@uploadShapeFile');
 Route::get('/get-all-data','PostgresController@getAllData');
 Route::get('/get-matcat-by-pointid/{pointid}','PostgresController@getMatCatByPointID');
-Route::post('/get-matcat','PostgresController@getMatCat');
+Route::post('/get-matcat/{dem}','PostgresController@getMatCat');
 
 Route::get('/download-data','PostgresController@downloadData');
 // Route::get('/quick-assign-role','UserController@makeRoleAndAssign');
