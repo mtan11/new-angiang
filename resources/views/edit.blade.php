@@ -332,6 +332,28 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
+                                <h6>Ranh nguy hiểm</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="ranh_nguyhiem" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Vành đai an toàn</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="vanhdai_antoan" type="checkbox" >
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
                                 <h6>Thửa đất</h6>
                             </div>
                             <div class="col-4">

@@ -1253,6 +1253,22 @@ let duongbinhdo_dangsau2009 = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
+let vanhdai_antoan = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:vanhdai_antoan',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
+let ranh_nguyhiem = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:ranh_nguyhiem',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
 let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:dieu_chinh_quy_hoach_th',
@@ -1366,6 +1382,12 @@ $("#duongbinhdo_dangsau2019").on('change', function () {
 });
 $("#duongbinhdo_dangsau2009").on('change', function () {
     toggleLayer(duongbinhdo_dangsau2009, map, this.checked);
+});
+$("#ranh_nguyhiem").on('change', function () {
+    toggleLayer(ranh_nguyhiem, map, this.checked);
+});
+$("#vanhdai_antoan").on('change', function () {
+    toggleLayer(vanhdai_antoan, map, this.checked);
 });
 $("#dieu_chinh_quy_hoach_th").on('change', function() {
     toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
