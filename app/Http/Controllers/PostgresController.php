@@ -219,8 +219,16 @@ class PostgresController extends Controller
 
     public function insertDataDoanSL(Request $request)
     {
-        $name = $request->name;
-        $info = $request->info;
+        #'photos','tendoan','mota','stt','diadiem','chieudai','kc_nguyhiem','kc_antoan','tocdo','mucdo','shape_leng','geom'
+        $tendoan = $request->tendoan;
+        $mota = $request->mota;
+        $stt = $request->stt;
+        $diadiem = $request->diadiem;
+        $chieudai = $request->chieudai;
+        $kc_nguyhiem = $request->kc_nguyhiem;
+        $kc_antoan = $request->kc_antoan;
+        $tocdo = $request->tocdo;
+        $mucdo = $request->mucdo;
         $xy = $request->xy;
         $photos = $request->file('photos');
         // $photomc = $request->file('photomc');
@@ -234,11 +242,16 @@ class PostgresController extends Controller
                 'img' => []
                 // 'imgmc' => []
             )),
-            'name' => $name,
-            'info' => $info,
-            'geom' => DB::raw("st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($point)'),32648)")
-
-            
+            'tendoan' => $tendoan,
+            'mota' => $mota,
+            'stt' => $stt,
+            'diadiem' => $diadiem,
+            'chieudai' => $chieudai,
+            'kc_nguyhiem' => $kc_nguyhiem,
+            'kc_antoan' => $kc_antoan,
+            'tocdo' => $tocdo,
+            'mucdo' => $mucdo,
+            'geom' => DB::raw("st_transform(GeomFromEWKT('SRID=4326;LINESTRING ($point)'),32648)"),
         ]);
 
         $photos = $request->file('photos');
@@ -266,7 +279,8 @@ class PostgresController extends Controller
         $data->update([
             'photos' => json_encode(array(
                 'img' => $photoFiles
-            ))]);
+            )),
+            'shape_leng' => DB::raw("ST_Length(geom)"),]);
         
         // $excelextension = $excelmc->getClientOriginalExtension();
         // $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
@@ -280,10 +294,15 @@ class PostgresController extends Controller
 
     public function updateDataDoanSL(Request $request)
     {
-        $id = $request->id;
-        $name = $request->name;
-        $info = $request->info;
-        // $xy = $request->xy;
+        $tendoan = $request->tendoan;
+        $mota = $request->mota;
+        $stt = $request->stt;
+        $diadiem = $request->diadiem;
+        $chieudai = $request->chieudai;
+        $kc_nguyhiem = $request->kc_nguyhiem;
+        $kc_antoan = $request->kc_antoan;
+        $tocdo = $request->tocdo;
+        $mucdo = $request->mucdo;
         $photos = $request->file('photos');
         // $photomc = $request->file('photomc');
         // $excelmc = $request->file('excelmc');
@@ -296,8 +315,15 @@ class PostgresController extends Controller
             //     'img' => []
             //     // 'imgmc' => []
             // )),
-            'name' => $name,
-            'info' => $info,
+            'tendoan' => $tendoan,
+            'mota' => $mota,
+            'stt' => $stt,
+            'diadiem' => $diadiem,
+            'chieudai' => $chieudai,
+            'kc_nguyhiem' => $kc_nguyhiem,
+            'kc_antoan' => $kc_antoan,
+            'tocdo' => $tocdo,
+            'mucdo' => $mucdo,
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
         $select = DoanSatLo::find($id);
@@ -422,7 +448,7 @@ class PostgresController extends Controller
         $diemsl = DB::connection('pgsql')->select(
             "select gid, name, info, ST_Asgeojson(ST_Transform(geom,4326)) from diem_khao_sat_mat_cat_ngang");
         $doansl = DB::connection('pgsql')->select(
-            "select gid, name, info, photos, ST_Asgeojson(ST_Transform(geom,4326)) from doan_sat_lo");
+            "select gid,photos,tendoan,mota,stt,diadiem,chieudai,kc_nguyhiem,kc_antoan,tocdo,mucdo,shape_leng, ST_Asgeojson(ST_Transform(geom,4326)) from doan_sat_lo");
         
         $result = (object) array(
             'diemanhks' => $diemanhks,
