@@ -31,3 +31,4 @@ Route::get('/get-matcat-by-pointid/{pointid}','PostgresController@getMatCatByPoi
 Route::post('/get-matcat','PostgresController@getMatCat');
 
 Route::get('/download-data','PostgresController@downloadData');
+// Route::get('/quick-assign-role','UserController@makeRoleAndAssign');
