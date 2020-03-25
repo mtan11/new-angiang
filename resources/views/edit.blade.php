@@ -310,6 +310,28 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
+                                <h6>Đường đẳng sâu 2019</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="duongbinhdo_dangsau2019" type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>Đường đẳng sâu 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="duongbinhdo_dangsau2009" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
                                 <h6>Thửa đất</h6>
                             </div>
                             <div class="col-4">
@@ -404,7 +426,7 @@
                     </div>
                 </div>
                 <div id="info-content" class="hidden">
-                    <div class="container-form" style="padding: 10px;">
+                    <div class="container-form" style="padding: 10px;" id="form-marker">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
                             <input class="form-control" id="input-name-show">
@@ -416,6 +438,48 @@
                         <div class="form-group">
                             <label id="title-update"></label>
                             <input type="file" multiple class="form-control-file" id="input-file-show" required>
+                        </div>
+                    </div>
+                    <div class="container-form" style="padding: 10px;" id="form-doansl">
+                        <div class="form-group">
+                            <label for="input-name">Tên</label>
+                            <textarea class="form-control" id="input-doan-show"  rows="2"> </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-name">Số thứ tự</label>
+                            <textarea class="form-control" id="input-stt-show"  rows="1"> </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Mô tả</label>
+                            <textarea class="form-control" id="input-mota-show"  rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Địa điểm</label>
+                            <textarea class="form-control" id="input-diadiem-show"  rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Chiều dài</label>
+                            <textarea class="form-control" id="input-chieudai-show"  rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Khoảng cách nguy hiểm</label>
+                            <textarea class="form-control" id="input-kcnguyhiem-show"  rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Khoảng cách an toàn</label>
+                            <textarea class="form-control" id="input-kcnantoan-show"  rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Tốc độ</label>
+                            <textarea class="form-control" id="input-tocdo-show"  rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Mức độ</label>
+                            <textarea class="form-control" id="input-mucdo-show" rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label id="title-update"></label>
+                            <input type="file" multiple class="form-control-file" id="input-file-doan-show" required>
                         </div>
                     </div>
                     <!-- <div class="img-slider">

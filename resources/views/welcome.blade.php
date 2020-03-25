@@ -102,10 +102,9 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Điểm khảo sát mặt cắt ngang thường xuyên</h6>
-                                <!-- <h6>ĐIỂM KHẢO SÁT MẶT CẮT NGANG THƯỜNG XUYÊN</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -113,11 +112,10 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
-                        <div class="row">
+                        </div> -->
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Điểm độ sâu 2009</h6>
-                                <!-- <h6>ĐIỂM ĐỘ SÂU 2009</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -139,7 +137,6 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <!-- <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6> -->
                                 <h6>Mô hình số độ cao (DEM) năm 2009</h6>
                             </div>
                             <div class="col-4">
@@ -164,7 +161,6 @@
                         <div class="row">
                             <div class="col-8">
                                 <h6>Dự báo sạt lở đường bờ bằng mô hình</h6>
-                                <!-- <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG MÔ HÌNH</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -177,7 +173,6 @@
                         <div class="row">
                             <div class="col-8">
                                 <h6>Dự báo sạt lở đường bờ bằng phương pháp trượt tổng thể </h6>
-                                <!-- <h6>DỰ BÁO SẠT LỞ ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP TRƯỢT TỔNG THỂ</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -188,7 +183,6 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <!-- <h6>DIỄN BIẾN ĐƯỜNG BỜ BẰNG PHƯƠNG PHÁP VIỄN THÁM & GIS</h6> -->
                                 <h6>Diễn biến đường bờ bằng phương pháp viễn thám & GIS</h6>
                             </div>
                             <div class="col-4">
@@ -202,7 +196,6 @@
                         <div class="row">
                             <div class="col-8">
                                 <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm 2030</h6>
-                                <!-- <h6>DỰ BÁO BIẾN HÌNH LÒNG DẪN BẰNG MÔ HÌNH ĐẾN NĂM 2030</h6> -->
                             </div>
                             <div class="col-4">
                                 <label class="switch">
@@ -221,20 +214,31 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-8">
-                                <h6>Quy hoạch khai thác cát</h6>
+                                <h6>Đường đẳng sâu 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="quy_hoach_khai_thac_cat_th" type="checkbox">
+                                    <input id="duongbinhdo_dangsau2019" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-8">
+                                <h6>Đường đẳng sâu 2009</h6>
+                            </div>
+                            <div class="col-4">
+                                <label class="switch">
+                                    <input id="duongbinhdo_dangsau2009" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Điều chỉnh quy hoạch khai thác cát</h6>
                             </div>
@@ -245,7 +249,7 @@
                                 </label>
                             </div>
                         </div> -->
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Thửa đất</h6>
                             </div>
@@ -255,7 +259,7 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <!-- <div class="row">
@@ -341,7 +345,7 @@
                     </div>
                 </div>
                 <div id="info-content" class="hidden">
-                    <div class="container-form" style="padding: 10px;">
+                    <div class="container-form" style="padding: 10px;" id="form-marker">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
                             <textarea class="form-control" id="input-name-show" disabled rows="2"> </textarea>
@@ -351,21 +355,41 @@
                             <textarea class="form-control" id="input-info-show" disabled rows="4"></textarea>
                         </div>
                     </div>
-                    <!-- <div class="img-slider">
-                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner" id="img-slider">
-
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                    <div class="container-form" style="padding: 10px;" id="form-doansl">
+                        <div class="form-group">
+                            <label for="input-name">Tên</label>
+                            <textarea class="form-control" id="input-doan-show" disabled rows="2"> </textarea>
                         </div>
-                    </div> -->
+                        <div class="form-group">
+                            <label for="input-info">Mô tả</label>
+                            <textarea class="form-control" id="input-mota-show" disabled rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Địa điểm</label>
+                            <textarea class="form-control" id="input-diadiem-show" disabled rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Chiều dài</label>
+                            <textarea class="form-control" id="input-chieudai-show" disabled rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Khoảng cách nguy hiểm</label>
+                            <textarea class="form-control" id="input-kcnguyhiem-show" disabled rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Khoảng cách an toàn</label>
+                            <textarea class="form-control" id="input-kcnantoan-show" disabled rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Tốc độ</label>
+                            <textarea class="form-control" id="input-tocdo-show" disabled rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Mức độ</label>
+                            <textarea class="form-control" id="input-mucdo-show" disabled rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div id="button-image-slider" class="text-center"><button class="btn btn-info">Click vào để xem hình ảnh</button></div>
                 </div>
             </div>
         </div>

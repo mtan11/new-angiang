@@ -17,6 +17,15 @@ let inputName = document.getElementById('input-name');
 let inputNameShow = document.getElementById('input-name-show');
 let inputInfo = document.getElementById('input-info');
 let inputInfoShow = document.getElementById('input-info-show');
+var inputDoanShow = document.getElementById('input-doan-show');
+var inputSttShow = document.getElementById('input-stt-show');
+var inputMotaShow = document.getElementById('input-mota-show');
+var inputDiadiemShow = document.getElementById('input-diadiem-show');
+var inputChieudaiShow = document.getElementById('input-chieudai-show');
+var inputKcnguyhiemShow = document.getElementById('input-kcnguyhiem-show');
+var inputKcantoanShow = document.getElementById('input-kcnantoan-show');
+var inputTocdoShow = document.getElementById('input-tocdo-show');
+var inputMucdoShow = document.getElementById('input-mucdo-show');
 let imgSlider = document.getElementById('img-slider');
 let btnCloseUpdate = document.getElementById('close-update-btn');
 var imgContainer = document.getElementById('container-img');
@@ -29,6 +38,8 @@ let btnUploadShpFile = document.getElementById('btn-upload-shp-file');
 let titleUpdate = document.getElementById('title-update');
 let updateBtnContainer = document.getElementById('container-update-btn');
 let containerInfoInsert = document.getElementById('container-info-insert');
+var containerFormMarker = document.getElementById('form-marker');
+var containerFormDoanSL = document.getElementById('form-doansl');
 // let api = '/';
 let api = 'https://satlo-angiang.online/';
 let apiGeo = 'https://satlo-angiang.online:8443/';
@@ -320,8 +331,15 @@ function getMarker() {
                         coordinates: JSON.parse(doansl[i].st_asgeojson).coordinates
                     },
                     properties: {
-                        Name: doansl[i].name,
-                        Info: doansl[i].info,
+                        Name: doansl[i].tendoan,
+                        Info: doansl[i].mota,
+                        Stt: doansl[i].stt,
+                        Diadiem: doansl[i].diadiem,
+                        Chieudai: doansl[i].chieudai,
+                        Kcnguyhiem: doansl[i].kc_nguyhiem,
+                        Kcantoan: doansl[i].kc_antoan,
+                        Tocdo: doansl[i].tocdo,
+                        Mucdo: doansl[i].mucdo,
                         Id: doansl[i].gid,
                         Photos: doansl[i].photos
                     }
@@ -401,6 +419,8 @@ function clickMarkerKS(feature, layer) {
         console.log(feature.properties);
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        containerFormMarker.classList.remove('hidden');
+        containerFormDoanSL.classList.add('hidden');
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
@@ -478,6 +498,8 @@ function clickMarkerSL(feature, layer) {
         console.log(feature.properties);
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        containerFormMarker.classList.remove('hidden');
+        containerFormDoanSL.classList.add('hidden');
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
@@ -748,11 +770,20 @@ function clickLineSL(feature, layer) {
         console.log(feature.properties);
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        containerFormMarker.classList.add('hidden');
+        containerFormDoanSL.classList.remove('hidden');
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
-        inputNameShow.value = feature.properties.Name;
-        inputInfoShow.value = feature.properties.Info;
+        inputDoanShow.value = feature.properties.Name;
+        inputMotaShow.value = feature.properties.Info;
+        inputDiadiemShow.value = feature.properties.Diadiem;
+        inputChieudaiShow.value = feature.properties.Chieudai;
+        inputKcnguyhiemShow.value = feature.properties.Kcnguyhiem;
+        inputKcantoanShow.value = feature.properties.Kcantoan;
+        inputTocdoShow.value = feature.properties.Tocdo;
+        inputSttShow.value = feature.properties.Stt;
+        inputMucdoShow.value = feature.properties.Mucdo;
         titleUpdate.innerHTML = 'Chọn ảnh';
 
         if (feature.properties.Photos == null) {
@@ -773,9 +804,16 @@ function clickLineSL(feature, layer) {
             var bodyFormData = new FormData();
             var name = document.getElementById('input-name-show');
             var descr = document.getElementById('input-info-show');
-            var file = document.getElementById('input-file-show');
-            bodyFormData.set('name', name.value);
-            bodyFormData.set('info', descr.value);
+            var file = document.getElementById('input-file-doan-show');
+            bodyFormData.set('tendoan', inputDoanShow.value);
+            bodyFormData.set('mota', inputMotaShow.value);
+            bodyFormData.set('stt', inputSttShow.value);
+            bodyFormData.set('diadiem', inputDiadiemShow.value);
+            bodyFormData.set('chieudai', inputChieudaiShow.value);
+            bodyFormData.set('kc_nguyhiem', inputKcnguyhiemShow.value);
+            bodyFormData.set('kc_antoan', inputKcantoanShow.value);
+            bodyFormData.set('tocdo', inputTocdoShow.value);
+            bodyFormData.set('mucdo', inputMucdoShow.value);
             bodyFormData.set('id', id);
             if (file.files.length != 0) {
                 for (let i = 0; i < file.files.length; i++) {
@@ -1199,6 +1237,22 @@ let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
+let duongbinhdo_dangsau2019 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:duongbinhdo_dangsau2019',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+}).addTo(map);
+let duongbinhdo_dangsau2009 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:duongbinhdo_dangsau2009',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+})
 let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
     Layers: 'angiang:dieu_chinh_quy_hoach_th',
@@ -1306,6 +1360,12 @@ $("#dem_2019").on('change', function() {
 });
 $("#quy_hoach_khai_thac_cat_th").on('change', function() {
     toggleLayer(quy_hoach_khai_thac_cat_th, map, this.checked);
+});
+$("#duongbinhdo_dangsau2019").on('change', function () {
+    toggleLayer(duongbinhdo_dangsau2019, map, this.checked);
+});
+$("#duongbinhdo_dangsau2009").on('change', function () {
+    toggleLayer(duongbinhdo_dangsau2009, map, this.checked);
 });
 $("#dieu_chinh_quy_hoach_th").on('change', function() {
     toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);

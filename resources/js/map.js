@@ -18,9 +18,21 @@ let inputName = document.getElementById('input-name');
 let inputInfo = document.getElementById('input-info');
 let inputNameShow = document.getElementById('input-name-show');
 let inputInfoShow = document.getElementById('input-info-show');
+var inputDoanShow = document.getElementById('input-doan-show');
+var inputMotaShow = document.getElementById('input-mota-show');
+var inputDiadiemShow = document.getElementById('input-diadiem-show');
+var inputChieudaiShow = document.getElementById('input-chieudai-show');
+var inputKcnguyhiemShow = document.getElementById('input-kcnguyhiem-show');
+var inputKcantoanShow = document.getElementById('input-kcnantoan-show');
+var inputTocdoShow = document.getElementById('input-tocdo-show');
+var inputMucdoShow = document.getElementById('input-mucdo-show');
+
+var btnShowImageSlider = document.getElementById('button-image-slider');
 let imgSlider = document.getElementById('img-slider');
 var swiperContainer = document.getElementById('swiper-container');
 var chartContainer = document.getElementById('container-chart');
+var containerFormMarker = document.getElementById('form-marker');
+var containerFormDoanSL = document.getElementById('form-doansl');
 // let api = '/';
 let api = 'https://satlo-angiang.online/';
 let apiGeo = 'https://satlo-angiang.online:8443/';
@@ -113,6 +125,11 @@ btnOpen.addEventListener('click', showPanel.bind(this));
 legendBtn.addEventListener('click', showLegendPanel.bind(this));
 btnCloseLegend.addEventListener('click', closeLegendPanel.bind(this));
 // btnSubmit.addEventListener('click', acceptEditInfo.bind(this));
+btnShowImageSlider.addEventListener('click', showImagesSlider.bind(this));
+
+function showImagesSlider() {
+    swiperContainer.classList.remove('hidden');
+}
 
 //tree view
 var toggler = document.getElementsByClassName("caret");
@@ -205,8 +222,14 @@ function getMarker() {
                         coordinates: JSON.parse(doansl[i].st_asgeojson).coordinates
                     },
                     properties: {
-                        Name: doansl[i].name,
-                        Info: doansl[i].info,
+                        Name: doansl[i].tendoan,
+                        Info: doansl[i].mota,
+                        Diadiem: doansl[i].diadiem,
+                        Chieudai: doansl[i].chieudai,
+                        Kcnguyhiem: doansl[i].kc_nguyhiem,
+                        Kcantoan: doansl[i].kc_antoan,
+                        Tocdo: doansl[i].tocdo,
+                        Mucdo: doansl[i].mucdo,
                         Id: doansl[i].gid,
                         Photos: doansl[i].photos
                     }
@@ -234,17 +257,17 @@ function getMarker() {
                     }
                 });
             };
-            for (var i = 0; i < markerGotSL.length; i++) {
-                let mar = L.geoJson(markerGotSL[i], {
-                    pointToLayer: function (feature, latlng) {
-                        return L.marker(latlng, {
-                            icon: ksIcon
-                        });
-                    },
-                    onEachFeature: clickMarkerSL.bind(this),
-                });
-                arrSatLo.addLayer(mar);
-            }
+            // for (var i = 0; i < markerGotSL.length; i++) {
+            //     let mar = L.geoJson(markerGotSL[i], {
+            //         pointToLayer: function (feature, latlng) {
+            //             return L.marker(latlng, {
+            //                 icon: ksIcon
+            //             });
+            //         },
+            //         onEachFeature: clickMarkerSL.bind(this),
+            //     });
+            //     arrSatLo.addLayer(mar);
+            // }
             for (var i = 0; i < diemanhks.length; i++) {
                 // console.log(diemanhks[i]);
                 markerGot.push({
@@ -318,6 +341,8 @@ function clickMarkerKS(feature, layer) {
         console.log(feature.properties);
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        containerFormMarker.classList.remove('hidden');
+        containerFormDoanSL.classList.add('hidden');
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
@@ -325,9 +350,11 @@ function clickMarkerKS(feature, layer) {
         inputInfoShow.value = feature.properties.Info;
 
         if (feature.properties.Photos == null) {
+            btnShowImageSlider.classList.add('hidden');
             swiperContainer.classList.add('hidden');
         } else {
-            swiperContainer.classList.remove('hidden');
+            btnShowImageSlider.classList.remove('hidden');
+            // swiperContainer.classList.remove('hidden');
         }
         let photo = [];
         if (feature.properties.Photos != null) {
@@ -358,6 +385,9 @@ function clickMarkerSL(feature, layer) {
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
+        btnShowImageSlider.classList.add('hidden');
+        containerFormMarker.classList.remove('hidden');
+        containerFormDoanSL.classList.add('hidden');
         imgSlider.innerHTML = '';
         inputNameShow.value = feature.properties.Name;
         inputInfoShow.value = feature.properties.Info;
@@ -371,15 +401,12 @@ function clickMarkerSL(feature, layer) {
             })
             .then(function (response) {
                 //handle success
-                console.log(response.data);
                 if (response.data.length < 1) {
                     chartContainer.classList.add('hidden');
                 } else {
                     chartContainer.classList.remove('hidden');
                 }
                 createD3Chart(response);
-                console.log(response.data);
-
             })
             .catch(function (response) {
                 //handle error
@@ -793,16 +820,27 @@ function clickLineSL(feature, layer) {
         console.log(feature.properties);
         let id = feature.properties.Id;
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
+        containerFormMarker.classList.add('hidden');
+        containerFormDoanSL.classList.remove('hidden');
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
         imgSlider.innerHTML = '';
-        inputNameShow.value = feature.properties.Name;
-        inputInfoShow.value = feature.properties.Info;
+        inputDoanShow.value = feature.properties.Name;
+        inputMotaShow.value = feature.properties.Info;
+        inputDiadiemShow.value = feature.properties.Diadiem;
+        inputChieudaiShow.value = feature.properties.Chieudai;
+        inputKcnguyhiemShow.value = feature.properties.Kcnguyhiem;
+        inputKcantoanShow.value = feature.properties.Kcantoan;
+        inputTocdoShow.value = feature.properties.Tocdo;
+        inputMucdoShow.value = feature.properties.Mucdo;
 
         if (feature.properties.Photos == null) {
             swiperContainer.classList.add('hidden');
+            btnShowImageSlider.classList.add('hidden');
+
         } else {
-            swiperContainer.classList.remove('hidden');
+            btnShowImageSlider.classList.remove('hidden');
+            // swiperContainer.classList.remove('hidden');
         }
         let photo = [];
         if (feature.properties.Photos != null) {
@@ -1018,9 +1056,17 @@ let quy_hoach_khai_thac_cat_th = L.tileLayer.wms(geoserver, {
     SRS: 'EPSG:900913',
     maxZoom: 21
 })
-let dieu_chinh_quy_hoach_th = L.tileLayer.wms(geoserver, {
+let duongbinhdo_dangsau2019 = L.tileLayer.wms(geoserver, {
     Format: 'image/png',
-    Layers: 'angiang:dieu_chinh_quy_hoach_th',
+    Layers: 'angiang:duongbinhdo_dangsau2019',
+    Version: '1.1.1',
+    Transparent: true,
+    SRS: 'EPSG:900913',
+    maxZoom: 21
+}).addTo(map);
+let duongbinhdo_dangsau2009 = L.tileLayer.wms(geoserver, {
+    Format: 'image/png',
+    Layers: 'angiang:duongbinhdo_dangsau2009',
     Version: '1.1.1',
     Transparent: true,
     SRS: 'EPSG:900913',
@@ -1106,9 +1152,9 @@ $("#satlotruottongthe").on('change', function () {
 $("#satloduongbo").on('change', function () {
     toggleLayer(satloduongbo_gis_line, map, this.checked);
 });
-$("#diemanh").on('change', function () {
-    toggleLayer(arrSatLo, map, this.checked);
-});
+// $("#diemanh").on('change', function () {
+//     toggleLayer(arrSatLo, map, this.checked);
+// });
 $("#diemmatcatmoi").on('change', function () {
     toggleLayer(u_diem_mc_moi, map, this.checked);
 });
@@ -1130,8 +1176,11 @@ $("#dem_2019").on('change', function () {
 $("#quy_hoach_khai_thac_cat_th").on('change', function () {
     toggleLayer(quy_hoach_khai_thac_cat_th, map, this.checked);
 });
-$("#dieu_chinh_quy_hoach_th").on('change', function () {
-    toggleLayer(dieu_chinh_quy_hoach_th, map, this.checked);
+$("#duongbinhdo_dangsau2019").on('change', function () {
+    toggleLayer(duongbinhdo_dangsau2019, map, this.checked);
+});
+$("#duongbinhdo_dangsau2009").on('change', function () {
+    toggleLayer(duongbinhdo_dangsau2009, map, this.checked);
 });
 $("#du_bao_long_dan_2030").on('change', function () {
     toggleLayer(du_bao_long_dan_2030, map, this.checked);
