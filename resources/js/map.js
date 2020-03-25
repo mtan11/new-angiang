@@ -215,6 +215,10 @@ function getMarker() {
             let markerGotSL = [];
             for (var i = 0; i < doansl.length; i++) {
                 // console.log(diemanhks[i]);
+                if(doansl[i].mucdo == "Rất nguy hiểm") {
+                    
+                }
+
                 doanGotSL.push({
                     type: 'Feature',
                     geometry: {
@@ -792,15 +796,25 @@ function createD3ChartDraw(response) {
 }
 
 function clickLineSL(feature, layer) {
-    layer.setStyle({
-        color: 'blue'
-    });
+    if(feature.properties.Mucdo == "Rất nguy hiểm") {
+        layer.setStyle({
+            color: 'red'
+        });
+    } else if(feature.properties.Mucdo == "Nguy hiểm") {
+        layer.setStyle({
+            color: 'yellow'
+        });
+    } else {
+        layer.setStyle({
+            color: 'blue'
+        });
+    }
+    
     layer.on('mouseover', function (e) {
         // var popup = e.target.getPopup();
         // popup.setLatLng(e.latlng).openOn(mymap);
 
         this.setStyle({
-            color: 'red',
             weight: weightLineHover,
         });
     });
@@ -809,7 +823,6 @@ function clickLineSL(feature, layer) {
         // popup.setLatLng(e.latlng).openOn(mymap);
 
         this.setStyle({
-            color: 'blue',
             weight: 3,
         });
     });
