@@ -1219,7 +1219,15 @@ function onMarkerClick(e) {
     console.log(e);
 }
 map.addControl(new L.Control.Fullscreen());
-L.control.ruler().addTo(map);
+var optionsRuler = {
+    lengthUnit: {
+      factor: 0.539956803,    //  from km to nm
+      display: 'meters',
+      decimal: 2,
+      label: 'Khoảng cách'
+    }
+  };
+L.control.ruler(optionsRuler).addTo(map);
 L.control.locate().addTo(map);
 // add leaflet.pm controls with some options to the map
 map.pm.addControls({
