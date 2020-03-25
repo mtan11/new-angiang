@@ -285,7 +285,7 @@
                                 </label>
                             </div>
                         </div>
-                        @role(admin)
+                        @role('admin')
                         <div class="row">
                             <div class="col-8">
                                 <h6>Quy hoạch khai thác cát</h6>
@@ -354,7 +354,7 @@
                                 </label>
                             </div>
                         </div>
-                        @role(admin)
+                        @role('admin')
                         <div class="row">
                             <div class="col-8">
                                 <h6>Thửa đất</h6>
@@ -588,7 +588,7 @@
                             <option value="diemks">Hình ảnh khảo sát thực địa 2019</option>
                             <option value="doansl">Đoạn sạt lỡ</option>
                             <option value="diemsl">Điểm mặt cắt khảo sát</option>
-                            @role(admin)
+                            @role('admin')
                             <option value="quyhoach">Quy hoạch khai thác cát</option>
                             <option value="quyhoach_dieuchinh">Điều chỉnh quy hoạch khai thác cát</option>
                             @endrole
