@@ -231,7 +231,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Đường đẳng sâu 2009</h6>
                             </div>
@@ -241,7 +241,7 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Điều chỉnh quy hoạch khai thác cát</h6>
