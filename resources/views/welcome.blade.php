@@ -454,7 +454,7 @@
     </div>
 
     <div class="container-chart hidden" id="container-chart">
-        <h3 style="text-align: center;" class="title-chart">Biểu đồ mặt cắt</h3>
+        <h3 style="text-align: center;" class="title-chart">Biểu đồ mặt cắt <text id="year-matcat"></text></h3>
         <div id="chart"></div>
     </div>
 

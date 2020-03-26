@@ -40,6 +40,8 @@ let updateBtnContainer = document.getElementById('container-update-btn');
 let containerInfoInsert = document.getElementById('container-info-insert');
 var containerFormMarker = document.getElementById('form-marker');
 var containerFormDoanSL = document.getElementById('form-doansl');
+var yearMatCat = document.getElementById('year-matcat');
+
 // let api = '/';
 let api = 'https://satlo-angiang.online/';
 let apiGeo = 'https://satlo-angiang.online:8443/';
@@ -749,15 +751,15 @@ function createD3Chart(response) {
 function clickLineSL(feature, layer) {
     if(feature.properties.Mucdo == "Rất nguy hiểm") {
         layer.setStyle({
-            color: 'red'
+            color: '#ff3c00'
         });
     } else if(feature.properties.Mucdo == "Nguy hiểm") {
         layer.setStyle({
-            color: 'yellow'
+            color: '#ffbf00'
         });
     } else {
         layer.setStyle({
-            color: 'blue'
+            color: '#ff7b00'
         });
     }
     layer.on('mouseover', function(e) {
@@ -1458,10 +1460,12 @@ var btnMc2019 = document.getElementById('btn-mc-2019');
 btnMc2009.addEventListener('click', () => {
     btnDrawLine.click();
     namMatCat = 2009;
+    yearMatCat.innerHTML = '2009';
 })
 btnMc2019.addEventListener('click', () => {
     btnDrawLine.click();
     namMatCat = 2019;
+    yearMatCat.innerHTML = '2019';
 })
 // create an empty layer group to store the results and add it to the map
 var results = L.layerGroup().addTo(map);

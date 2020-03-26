@@ -26,7 +26,7 @@ var inputKcnguyhiemShow = document.getElementById('input-kcnguyhiem-show');
 var inputKcantoanShow = document.getElementById('input-kcnantoan-show');
 var inputTocdoShow = document.getElementById('input-tocdo-show');
 var inputMucdoShow = document.getElementById('input-mucdo-show');
-
+var yearMatCat = document.getElementById('year-matcat');
 // var btnShowImageSlider = document.getElementById('button-image-slider');
 let imgSlider = document.getElementById('img-slider');
 var swiperContainer = document.getElementById('swiper-container');
@@ -798,15 +798,15 @@ function createD3ChartDraw(response) {
 function clickLineSL(feature, layer) {
     if(feature.properties.Mucdo == "Rất nguy hiểm") {
         layer.setStyle({
-            color: 'red'
+            color: '#ff3c00'
         });
     } else if(feature.properties.Mucdo == "Nguy hiểm") {
         layer.setStyle({
-            color: 'yellow'
+            color: '#ffbf00'
         });
     } else {
         layer.setStyle({
-            color: 'blue'
+            color: '#ff7b00'
         });
     }
     
@@ -1257,10 +1257,12 @@ var btnMc2019 = document.getElementById('btn-mc-2019');
 btnMc2009.addEventListener('click', () => {
     btnDrawLine.click();
     namMatCat = 2009;
+    yearMatCat.innerHTML = '2009';
 })
 btnMc2019.addEventListener('click', () => {
     btnDrawLine.click();
     namMatCat = 2019;
+    yearMatCat.innerHTML = '2019';
 })
 // create an empty layer group to store the results and add it to the map
 var results = L.layerGroup().addTo(map);
