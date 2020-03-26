@@ -63,11 +63,11 @@ let urlImg = '/storage/uploadedimages/';
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
     maxZoom: 21,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
+}).addTo(map);
 let basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 21,
     id: 'mapbox.streets'
-}).addTo(map);
+});
 
 //Switch base map
 var checkmap = L.control({
@@ -77,12 +77,12 @@ checkmap.onAdd = function (e) {
     var div = L.DomUtil.create('div');
     div.innerHTML = `
   <div value="basemap" id="switchwrapper" class="switchwrapper">
-  <figure id="googlepic" class="item-wrapper">
+  <figure id="googlepic" class="item-wrapper" style="display: none;">
   <figcaption class="item-title">
   <span class="item-text">Vệ tinh</span></figcaption>
   <img class="item-img" src="/images/earth-layer.png" alt="Bản đồ" title="Satellite">
   </figure>
-  <figure id="basepic" class="item-wrapper" style="display: none;">
+  <figure id="basepic" class="item-wrapper" >
   <figcaption class="item-title">
   <span class="item-text">Bản đồ</span></figcaption>
   <img class="item-img" src="/images/base-layer.png" alt="Mapbox" title="Base map">
@@ -299,7 +299,7 @@ function getMarker() {
                 });
                 arrMarkers.addLayer(mar);
             }
-            arrMarkers.addTo(map);
+            // arrMarkers.addTo(map);
             arrSatLo.addTo(map);
             arrDoanSL.addTo(map);
         });

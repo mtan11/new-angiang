@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="rungngapman" type="checkbox" checked>
+                                    <input id="rungngapman" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>

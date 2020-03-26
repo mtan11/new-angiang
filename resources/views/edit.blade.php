@@ -81,7 +81,7 @@
     </div> --}}
 
     @endauth
-    <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
+    <a class="btn btn-light btn-upload" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     <a class="btn btn-light btn-legend-edit" id="btn-legend">Chú giải</a>
     <a class="btn btn-success btn-2009" id="btn-mc-2009">2009</a>
     <a class="btn btn-success btn-2019" id="btn-mc-2019">2019</a>
