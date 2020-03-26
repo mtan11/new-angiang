@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="{{ mix('css/leaflet.elevation-0.0.4.css') }}" />
     <script type="text/javascript" src="{{ mix('js/leaflet-elevation.js') }}"></script>
@@ -426,7 +426,7 @@
             <div class="main-content-panel">
                 <div class="container-content">
                     <ul id="myUL">
-                        <li><span class="caret">Biến đổi lòng dẫn (m)</span>
+                        <li><span class="caret">Biến đổi lòng dẫn (Giá trị dương: bồi, giá trị âm: xói) (m)</span>
                             <ul class="nested">
                                 <img src='/images/legend_biendoilongdan.png'>
                             </ul>
@@ -442,7 +442,7 @@
                                 <img src='/images/legend_duongbo_gis.png'>
                             </ul>
                         </li>
-                        <li><span class="caret">Dự báo sạt lở đường bờ bằng mô hình</span>
+                        <li><span class="caret">Dự báo sạt lở đường bờ</span>
                             <ul class="nested">
                                 <img src='/images/legend_ruiro_satlo.png'>
                             </ul>

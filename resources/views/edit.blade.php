@@ -544,7 +544,7 @@
             <div id="" style="overflow-y:scroll; overflow-x:hidden; height:600px;">
                 <div class="container-content">
                     <ul id="myUL">
-                        <li><span class="caret">Biến đổi lòng dẫn (m)</span>
+                        <li><span class="caret">Biến đổi lòng dẫn (Giá trị dương: bồi, giá trị âm: xói) (m)</span>
                             <ul class="nested">
                             <img src="/images/legend_biendoilongdan.png">
                             </ul>
@@ -559,7 +559,7 @@
                             <img src="/images/legend_duongbo_gis.png">
                             </ul>
                         </li>
-                        <li><span class="caret">Dự báo sạt lở đường bờ bằng mô hình</span>
+                        <li><span class="caret">Dự báo sạt lở đường bờ</span>
                             <ul class="nested">
                             <img src="/images/legend_ruiro_satlo.png">
                             </ul>
