@@ -355,7 +355,7 @@ body {
 }
 
 .swiper-container {
-    width: 600px;
+    // width: 600px;
     height: 300px;
     z-index: 9999;
     // position: absolute;
@@ -396,6 +396,10 @@ body {
     cursor: pointer;
     width: 30px;
     transition: 2s;
+}
+
+label {
+    font-weight: bold;
 }
 
 .btn-login {
