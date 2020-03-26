@@ -16,6 +16,10 @@ body {
     display: none !important;
 }
 
+.leaflet-pm-toolbar {
+    display: none;
+}
+
 .panel-container {
     position: absolute;
     top: 25%;
@@ -70,10 +74,10 @@ body {
 
 @media screen and (max-height: 823px) {
     .swiper-container {
-        width: 335px !important;
-        left: 5% !important;
-        bottom: 10% !important;
-        height: 200px !important;
+        // width: 335px !important;
+        // left: 5% !important;
+        // bottom: 10% !important;
+        // height: 200px !important;
     }
 
     .container-chart {
@@ -83,9 +87,9 @@ body {
         height: 200px !important;
     }
 
-    #swiper-container img {
-        height: 200px !important;
-    }
+    // #swiper-container img {
+    //     height: 200px !important;
+    // }
 
     .panel-container {
         width: 360px;
@@ -101,15 +105,15 @@ body {
         left: 30% !important;
     }
 
-    #swiper-container img {
-        height: 300px !important;
-    }
+    // #swiper-container img {
+    //     height: 300px !important;
+    // }
 
-    .swiper-container {
-        width: 500px !important;
-        height: 300px !important;
-        left: 30% !important;
-    }
+    // .swiper-container {
+    //     width: 500px !important;
+    //     height: 300px !important;
+    //     // left: 30% !important;
+    // }
 }
 
 @media screen and (max-width: 425px) {
@@ -131,12 +135,12 @@ body {
 
     }
 
-    .swiper-container {
-        width: 370px !important;
-        left: 5% !important;
-        bottom: 20% !important;
-        height: 220px !important;
-    }
+    // .swiper-container {
+    //     width: 370px !important;
+    //     // left: 5% !important;
+    //     // bottom: 20% !important;
+    //     height: 220px !important;
+    // }
 
     .title-chart {
         font-size: 15px;
@@ -149,9 +153,9 @@ body {
         height: 200px !important;
     }
 
-    #swiper-container img {
-        height: 220px !important;
-    }
+    // #swiper-container img {
+    //     height: 220px !important;
+    // }
 
     .panel-container {
         width: 395px;
@@ -184,12 +188,12 @@ body {
 
     }
 
-    .swiper-container {
-        width: 370px !important;
-        left: 5% !important;
-        bottom: 20% !important;
-        height: 220px !important;
-    }
+    // .swiper-container {
+    //     width: 370px !important;
+    //     // left: 5% !important;
+    //     bottom: 20% !important;
+    //     height: 220px !important;
+    // }
 
     .title-chart {
         font-size: 15px;
@@ -202,9 +206,9 @@ body {
         height: 200px !important;
     }
 
-    #swiper-container img {
-        height: 220px !important;
-    }
+    // #swiper-container img {
+    //     height: 220px !important;
+    // }
 
     .panel-container {
         width: 395px;
@@ -220,12 +224,12 @@ body {
 
 
 @media screen and (max-width: 375px) {
-    .swiper-container {
-        width: 325px !important;
-        left: 5% !important;
-        bottom: 14% !important;
-        height: 200px !important;
-    }
+    // .swiper-container {
+    //     width: 325px !important;
+    //     // left: 5% !important;
+    //     // bottom: 14% !important;
+    //     height: 200px !important;
+    // }
 
     .title-chart {
         font-size: 15px;
@@ -238,9 +242,9 @@ body {
         height: 200px !important;
     }
 
-    #swiper-container img {
-        height: 200px !important;
-    }
+    // #swiper-container img {
+    //     height: 200px !important;
+    // }
 
     .panel-container {
         width: 360px;
@@ -262,12 +266,12 @@ body {
     }
 }
 @media screen and (max-width: 375px) and (max-height: 850px) {
-    .swiper-container {
-        width: 325px !important;
-        left: 5% !important;
-        bottom: 15% !important;
-        height: 200px !important;
-    }
+    // .swiper-container {
+    //     width: 325px !important;
+    //     // left: 5% !important;
+    //     // bottom: 15% !important;
+    //     height: 200px !important;
+    // }
     .container-chart {
         width: 280px !important;
         left: 2% !important;
@@ -277,12 +281,12 @@ body {
 }
 
 @media screen and (max-width: 375px) and (max-height: 765px) {
-    .swiper-container {
-        width: 325px !important;
-        left: 5% !important;
-        bottom: 15% !important;
-        height: 200px !important;
-    }
+    // .swiper-container {
+    //     width: 325px !important;
+    //     // left: 5% !important;
+    //     // bottom: 15% !important;
+    //     height: 200px !important;
+    // }
     .container-chart {
         width: 280px !important;
         left: 2% !important;
@@ -294,12 +298,12 @@ body {
 
 @media screen and (max-width: 320px) {
 
-    .swiper-container {
-        width: 280px !important;
-        left: 6% !important;
-        bottom: 3% !important;
-        height: 200px !important;
-    }
+    // .swiper-container {
+    //     width: 280px !important;
+    //     // left: 6% !important;
+    //     // bottom: 3% !important;
+    //     height: 200px !important;
+    // }
 
     .title-chart {
         font-size: 15px;
@@ -312,9 +316,9 @@ body {
         height: 200px !important;
     }
 
-    #swiper-container img {
-        height: 200px !important;
-    }
+    // #swiper-container img {
+    //     height: 200px !important;
+    // }
 
     .panel-container {
         width: 300px;
@@ -354,9 +358,9 @@ body {
     width: 600px;
     height: 300px;
     z-index: 9999;
-    position: absolute;
-    bottom: 10px;
-    left: 30%;
+    // position: absolute;
+    // bottom: 10px;
+    // left: 30%;
 }
 
 .swiper-slide {
@@ -402,9 +406,24 @@ body {
     z-index: 1000;
 }
 
+.btn-2009{
+    position: absolute;
+    top: 170px;
+    left: 5px;
+    width: 60px;
+    z-index: 1000;
+}
+.btn-2019{
+    position: absolute;
+    top: 220px;
+    left: 5px;
+    width: 60px;
+    z-index: 1000;
+}
+
 .btn-3d {
     position: absolute;
-    top: 10px;
+    top: 120px;
     right: 45px;
     width: 115px;
     z-index: 1000;
@@ -428,10 +447,11 @@ body {
 
 .btn-legend {
     position: absolute;
-    top: 120px;
+   
     width: 115px;
-    right: 45px;
     z-index: 1000;
+    top: 10px;
+    right: 45px;
 }
 
 .btn-legend-edit {

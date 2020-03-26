@@ -401,7 +401,7 @@ function getMarker() {
                 });
                 arrMarkers.addLayer(mar);
             }
-            arrMarkers.addTo(map);
+            // arrMarkers.addTo(map);
             arrSatLo.addTo(map);
             arrDoanSL.addTo(map);
         });
@@ -1435,8 +1435,8 @@ function onMarkerClick(e) {
 map.addControl(new L.Control.Fullscreen());
 var optionsRuler = {
     lengthUnit: {
-      factor: 0.539956803,    //  from km to nm
-      display: 'meters',
+      factor: 1000,    //  from km to nm
+      display: 'm',
       decimal: 2,
       label: 'Khoảng cách'
     }
@@ -1451,7 +1451,18 @@ map.pm.addControls({
 
 // create the geocoding control and add it to the map
 var searchControl = L.esri.Geocoding.geosearch().addTo(map);
-
+var namMatCat = 2009;
+var btnDrawLine = document.getElementsByClassName('leaflet-pm-icon-polyline')[0];
+var btnMc2009 = document.getElementById('btn-mc-2009');
+var btnMc2019 = document.getElementById('btn-mc-2019');
+btnMc2009.addEventListener('click', () => {
+    btnDrawLine.click();
+    namMatCat = 2009;
+})
+btnMc2019.addEventListener('click', () => {
+    btnDrawLine.click();
+    namMatCat = 2019;
+})
 // create an empty layer group to store the results and add it to the map
 var results = L.layerGroup().addTo(map);
 
@@ -1467,6 +1478,11 @@ map.on('pm:create', function(e) {
     console.log(e.layer.getLatLngs());
     let latlng = '';
     let url = api + 'api/get-matcat'
+    if( namMatCat == 2009) {
+        url = api + 'api/get-matcat/dem2009';
+    } else {
+        url = api + 'api/get-matcat/dem2019';
+    }
     var bodyFormData = new FormData();
     let coordinates = e.layer.getLatLngs();
     for (let i = 0; i < coordinates.length; i++) {
@@ -1481,7 +1497,7 @@ map.on('pm:create', function(e) {
     bodyFormData.set('linestring', latlngmc);
     axios({
             method: 'post',
-            url: urlKS,
+            url: url,
             data: bodyFormData,
             headers: {
                 'Content-Type': 'multipart/form-data'

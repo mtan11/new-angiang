@@ -83,6 +83,8 @@
     @endauth
     <a class="btn btn-light btn-3d" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     <a class="btn btn-light btn-legend-edit" id="btn-legend">Chú giải</a>
+    <a class="btn btn-success btn-2009" id="btn-mc-2009">2009</a>
+    <a class="btn btn-success btn-2019" id="btn-mc-2019">2019</a>
     <div id="map"></div>
     <div id="show-btn" class="arrow-btn"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel-update" class="panel-container-update">
@@ -148,7 +150,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="rungngapman" type="checkbox" checked>
+                                    <input id="rungngapman" type="checkbox" >
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -200,9 +202,8 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-8">
-                                <!-- <h6>MÔ HÌNH SỐ ĐỘ CAO (DEM) NĂM 2009</h6> -->
                                 <h6>Mô hình số độ cao (DEM) năm 2009</h6>
                             </div>
                             <div class="col-4">
@@ -222,7 +223,7 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                             <div class="col-8">
@@ -548,11 +549,11 @@
                             <img src="/images/legend_biendoilongdan.png">
                             </ul>
                         </li>
-                        <li><span class="caret">Độ sâu địa hình đáy (m)</span>
+                        <!-- <li><span class="caret">Độ sâu địa hình đáy (m)</span>
                             <ul class="nested">
                             <img src="/images/legend_dem.png">
                             </ul>
-                        </li>
+                        </li> -->
                         <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS qua các năm</span>
                             <ul class="nested">
                             <img src="/images/legend_duongbo_gis.png">

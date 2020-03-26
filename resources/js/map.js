@@ -27,7 +27,7 @@ var inputKcantoanShow = document.getElementById('input-kcnantoan-show');
 var inputTocdoShow = document.getElementById('input-tocdo-show');
 var inputMucdoShow = document.getElementById('input-mucdo-show');
 
-var btnShowImageSlider = document.getElementById('button-image-slider');
+// var btnShowImageSlider = document.getElementById('button-image-slider');
 let imgSlider = document.getElementById('img-slider');
 var swiperContainer = document.getElementById('swiper-container');
 var chartContainer = document.getElementById('container-chart');
@@ -60,7 +60,7 @@ let geoserver = 'https://satlo-angiang.online:8443/geoserver/angiang/wms';
 let urlImg = '/storage/uploadedimages/';
 
 
-let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
     maxZoom: 21,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 });
@@ -125,7 +125,7 @@ btnOpen.addEventListener('click', showPanel.bind(this));
 legendBtn.addEventListener('click', showLegendPanel.bind(this));
 btnCloseLegend.addEventListener('click', closeLegendPanel.bind(this));
 // btnSubmit.addEventListener('click', acceptEditInfo.bind(this));
-btnShowImageSlider.addEventListener('click', showImagesSlider.bind(this));
+// btnShowImageSlider.addEventListener('click', showImagesSlider.bind(this));
 
 function showImagesSlider() {
     swiperContainer.classList.remove('hidden');
@@ -354,11 +354,11 @@ function clickMarkerKS(feature, layer) {
         inputInfoShow.value = feature.properties.Info;
 
         if (feature.properties.Photos == null) {
-            btnShowImageSlider.classList.add('hidden');
+            // btnShowImageSlider.classList.add('hidden');
             swiperContainer.classList.add('hidden');
         } else {
-            btnShowImageSlider.classList.remove('hidden');
-            // swiperContainer.classList.remove('hidden');
+            // btnShowImageSlider.classList.remove('hidden');
+            swiperContainer.classList.remove('hidden');
         }
         let photo = [];
         if (feature.properties.Photos != null) {
@@ -389,7 +389,7 @@ function clickMarkerSL(feature, layer) {
         titlePanel.innerHTML = "Thông tin điểm khảo sát";
         layerContent.classList.add("hidden");
         infoContent.classList.remove("hidden");
-        btnShowImageSlider.classList.add('hidden');
+        // btnShowImageSlider.classList.add('hidden');
         containerFormMarker.classList.remove('hidden');
         containerFormDoanSL.classList.add('hidden');
         imgSlider.innerHTML = '';
@@ -849,11 +849,11 @@ function clickLineSL(feature, layer) {
 
         if (feature.properties.Photos == null) {
             swiperContainer.classList.add('hidden');
-            btnShowImageSlider.classList.add('hidden');
+            // btnShowImageSlider.classList.add('hidden');
 
         } else {
-            btnShowImageSlider.classList.remove('hidden');
-            // swiperContainer.classList.remove('hidden');
+            // btnShowImageSlider.classList.remove('hidden');
+            swiperContainer.classList.remove('hidden');
         }
         let photo = [];
         if (feature.properties.Photos != null) {
@@ -1234,8 +1234,8 @@ function onMarkerClick(e) {
 map.addControl(new L.Control.Fullscreen());
 var optionsRuler = {
     lengthUnit: {
-      factor: 0.539956803,    //  from km to nm
-      display: 'meters',
+      factor: 1000,    //  from km to nm
+      display: 'm',
       decimal: 2,
       label: 'Khoảng cách'
     }
@@ -1250,7 +1250,18 @@ map.pm.addControls({
 
 // create the geocoding control and add it to the map
 var searchControl = L.esri.Geocoding.geosearch().addTo(map);
-
+var namMatCat = 2009;
+var btnDrawLine = document.getElementsByClassName('leaflet-pm-icon-polyline')[0];
+var btnMc2009 = document.getElementById('btn-mc-2009');
+var btnMc2019 = document.getElementById('btn-mc-2019');
+btnMc2009.addEventListener('click', () => {
+    btnDrawLine.click();
+    namMatCat = 2009;
+})
+btnMc2019.addEventListener('click', () => {
+    btnDrawLine.click();
+    namMatCat = 2019;
+})
 // create an empty layer group to store the results and add it to the map
 var results = L.layerGroup().addTo(map);
 
@@ -1266,6 +1277,11 @@ map.on('pm:create', function (e) {
     console.log(e.layer.getLatLngs());
     let latlng = '';
     let url = api + 'api/get-matcat'
+    if( namMatCat == 2009) {
+        url = api + 'api/get-matcat/dem2009';
+    } else {
+        url = api + 'api/get-matcat/dem2019';
+    }
     var bodyFormData = new FormData();
     let coordinates = e.layer.getLatLngs();
     for (let i = 0; i < coordinates.length; i++) {

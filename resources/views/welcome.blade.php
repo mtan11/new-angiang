@@ -62,10 +62,14 @@
 
     <div id="map"></div>
     <a class="btn btn-light btn-login" href="/login">Đăng nhập</a>
+    @role('admin')
     <a class="btn btn-light btn-3d" href="/3dmap">Bản đồ 3D</a>
     <a class="btn btn-light btn-2010" href="/vantoc2010">Bản đồ 2010</a>
     <a class="btn btn-light btn-2013" href="/vantoc2013">Bản đồ 2013</a>
+    @endrole
     <a class="btn btn-light btn-legend" id="btn-legend">Chú giải</a>
+    <a class="btn btn-success btn-2009" id="btn-mc-2009">2009</a>
+    <a class="btn btn-success btn-2019" id="btn-mc-2019">2019</a>
     <div id="show-btn" class="arrow-btn"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel" class="panel-container">
         <div>
@@ -389,7 +393,23 @@
                             <textarea class="form-control" id="input-mucdo-show" disabled rows="1"></textarea>
                         </div>
                     </div>
-                    <div id="button-image-slider" class="text-center"><button class="btn btn-info">Click vào để xem hình ảnh</button></div>
+                    <div class="swiper-container hidden" id="swiper-container">
+                        <div class="img-slider">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" id="img-slider">
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div id="button-image-slider" class="text-center"><button class="btn btn-info">Click vào để xem hình ảnh</button></div> -->
                 </div>
             </div>
         </div>
@@ -408,22 +428,23 @@
                     <ul id="myUL">
                         <li><span class="caret">Biến đổi lòng dẫn (m)</span>
                             <ul class="nested">
-                            <img src='/images/legend_biendoilongdan.png'>
+                                <img src='/images/legend_biendoilongdan.png'>
                             </ul>
                         </li>
-                        <li><span class="caret">Độ sâu địa hình đáy (m)</span>
+
+                        <!-- <li><span class="caret">Độ sâu địa hình đáy (m)</span>
                             <ul class="nested">
                             <img src='/images/legend_dem.png'>
                             </ul>
-                        </li>
+                        </li> -->
                         <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS qua các năm</span>
                             <ul class="nested">
-                            <img src='/images/legend_duongbo_gis.png'>
+                                <img src='/images/legend_duongbo_gis.png'>
                             </ul>
                         </li>
                         <li><span class="caret">Dự báo sạt lở đường bờ bằng mô hình</span>
                             <ul class="nested">
-                            <img src='/images/legend_ruiro_satlo.png'>
+                                <img src='/images/legend_ruiro_satlo.png'>
                             </ul>
                         </li>
                     </ul>
@@ -436,22 +457,7 @@
         <h3 style="text-align: center;" class="title-chart">Biểu đồ mặt cắt</h3>
         <div id="chart"></div>
     </div>
-    <div class="swiper-container hidden" id="swiper-container">
-        <div class="img-slider">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" id="img-slider">
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
+
 </body>
 <script src="{{ mix('js/d3.legend.js') }}"></script>
 <script src="{{ mix('js/map.js') }}"></script>
