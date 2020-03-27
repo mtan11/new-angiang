@@ -806,15 +806,18 @@ function createD3ChartDraw(response) {
 function clickLineSL(feature, layer) {
     if(feature.properties.Mucdo == "Rất nguy hiểm") {
         layer.setStyle({
-            color: '#ff3c00'
+            color: '#ff3c00',
+            weight: 5
         });
     } else if(feature.properties.Mucdo == "Nguy hiểm") {
         layer.setStyle({
-            color: '#ffbf00'
+            color: '#ffbf00',
+            weight: 5
         });
     } else {
         layer.setStyle({
-            color: '#ff7b00'
+            color: '#ff7b00',
+            weight: 5
         });
     }
     
@@ -831,7 +834,7 @@ function clickLineSL(feature, layer) {
         // popup.setLatLng(e.latlng).openOn(mymap);
 
         this.setStyle({
-            weight: 3,
+            weight: 5,
         });
     });
     layer.on('click', function (e) {
