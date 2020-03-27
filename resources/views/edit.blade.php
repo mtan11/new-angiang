@@ -83,8 +83,8 @@
     @endauth
     <a class="btn btn-light btn-upload" data-toggle="modal" data-target="#modaluploadshp" id="btn-upload-shp">Cập nhật</a>
     <a class="btn btn-light btn-legend-edit" id="btn-legend">Chú giải</a>
-    <a class="btn btn-success btn-2009" id="btn-mc-2009">2009</a>
-    <a class="btn btn-success btn-2019" id="btn-mc-2019">2019</a>
+    <a class="btn btn-light btn-2009" id="btn-mc-2009" data-toggle="tooltip" data-placement="right" title="Vẽ mặt cắt 2009">2009</a>
+    <a class="btn btn-light btn-2019" id="btn-mc-2019" data-toggle="tooltip" data-placement="right" title="Vẽ mặt cắt 2019">2019</a>
     <div id="map"></div>
     <div id="show-btn" class="arrow-btn"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel-update" class="panel-container-update">
@@ -143,14 +143,14 @@
             <div id="" style="overflow-y:scroll; overflow-x:hidden; height:580px;">
                 <div class="container-content">
                     <div id="layer-content">
-                    <div class="row">
+                        <div class="row">
                             <div class="col-8">
                                 <!-- <h6>HÌNH ẢNH KHẢO SÁT THỰC ĐỊA 2019</h6> -->
                                 <h6>Hình ảnh khảo sát thực địa 2019</h6>
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="rungngapman" type="checkbox" >
+                                    <input id="rungngapman" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -298,7 +298,7 @@
                                 </label>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-8">
                                 <h6>Điều chỉnh quy hoạch khai thác cát</h6>
@@ -350,7 +350,7 @@
                             </div>
                             <div class="col-4">
                                 <label class="switch">
-                                    <input id="vanhdai_antoan" type="checkbox" >
+                                    <input id="vanhdai_antoan" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -368,7 +368,7 @@
                             </div>
                         </div>
                         @endrole
-                        
+
                         <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Bản đồ bổ sung và điều chỉnh các quy hoạch khai thác cát cho các khu vực trọng điểm
@@ -469,35 +469,35 @@
                     <div class="container-form" style="padding: 10px;" id="form-doansl">
                         <div class="form-group">
                             <label for="input-name">Tên</label>
-                            <textarea class="form-control" id="input-doan-show"  rows="2"> </textarea>
+                            <textarea class="form-control" id="input-doan-show" rows="2"> </textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-name">Số thứ tự</label>
-                            <textarea class="form-control" id="input-stt-show"  rows="1"> </textarea>
+                            <textarea class="form-control" id="input-stt-show" rows="1"> </textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Mô tả</label>
-                            <textarea class="form-control" id="input-mota-show"  rows="4"></textarea>
+                            <textarea class="form-control" id="input-mota-show" rows="4"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Địa điểm</label>
-                            <textarea class="form-control" id="input-diadiem-show"  rows="2"></textarea>
+                            <textarea class="form-control" id="input-diadiem-show" rows="2"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Chiều dài</label>
-                            <textarea class="form-control" id="input-chieudai-show"  rows="1"></textarea>
+                            <textarea class="form-control" id="input-chieudai-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Khoảng cách nguy hiểm</label>
-                            <textarea class="form-control" id="input-kcnguyhiem-show"  rows="1"></textarea>
+                            <textarea class="form-control" id="input-kcnguyhiem-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Khoảng cách an toàn</label>
-                            <textarea class="form-control" id="input-kcnantoan-show"  rows="1"></textarea>
+                            <textarea class="form-control" id="input-kcnantoan-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Tốc độ</label>
-                            <textarea class="form-control" id="input-tocdo-show"  rows="1"></textarea>
+                            <textarea class="form-control" id="input-tocdo-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="input-info">Mức độ</label>
@@ -526,7 +526,7 @@
 
                     <div class="d-flex" style="justify-content: center" id="container-update-btn">
                         <button class="btn btn-primary">Cập nhật</button>
-                    
+
                     </div>
                 </div>
             </div>
@@ -546,7 +546,7 @@
                     <ul id="myUL">
                         <li><span class="caret">Biến đổi lòng dẫn (Giá trị dương: bồi, giá trị âm: xói) (m)</span>
                             <ul class="nested">
-                            <img src="/images/legend_biendoilongdan.png">
+                                <img src="/images/legend_biendoilongdan.png">
                             </ul>
                         </li>
                         <!-- <li><span class="caret">Độ sâu địa hình đáy (m)</span>
@@ -556,12 +556,12 @@
                         </li> -->
                         <li><span class="caret">Diễn biến đường bờ bằng phương pháp viễn thám & GIS qua các năm</span>
                             <ul class="nested">
-                            <img src="/images/legend_duongbo_gis.png">
+                                <img src="/images/legend_duongbo_gis.png">
                             </ul>
                         </li>
                         <li><span class="caret">Dự báo sạt lở đường bờ</span>
                             <ul class="nested">
-                            <img src="/images/legend_ruiro_satlo.png">
+                                <img src="/images/legend_ruiro_satlo.png">
                             </ul>
                         </li>
                     </ul>
@@ -625,7 +625,11 @@
         </div>
     </div>
     <div class="container-chart hidden" id="container-chart">
-        <h3 style="text-align: center;">Biểu đồ mặt cắt <text id="year-matcat"></text></h3>
+        <h3 style="text-align: center;">Biểu đồ mặt cắt <text id="year-matcat"></text>
+            <button type="button" id="close-chart-btn" class="close" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            </h3>
         <div id="chart"></div>
     </div>
     <div class="swiper-container hidden" id="swiper-container">

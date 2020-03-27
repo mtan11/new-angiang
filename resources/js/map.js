@@ -2,9 +2,15 @@ import {
     compile
 } from "vue-template-compiler";
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
 var map = L.map('map').setView([10.6079209, 105.1175397], 11);
 
 let btnCloseLegend = document.getElementById('close-legend-btn');
+let btnChartClose = document.getElementById('close-chart-btn');
+
 let legendBtn = document.getElementById('btn-legend');
 let legendPanel = document.getElementById('legend-panel');
 let btnClose = document.getElementById('close-btn');
@@ -121,6 +127,7 @@ document.getElementById('basepic').addEventListener('click', function (e) {
 });
 
 btnClose.addEventListener('click', closePanel.bind(this));
+btnChartClose.addEventListener('click', closePanel.bind(this));
 btnOpen.addEventListener('click', showPanel.bind(this));
 legendBtn.addEventListener('click', showLegendPanel.bind(this));
 btnCloseLegend.addEventListener('click', closeLegendPanel.bind(this));
@@ -395,6 +402,7 @@ function clickMarkerSL(feature, layer) {
         imgSlider.innerHTML = '';
         inputNameShow.value = feature.properties.Name;
         inputInfoShow.value = feature.properties.Info;
+        yearMatCat.innerHTML ='';
 
         axios({
                 method: 'get',
@@ -1276,7 +1284,8 @@ searchControl.on("results", function (data) {
 });
 
 map.on('pm:create', function (e) {
-    console.log(e.layer.getLatLngs());
+    console.log(e.layer);
+    map.removeLayer(e.layer);
     let latlng = '';
     let url = api + 'api/get-matcat'
     if( namMatCat == 2009) {
@@ -1295,7 +1304,6 @@ map.on('pm:create', function (e) {
 
     }
     latlngmc = latlng;
-    console.log(latlngmc);
     bodyFormData.set('linestring', latlngmc);
     axios({
             method: 'post',

@@ -68,8 +68,8 @@
     <a class="btn btn-light btn-2013" href="/vantoc2013">Bản đồ 2013</a>
     @endrole
     <a class="btn btn-light btn-legend" id="btn-legend">Chú giải</a>
-    <a class="btn btn-success btn-2009" id="btn-mc-2009">2009</a>
-    <a class="btn btn-success btn-2019" id="btn-mc-2019">2019</a>
+    <a class="btn btn-light btn-2009" id="btn-mc-2009" data-toggle="tooltip" data-placement="right" title="Vẽ mặt cắt 2009">2009</a>
+    <a class="btn btn-light btn-2019" id="btn-mc-2019" data-toggle="tooltip" data-placement="right" title="Vẽ mặt cắt 2019">2019</a>
     <div id="show-btn" class="arrow-btn"><i class="fa fa-angle-double-left"></i></div>
     <div id="panel" class="panel-container">
         <div>
@@ -454,7 +454,11 @@
     </div>
 
     <div class="container-chart hidden" id="container-chart">
-        <h3 style="text-align: center;" class="title-chart">Biểu đồ mặt cắt <text id="year-matcat"></text></h3>
+        <h3 style="text-align: center;" class="title-chart">Biểu đồ mặt cắt <text id="year-matcat"></text>
+            <button type="button" id="close-chart-btn" class="close" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </h3>
         <div id="chart"></div>
     </div>
 

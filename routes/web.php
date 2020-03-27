@@ -23,11 +23,11 @@ Route::get('/vantoc2010', function () {
 Route::get('/vantoc2013', function () {
     return view('vantoc2013');
 });
-Route::group(['middleware' => ['auth']], function () {
+// Route::group(['middleware' => ['auth']], function () {
     Route::get('/edit', function () {
         return view('edit');
     })->name('edit');
-});
+// });
 
 Auth::routes();
 
