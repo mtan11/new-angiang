@@ -488,15 +488,15 @@
                             <textarea class="form-control" id="input-chieudai-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Khoảng cách nguy hiểm</label>
+                            <label for="input-info">Khoảng cách nguy hiểm (m)</label>
                             <textarea class="form-control" id="input-kcnguyhiem-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Khoảng cách an toàn</label>
+                            <label for="input-info">Khoảng cách an toàn (m)</label>
                             <textarea class="form-control" id="input-kcnantoan-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Tốc độ</label>
+                            <label for="input-info">Tốc độ (m/s)</label>
                             <textarea class="form-control" id="input-tocdo-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">
@@ -506,6 +506,22 @@
                         <div class="form-group">
                             <label id="title-update"></label>
                             <input type="file" multiple class="form-control-file" id="input-file-doan-show" required>
+                        </div>
+                    </div>
+                    <div class="swiper-container hidden" id="swiper-container">
+                        <div class="img-slider">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" id="img-slider">
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="img-slider">
@@ -629,25 +645,10 @@
             <button type="button" id="close-chart-btn" class="close" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
-            </h3>
+        </h3>
         <div id="chart"></div>
     </div>
-    <div class="swiper-container hidden" id="swiper-container">
-        <div class="img-slider">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" id="img-slider">
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
+
 </body>
 
 <script src="https://unpkg.com/swiper/js/swiper.js"></script>
