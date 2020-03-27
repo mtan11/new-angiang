@@ -60,7 +60,7 @@ let coormc;
 let geoserver = 'https://satlo-angiang.online:8443/geoserver/angiang/wms';
 let urlImg = '/storage/uploadedimages/';
 
-let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
     maxZoom: 21,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 }).addTo(map);

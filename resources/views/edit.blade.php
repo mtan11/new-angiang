@@ -484,7 +484,7 @@
                             <textarea class="form-control" id="input-diadiem-show" rows="2"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Chiều dài</label>
+                            <label for="input-info">Chiều dài (m)</label>
                             <textarea class="form-control" id="input-chieudai-show" rows="1"></textarea>
                         </div>
                         <div class="form-group">

@@ -373,19 +373,19 @@
                             <textarea class="form-control" id="input-diadiem-show" disabled rows="2"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Chiều dài</label>
+                            <label for="input-info">Chiều dài (m)</label>
                             <textarea class="form-control" id="input-chieudai-show" disabled rows="1"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Khoảng cách nguy hiểm</label>
+                            <label for="input-info">Khoảng cách nguy hiểm (m)</label>
                             <textarea class="form-control" id="input-kcnguyhiem-show" disabled rows="1"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Khoảng cách an toàn</label>
+                            <label for="input-info">Khoảng cách an toàn (m)</label>
                             <textarea class="form-control" id="input-kcnantoan-show" disabled rows="1"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="input-info">Tốc độ</label>
+                            <label for="input-info">Tốc độ (m/s)</label>
                             <textarea class="form-control" id="input-tocdo-show" disabled rows="1"></textarea>
                         </div>
                         <div class="form-group">
