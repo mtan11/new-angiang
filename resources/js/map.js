@@ -40,8 +40,8 @@ var chartContainer = document.getElementById('container-chart');
 var containerFormMarker = document.getElementById('form-marker');
 var containerFormDoanSL = document.getElementById('form-doansl');
 // let api = '/';
-let api = 'https://satlo-angiang.online/';
-let apiGeo = 'https://satlo-angiang.online:8443/';
+let api = window.location.hostname;
+let apiGeo = api+':8443/';
 let lat = 0;
 let lng = 0;
 
@@ -62,7 +62,7 @@ var ksIcon = new L.icon({
     iconAnchor: [15, 40],
     popupAnchor: [0, -40],
 });
-let geoserver = 'https://satlo-angiang.online:8443/geoserver/angiang/wms';
+let geoserver = api+':8443/geoserver/angiang/wms';
 let urlImg = '/storage/uploadedimages/';
 
 

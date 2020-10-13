@@ -48,8 +48,8 @@ var containerFormDoanSL = document.getElementById('form-doansl');
 var yearMatCat = document.getElementById('year-matcat');
 
 // let api = '/';
-let api = 'https://satlo-angiang.online/';
-let apiGeo = 'https://satlo-angiang.online:8443/';
+let api = window.location.hostname;
+let apiGeo = api+':8443/';
 let lat = 0;
 let lng = 0;
 var weightLineHover = 8;
@@ -57,7 +57,7 @@ var weightLineHover = 8;
 let latlngmc = '';
 let coormc;
 
-let geoserver = 'https://satlo-angiang.online:8443/geoserver/angiang/wms';
+let geoserver = api+':8443/geoserver/angiang/wms';
 let urlImg = '/storage/uploadedimages/';
 
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
