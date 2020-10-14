@@ -1,6 +1,8 @@
 import {
     compile
 } from "vue-template-compiler";
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()

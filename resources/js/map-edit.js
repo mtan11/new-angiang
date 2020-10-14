@@ -1,3 +1,6 @@
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
+
 var map = L.map('map').setView([10.6079209, 105.1175397], 11);
 
 $(function () {
@@ -317,6 +320,7 @@ function acceptEditInfo() {
 
 
 function getMarker() {
+    console.log("abccccc")
     let url = api + 'api/get-all-data'
     axios({
             method: 'get',
