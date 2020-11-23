@@ -51,7 +51,7 @@ var containerFormDoanSL = document.getElementById('form-doansl');
 var yearMatCat = document.getElementById('year-matcat');
 
 // let api = '/';
-let api = 'http://localhost:8000/';
+let api = 'https://satlo.angiang.gov.vn/';
 let apiGeo = 'https://satlo.angiang.gov.vn:8443/';
 let lat = 0;
 let lng = 0;
