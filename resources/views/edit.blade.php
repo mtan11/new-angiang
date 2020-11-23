@@ -181,6 +181,7 @@
                                 </label>
                             </div>
                         </div>
+                        @role('admin')
                         <div class="row">
                             <div class="col-8">
                                 <h6>Điểm độ sâu 2009</h6>
@@ -204,6 +205,7 @@
                                 </label>
                             </div>
                         </div>
+                        @endrole
                         <!-- <div class="row">
                             <div class="col-8">
                                 <h6>Mô hình số độ cao (DEM) năm 2009</h6>
@@ -264,7 +266,7 @@
                                 </label>
                             </div>
                         </div>
-
+                        @role('admin')
                         <div class="row">
                             <div class="col-8">
                                 <h6>Dự báo biến hình lòng dẫn bằng mô hình đến năm 2030</h6>
@@ -288,7 +290,6 @@
                                 </label>
                             </div>
                         </div>
-                        @role('admin')
                         <div class="row">
                             <div class="col-8">
                                 <h6>Quy hoạch khai thác cát</h6>
