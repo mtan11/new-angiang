@@ -86,7 +86,7 @@ if table == 'diemks':
     cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
-    sql_append_query = """insert into """+tablename+""" (name,info,geom) select name,info,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
+    sql_append_query = """insert into """+tablename+""" (geom, name, info, photos, created_at) select geom, name, info, photos, now() from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
     print(sql_append_query)
     cursor.execute(sql_append_query)
     connection.commit()
@@ -101,7 +101,7 @@ elif table == 'doansl':
     cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
-    sql_append_query = """insert into """+tablename+""" (name,info,geom) select name,info,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
+    sql_append_query = """insert into """+tablename+""" (geom, tendoan, mota, photos, created_at, stt, diadiem, chieudai, kc_nguyhiem, kc_antoan, tocdo, mucdo, shape_leng) select geom, tendoan, mota, photos, now(), stt, diadiem, chieudai, kc_nguyhiem, kc_antoan, tocdo, mucdo, shape_leng from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
     print(sql_append_query)
     cursor.execute(sql_append_query)
     connection.commit()
@@ -116,7 +116,7 @@ elif table == 'diemsl':
     cmd = '''shp2pgsql -c -D -I -s 32648 -S -W "UTF-8" '''+i+''' public.'''+tablename+namefile+'''_queue | PGPASSWORD=nguyenq12345678 psql -U postgres -d postgres -h localhost -p 5432'''
     print(cmd)
     os.system(cmd)  
-    sql_append_query = """insert into """+tablename+""" (name,info,geom) select name,info,geom from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
+    sql_append_query = """insert into """+tablename+""" (geom, name, info, created_at) select geom, name, info, now() from """+tablename+namefile+"""_queue; DROP TABLE """+tablename+namefile+"""_queue;"""
     print(sql_append_query)
     cursor.execute(sql_append_query)
     connection.commit()
