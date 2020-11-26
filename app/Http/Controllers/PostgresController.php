@@ -503,7 +503,7 @@ class PostgresController extends Controller
                         (SELECT (ST_DumpPoints(geom_3d)).geom AS geom,
                                 ST_StartPoint(geom_3d) AS origin
                         FROM linez)
-                    SELECT ROUND(ST_distance(origin, geom),3) AS x, ROUND(ST_Z(geom),3) AS y
+                    SELECT ROUND(ST_distance(origin, geom)::numeric,3) AS x, ROUND(ST_Z(geom)::numeric,3) AS y
                     FROM points3dd;");
                 $res = "{'dem':'2009','values':".json_encode($dem2009)."}";
                 break;
@@ -526,7 +526,7 @@ class PostgresController extends Controller
                         (SELECT (ST_DumpPoints(geom_3d)).geom AS geom,
                                 ST_StartPoint(geom_3d) AS origin
                         FROM linez)
-                    SELECT ROUND(ST_distance(origin, geom),3) AS x, ROUND(ST_Z(geom),3) AS y
+                    SELECT ROUND(ST_distance(origin, geom)::numeric,3) AS x, ROUND(ST_Z(geom)::numeric,3) AS y
                     FROM points3dd;");
                 $res = "{'dem':'2019','values':".json_encode($dem2019)."}";
                 break;
