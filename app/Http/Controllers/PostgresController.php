@@ -171,12 +171,13 @@ class PostgresController extends Controller
             'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
 
+        if ($excelmc) {
+            $excelextension = $excelmc->getClientOriginalExtension();
+            $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+            Storage::disk('public')->put('/exceldiemsl/' . $data->gid . '/' . $excelfileName, File::get($excelmc));
+            $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
+        }
         
-        $excelextension = $excelmc->getClientOriginalExtension();
-        $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
-        Storage::disk('public')->put('/exceldiemsl/' . $data->gid . '/' . $excelfileName, File::get($excelmc));
-        
-        $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$data->gid} {$excelfileName}");
 
 
         return 'thêm data thanh cong';
@@ -205,12 +206,12 @@ class PostgresController extends Controller
             // 'geom' => DB::raw("ST_Transform(ST_GeomFromText('$point',4326), 32648)")
         ]);
 
-        
-        $excelextension = $excelmc->getClientOriginalExtension();
-        $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
-        Storage::disk('public')->put('/exceldiemsl/' . $id . '/' . $excelfileName, File::get($excelmc));
-        
-        $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$id} {$excelfileName}");
+        if ($excelmc) {
+            $excelextension = $excelmc->getClientOriginalExtension();
+            $excelfileName = sprintf('%s.%s', $excelmc->getFilename(), $excelextension);
+            Storage::disk('public')->put('/exceldiemsl/' . $id . '/' . $excelfileName, File::get($excelmc));
+            $process = shell_exec("python3 /var/www/new-angiang/pyservices/importExcel.py {$id} {$excelfileName}");
+        }
 
 
         return 'update data thanh cong';
