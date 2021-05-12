@@ -24,6 +24,6 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "swiper": "^6.3.3"
+        "swiper": "^6.5.1"
     }
 }
